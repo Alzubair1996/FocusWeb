@@ -12,7 +12,7 @@ buildPrintableData(ttf) => pw.Padding(
               child: pw.Center(
                 // style: pw.TextStyle(font: ttf, fontSize: 24)
                   child: pw.Text(
-                    "Summary Attendance Sheet of  ${DashboardPageState.selectedMonthIndex}  ${DashboardPageState.Years}",
+                    "Summary Attendance Sheet of ${DashboardPageState.selectedMonthIndex}  ${DashboardPageState.Years}",
                     style: pw.TextStyle(
                       fontSize: 16,font: ttf
                     ),
@@ -100,6 +100,7 @@ buildPrintableData(ttf) => pw.Padding(
                 itemBuilder: (context, index) {
                   final name =
                   DashboardPageState.locationsall[index].name.toString();
+                 final num= DashboardPageState.locationsall[index].tolal.toString();
                   final numer =
                   DashboardPageState.locationsall[index].id.toString();
                   final numer1 = "J${numer.padLeft(4, '0')}";
@@ -160,6 +161,7 @@ buildPrintableData(ttf) => pw.Padding(
                               ),
                             ),
                             child: pw.Container(
+                              color:  getGuardCountColor(guardCount, int.parse(num)),
                               // تعيين Padding إلى صفر
                               margin: pw.EdgeInsets.only(left: 0.5),
 
@@ -181,7 +183,8 @@ buildPrintableData(ttf) => pw.Padding(
     );
 
 
-buildPrintableDataDetales(ttf) => pw.Padding(
+buildPrintableDataDetales(ttf ,idess, locations, indix1)
+=> pw.Padding(
   padding: const pw.EdgeInsets.all(13.00),
   child: pw.Column(children: [
     pw.Row(children: [
@@ -191,7 +194,7 @@ buildPrintableDataDetales(ttf) => pw.Padding(
           child: pw.Center(
             // style: pw.TextStyle(font: ttf, fontSize: 24)
               child: pw.Text(
-                "details  ${DashboardPageState.selectedMonthIndex}  ${DashboardPageState.Years}",
+                "details of  ${DashboardPageState.locationsall[indix1].name}   ${DashboardPageState.selectedMonthIndex}/ ${DashboardPageState.Years}",
                 style: pw.TextStyle(
                     fontSize: 16,font: ttf
                 ),
@@ -275,13 +278,10 @@ buildPrintableDataDetales(ttf) => pw.Padding(
       child:
       pw.ListView.builder(
           direction: pw.Axis.vertical,
-          itemCount: DashboardPageState.locationsall.length,
+          itemCount: idess.length,
           itemBuilder: (context, index) {
-            final name =
-            DashboardPageState.locationsall[index].name.toString();
-            final numer =
-            DashboardPageState.locationsall[index].id.toString();
-            final numer1 = "J${numer.padLeft(4, '0')}";
+      var id= idess[index].toString();
+          var name= DashboardPageState.Guard_Data[idess[index]].NAME_EN .toString();
             return pw.Row(children: [
               pw.Container(
                 decoration: pw.BoxDecoration(
@@ -297,7 +297,7 @@ buildPrintableDataDetales(ttf) => pw.Padding(
                       height: 20,
                       child: pw.Center(
                         child: pw.Text(
-                            numer1,style: pw.TextStyle(font: ttf)
+                            id,style: pw.TextStyle(font: ttf)
                         ),
                       )),
                 ),
@@ -315,9 +315,10 @@ buildPrintableDataDetales(ttf) => pw.Padding(
                   child: pw.SizedBox(
                       width: 130,
                       height: 20,
-                      child: pw.Text(name,style: pw.TextStyle(font: ttf), maxLines: 1)),
+                      child: pw.Text(name,style: pw.TextStyle(font: ttf,), maxLines: 1)),
                 ),
               ),
+            /*
               pw.ListView.builder(
                   direction: pw.Axis.horizontal,
                   itemCount: DashboardPageState.days,
@@ -352,12 +353,18 @@ buildPrintableDataDetales(ttf) => pw.Padding(
                       ),
                     );
                   }),
+              */
             ]);
           }),
-    ),
+          ),
+
+
 
   ]),
 );
+
+
+
 int getGuardCount(String day, int targetSiteNumber) {
   return DashboardPageState.attendanceData.values.where((attendance) {
 
@@ -375,4 +382,23 @@ int getGuardCount(String day, int targetSiteNumber) {
 
   }).length ;
 
+}
+
+PdfColor getGuardCountColor(int guardCount, int num) {
+  if (DashboardPageState.isChecked) {
+    if (guardCount == 0) {
+      return PdfColors.white;
+    } else if (guardCount < num) {
+      return PdfColors.amberAccent;
+    } else if (guardCount > num) {
+      return PdfColors.red;
+    } else {
+      return PdfColors.white;
+    }
+  } else {
+    return PdfColors.white;
+  }
+}
+int getIndexById(int id) {
+  return DashboardPageState.locationsall.indexWhere((location) => location.id == id);
 }

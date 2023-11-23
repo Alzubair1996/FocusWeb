@@ -7,9 +7,9 @@ class LocationData {
   final String day_time;
   final String night_time;
   final int hors;
-  final String  latitude;
-  final String  longitude;
+  final double  latitude;
+  final double  longitude;
 
 
-  LocationData(this.id,this.tolal,this.day_time,this.night_time,this.hors,this.name, this.latitude, this.longitude);
+  LocationData(this.id,this.tolal,this.name,this.day_time,this.night_time,this.hors, this.latitude, this.longitude);
 }

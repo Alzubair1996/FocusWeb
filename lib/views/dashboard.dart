@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +15,14 @@ import '../GuardDetails.dart';
 import '../helpers/theme/theme_customizer.dart';
 import '../printable_data.dart';
 import 'User.dart';
-import 'package:pdf/pdf.dart';
+
 import '../helpers/extensions/string.dart';
 import 'package:webkit/views/layouts/layout.dart';
 import '../LocationData.dart';
 import '../e_attendence.dart';
 import 'package:excel/excel.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:image/image.dart' as img;
+
 
 import 'dart:html' if (dart.library.html) 'dart:html';
 
@@ -39,7 +41,7 @@ class DashboardPageState extends State<DashboardPage>
 
   String t = "";
   int _currentPage = 1;
-  int _itemsPerPage = 16;
+  final int _itemsPerPage = 16;
   static List<dynamic> siteData = [];
   static List<dynamic> idess = [];
   static int days = DateTime.now().day;
@@ -82,7 +84,7 @@ class DashboardPageState extends State<DashboardPage>
   static int selectedMonthIndex = (DateTime.now().month - 1).toInt();
   static List<LocationData> locationsall = [];
   static List<LocationData> all_locations = [];
-  static List<GuardData> _Guard_Data = [];
+  static List<GuardData> Guard_Data = [];
   late final List<e_attendence> E_Atendance = [];
   static Map<String, dynamic> attendanceData = {};
   static List<Record> record = [];
@@ -390,12 +392,12 @@ class DashboardPageState extends State<DashboardPage>
 
                             // حفظ ملف Excel في مسار معين
                           },
+                          style: TextButton.styleFrom(
+                              backgroundColor: Colors.orangeAccent),
                           child: Text(
                             "Extract_Summary".tr(),
                             style: TextStyle(color: Colors.black),
                           ),
-                          style: TextButton.styleFrom(
-                              backgroundColor: Colors.orangeAccent),
                         ),
                       ),
 
@@ -442,7 +444,7 @@ class DashboardPageState extends State<DashboardPage>
                                 List<String> a5 = [];
                                 a5.add(i.toString().padLeft(5, '0'));
 
-                                a5.add(_Guard_Data[i].NAME_EN);
+                                a5.add(Guard_Data[i].NAME_EN);
 
                                 for (int i2 = 1; i2 <= days; i2++) {
                                   int duty = 0;
@@ -541,7 +543,7 @@ class DashboardPageState extends State<DashboardPage>
                               final ids = idess.toSet().toList();
 
                               for (var ID in ids) {
-                                //_Guard_Data[ID].NAME_EN
+                                //Guard_Data[ID].NAME_EN
 
                                 bool have1 = false;
 
@@ -597,7 +599,7 @@ class DashboardPageState extends State<DashboardPage>
 
                                   if (duty == 12 && !have) {
                                     a21.add(ID.toString());
-                                    a21.add(_Guard_Data[ID].NAME_EN);
+                                    a21.add(Guard_Data[ID].NAME_EN);
                                     a21.add(day.toString());
 
                                     a21.add(toall[Numer].toString());
@@ -637,10 +639,10 @@ class DashboardPageState extends State<DashboardPage>
                             }
                             // حفظ ملف Excel في مسار معين
                           },
-                          child: Text("Extract_Data".tr(),
-                              style: TextStyle(color: Colors.black)),
                           style: TextButton.styleFrom(
                               backgroundColor: Colors.orangeAccent),
+                          child: Text("Extract_Data".tr(),
+                              style: TextStyle(color: Colors.black)),
                         ),
                       ),
                       Checkbox(
@@ -1217,6 +1219,50 @@ setState(() {
         });
       });
 
+
+      final locationRef = FirebaseDatabase.instance.ref("Focus/Locatins");
+
+      final locations2 = <LocationData>[];
+      try {
+
+        DatabaseEvent snapshot = await locationRef.once();
+
+        Map<dynamic, dynamic>? values = snapshot.snapshot.value as Map<dynamic, dynamic>;
+
+        values.forEach((key, value) {
+
+
+          bool add=false;
+          for (var number in siteData) {
+            if(number==value['id'] ){
+              add=true;
+            }
+          }
+          if(add) {
+            LocationData location = LocationData(
+              value['id'],
+              value['tolal'],
+              value['name'].toString(),
+              value['day_time'].toString(),
+              value['night_time'].toString(),
+              value['hors'],
+              double.parse(value['Latitude'].toString()),
+              double.parse(value['longitude'].toString()),
+            );
+            locations2.add(location);
+          }
+        });
+
+
+      } catch (error) {
+        print('Error: $error');
+      }
+      setState(() {
+        locationsall.clear();
+        locationsall.addAll(locations2);
+      });
+
+      /*
       final locationRef = FirebaseDatabase.instance.ref("Focus/Locatins");
 
       locationRef.get().then((locationData) {
@@ -1248,6 +1294,7 @@ setState(() {
           locationsall.addAll(locations2);
         });
       });
+      */
       final guardDitales = FirebaseDatabase.instance.ref("Focus/Data");
 
       guardDitales.get().then((guarddata1) {
@@ -1281,8 +1328,8 @@ setState(() {
         }
 
         setState(() {
-          _Guard_Data.clear();
-          _Guard_Data.addAll(guarddata);
+          Guard_Data.clear();
+          Guard_Data.addAll(guarddata);
         });
       });
 
@@ -1365,7 +1412,7 @@ setState(() {
 
         locationsall.clear();
 
-        _Guard_Data.clear();
+        Guard_Data.clear();
 
         record.clear();
         record3.clear();
@@ -1387,7 +1434,7 @@ class CustomListViewDialog extends StatefulWidget {
   List<dynamic> idess = [];
 
   String locations = "";
-  int indix1 = 0;
+   int indix1 = 0;
   int _currentPage1 = 1;
   int _itemsPerPage1 = 15;
 
@@ -1526,15 +1573,7 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
                                   height: 42,
                                   width: 250,
                                   decoration: BoxDecoration(
-                                      /*
-                                          border: Border(
-                                            bottom: BorderSide(
-                                              color: Colors.black,
-                                              // لون الحدود
-                                              width: 2.0, // عرض الحدود
-                                            ),
-                                          ),
-                                          */
+
                                       ),
                                   child: Card(
                                       margin: EdgeInsets.only(left: 1),
@@ -1559,8 +1598,8 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
                                                       .locale
                                                       .languageCode ==
                                                   "ar"
-                                              ? "  ${widget.idess[index]} -  ${DashboardPageState._Guard_Data[widget.idess[index]].NAME_AR}"
-                                              : "  ${widget.idess[index]} -  ${DashboardPageState._Guard_Data[widget.idess[index]].NAME_EN}"))),
+                                              ? "  ${widget.idess[index]} -  ${DashboardPageState.Guard_Data[widget.idess[index]].NAME_AR}"
+                                              : "  ${widget.idess[index]} -  ${DashboardPageState.Guard_Data[widget.idess[index]].NAME_EN}"))),
                                 ),
                               ),
                               Expanded(
@@ -1571,8 +1610,8 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
                                     ThemeCustomizer.instance.currentLanguage
                                                 .locale.languageCode ==
                                             "ar"
-                                        ? "  ${widget.idess[index]} -  ${DashboardPageState._Guard_Data[widget.idess[index]].NAME_AR}"
-                                        : "  ${widget.idess[index]} -  ${DashboardPageState._Guard_Data[widget.idess[index]].NAME_EN}",DashboardPageState.locationsall[widget.indix1].name.toString()),
+                                        ? "  ${widget.idess[index]} -  ${DashboardPageState.Guard_Data[widget.idess[index]].NAME_AR}"
+                                        : "  ${widget.idess[index]} -  ${DashboardPageState.Guard_Data[widget.idess[index]].NAME_EN}",DashboardPageState.locationsall[widget.indix1].name.toString()),
                               ),
                             ],
                           ),
@@ -1672,7 +1711,8 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
                             padding: const EdgeInsets.all(8.0),
                             child: TextButton(onPressed: () async {
 
-                              printDoc();
+
+                              printDoc(widget.idess,widget.locations,widget.indix1);
 
 
                             }, style: TextButton.styleFrom(
@@ -1761,9 +1801,13 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
     );
   }
 
-  Future<void> printDoc() async {
+  Future<void> printDoc(  idess, locations, indix1 ) async {
 
 
+    List<dynamic> idess1=idess.toList();
+    String locations1=locations;
+    int indix11=indix1;
+//Detales
     final fontData = await rootBundle.load("assets/font/font.ttf");
     final ttf = pw.Font.ttf(fontData.buffer.asByteData());
     final doc = pw.Document();
@@ -1777,7 +1821,7 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
           marginBottom: 0,
         ),
         build: (pw.Context context) {
-          return buildPrintableDataDetales(ttf);
+          return buildPrintableDataDetales(ttf,idess1,locations1,indix11);
         }));
     await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async => doc.save());
@@ -1908,32 +1952,44 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
 
       final locationRef = FirebaseDatabase.instance.ref("Focus/Locatins");
 
-      locationRef.get().then((locationData) {
-        final locations2 = <LocationData>[];
+      final locations2 = <LocationData>[];
+      try {
 
-        for (var number in DashboardPageState.siteData) {
-          //    DatabaseEvent event = await _database.child('Focus/Locatins').once();
+        DatabaseEvent snapshot = await locationRef.once();
 
-          final location = locationData.child("$number");
+        Map<dynamic, dynamic>? values = snapshot.snapshot.value as Map<dynamic, dynamic>;
 
-          final locationData1 = LocationData(
-            int.parse(location.child("id").value.toString()),
-            int.parse(location.child("tolal").value.toString()),
-            location.child("day_time").value.toString(),
-            location.child("night_time").value.toString(),
-            int.parse(location.child("hors").value.toString()),
-            location.child("name").value.toString(),
-            location.child("latitude").value.toString(),
-            location.child("longitude").value.toString(),
-          );
+        values.forEach((key, value) {
 
-          locations2.add(locationData1);
-        }
 
-        setState(() {
-          DashboardPageState.locationsall.clear();
-          DashboardPageState.locationsall.addAll(locations2);
+          bool add=false;
+          for (var number in DashboardPageState.siteData) {
+            if(number==value['id'] ){
+              add=true;
+            }
+          }
+          if(add) {
+            LocationData location = LocationData(
+              value['id'],
+              value['tolal'],
+              value['name'].toString(),
+              value['day_time'].toString(),
+              value['night_time'].toString(),
+              value['hors'],
+              double.parse(value['Latitude'].toString()),
+              double.parse(value['longitude'].toString()),
+            );
+            locations2.add(location);
+          }
         });
+
+
+      } catch (error) {
+        print('Error: $error');
+      }
+      setState(() {
+        DashboardPageState.locationsall.clear();
+        DashboardPageState.locationsall.addAll(locations2);
       });
       final guardDitales = FirebaseDatabase.instance.ref("Focus/Data");
 
@@ -1968,8 +2024,8 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
         }
 
         setState(() {
-          DashboardPageState._Guard_Data.clear();
-          DashboardPageState._Guard_Data.addAll(guarddata);
+          DashboardPageState.Guard_Data.clear();
+          DashboardPageState.Guard_Data.addAll(guarddata);
         });
       });
 
@@ -2060,7 +2116,7 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
 
         DashboardPageState.locationsall.clear();
 
-        DashboardPageState._Guard_Data.clear();
+        DashboardPageState.Guard_Data.clear();
 
         DashboardPageState.record.clear();
         DashboardPageState.record3.clear();

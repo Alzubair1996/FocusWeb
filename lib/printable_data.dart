@@ -138,7 +138,9 @@ buildPrintableData(ttf) => pw.Padding(
                           child: pw.SizedBox(
                               width: 130,
                               height: 20,
-                              child: pw.Text(name,style: pw.TextStyle(font: ttf), maxLines: 1)),
+                              child:pw.Align(
+                  alignment: pw.Alignment.centerLeft,
+                  child: pw.Text(" $name",style: pw.TextStyle(font: ttf), maxLines: 1))),
                         ),
                       ),
                     pw.ListView.builder(
@@ -219,7 +221,7 @@ pw.Row(children: [
         child: pw.SizedBox(
             width: 351.5+DashboardPageState.days*14.5,
             height: 17,
-            child: pw.Center(child: pw.Text(DashboardPageState.locationsall[indix1].name+" Attendance ${DashboardPageState.months[DashboardPageState.selectedMonthIndex]} -${DashboardPageState.Years} ",
+            child: pw.Center(child: pw.Text(DashboardPageState.locationsall[indix1].name+" Attendance ${DashboardPageState.months[DashboardPageState.selectedMonthIndex]} - ${DashboardPageState.Years} ",
                 style: pw.TextStyle(font: ttf,fontWeight: pw.FontWeight.bold)))),
       ),
     ),
@@ -443,7 +445,7 @@ var si=index+1;
                   child: pw.SizedBox(
                       width: 150,
                       height: 12,
-                      child: pw.Text(name,style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
+                      child: pw.Text(" $name",style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
                 ),
               ),
 
@@ -593,7 +595,50 @@ var si=index+1;
           }),
     ),
 
+pw.SizedBox(
+  width: 20,
+  height: 20
+),
 
+
+   pw.Container(
+     width:double.maxFinite,
+     child: pw.Center(
+
+       child:  pw.Row(
+           children: [
+          pw.Expanded(flex: 1,
+            child:    pw.Column(
+
+              children: [
+                pw.Container(child: pw.Text("Operation Coordinator     ",style: pw.TextStyle(font: ttf)),),
+                pw.SizedBox(
+                    width: 25,
+                    height: 25
+                ),
+                pw.Container(child:    pw.Text("Approved By : Mr. Abdul Jabbar     Sign : ______________",style: pw.TextStyle(font: ttf)),),
+              ]
+          ),),
+             pw.Expanded(
+               flex: 1,
+               child:    pw.Column(
+                 children: [
+                   pw.Container(child: pw.Text("Operation Manager        ",style: pw.TextStyle(font: ttf)),),
+                   pw.SizedBox(
+                       width: 25,
+                       height: 25
+                   ),
+                   pw.Container(child:  pw.Text("Approved By : Mr. Shukri Mahmood  Sign : ______________",style: pw.TextStyle(font: ttf)),),
+                 ]
+             ),),
+
+
+           ]
+
+
+       ),
+     )
+   )
   ]),
 );
 

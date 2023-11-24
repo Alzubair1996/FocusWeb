@@ -189,19 +189,42 @@ buildPrintableDataDetales(ttf ,idess, locations, indix1)
   padding: const pw.EdgeInsets.all(13.00),
   child: pw.Column(children: [
     pw.Row(children: [
+      pw.SizedBox(width: 50, height: 50),
       //pw.Image(logo, width: 40, height: 40),
       pw.Container(
-          width: 800,
+          width:  351.5+DashboardPageState.days*12.5-0.5,
           child: pw.Center(
             // style: pw.TextStyle(font: ttf, fontSize: 24)
               child: pw.Text(
-                "details of  ${DashboardPageState.locationsall[indix1].name}   ${DashboardPageState.selectedMonthIndex}/ ${DashboardPageState.Years}",
+                "Operation Department ",
                 style: pw.TextStyle(
-                    fontSize: 16,font: ttf
+                    fontSize: 22,font: ttf,fontWeight: pw.FontWeight.bold
                 ),
               )))
     ]),
     pw.SizedBox(width: 5, height: 5),
+pw.Row(children: [
+  pw.Expanded(
+    flex: 0,
+    child: pw.Container(
+      decoration: pw.BoxDecoration(
+        color: PdfColors.orangeAccent,
+        border: pw.Border.all(
+          color: PdfColors.black,
+          width: 1, // عرض الحدود
+        ),
+      ),
+      child: pw.Container(
+        margin: pw.EdgeInsets.only(left: 0.5),
+        child: pw.SizedBox(
+            width: 351.5+DashboardPageState.days*14.5-0.5,
+            height: 17,
+            child: pw.Center(child: pw.Text(DashboardPageState.locationsall[indix1].name+" Attendance ${DashboardPageState.months[DashboardPageState.selectedMonthIndex]} -${DashboardPageState.Years} ",
+                style: pw.TextStyle(font: ttf,fontWeight: pw.FontWeight.bold)))),
+      ),
+    ),
+  ),
+  ]),
     pw.Row(children: [
       pw.Expanded(
         flex: 0,
@@ -216,10 +239,10 @@ buildPrintableDataDetales(ttf ,idess, locations, indix1)
           child: pw.Container(
             margin: pw.EdgeInsets.only(left: 0.5),
             child: pw.SizedBox(
-                width: 44,
-                height: 20,
-                child: pw.Center(child: pw.Text("ID",
-                    style: pw.TextStyle(font: ttf)))),
+                width: 25,
+                height: 12,
+                child: pw.Center(child: pw.Text("SI No",
+                    style: pw.TextStyle(font: ttf,fontSize:9)))),
           ),
         ),
       ),
@@ -236,12 +259,54 @@ buildPrintableDataDetales(ttf ,idess, locations, indix1)
           child: pw.Container(
             margin: pw.EdgeInsets.only(left: 0.5),
             child: pw.SizedBox(
-                width: 130,
-                height: 20,
-                child: pw.Center(child: pw.Text("Name",style: pw.TextStyle(font: ttf)))),
+                width: 150,
+                height: 12,
+                child: pw.Center(child: pw.Text("Location",
+                    style: pw.TextStyle(font: ttf,fontSize:9)))),
           ),
         ),
       ),
+      pw.Expanded(
+        flex: 0,
+        child: pw.Container(
+          decoration: pw.BoxDecoration(
+            color: PdfColors.orangeAccent,
+            border: pw.Border.all(
+              color: PdfColors.black,
+              width: 1, // عرض الحدود
+            ),
+          ),
+          child: pw.Container(
+            margin: pw.EdgeInsets.only(left: 0.5),
+            child: pw.SizedBox(
+                width: 25,
+                height: 12,
+                child: pw.Center(child: pw.Text("ID No",
+                    style: pw.TextStyle(font: ttf,fontSize:9)))),
+          ),
+        ),
+      ),
+      pw.Expanded(
+        flex: 0,
+        child: pw.Container(
+          decoration: pw.BoxDecoration(
+            color: PdfColors.orangeAccent,
+            border: pw.Border.all(
+              color: PdfColors.black,
+              width: 1, // عرض الحدود
+            ),
+          ),
+          child: pw.Container(
+            margin: pw.EdgeInsets.only(left: 0.5),
+            child: pw.SizedBox(
+                width: 150,
+                height: 12,
+                child: pw.Center(child: pw.Text("Name",style: pw.TextStyle(font: ttf,fontSize:9)))),
+          ),
+        ),
+      ),
+
+
       pw.ListView.builder(
           direction: pw.Axis.horizontal,
           itemCount: DashboardPageState.days,
@@ -261,10 +326,10 @@ buildPrintableDataDetales(ttf ,idess, locations, indix1)
                 margin: pw.EdgeInsets.only(left: 0.5),
 
                 child: pw.SizedBox(
-                  width: 20,
-                  height: 20,
+                  width: 14,
+                  height: 12,
                   // تحديد عرض العنصر حسب احتياجاتك
-                  child: pw.Center(child: pw.Text(day,style: pw.TextStyle(font: ttf))),
+                  child: pw.Center(child: pw.Text(day,style: pw.TextStyle(font: ttf,fontSize:9))),
                 ),
               ),
             );
@@ -274,7 +339,7 @@ buildPrintableDataDetales(ttf ,idess, locations, indix1)
 
 //27
     pw.SizedBox(
-      height: (idess.length.toInt())*20,
+      height: (idess.length.toInt())*12,
 
       child:
       pw.ListView.builder(
@@ -283,59 +348,7 @@ buildPrintableDataDetales(ttf ,idess, locations, indix1)
           itemBuilder: (context, index) {
       var id= idess[index].toString();
 
-
-final List<int> dyas1aa=[];
-for(int day =1;day<DashboardPageState.days;day++){
-  int idhave=0;
- // print(day.toString()+"ttttttt");
-  try{
-final record3 = DashboardPageState.record3.firstWhere((record3) {
-return record3.job_no == int.parse(locations) &&
-int.parse(record3.date.toString()) == (day ) &&
-id == record3.id.toString();
-});
-
-idhave=day;
-print(idhave.toString()+"ttttttt");
-
-}catch(e){
-
-//  print(idhave.toString()+"ttttttt");
-}
-if(idhave!=0){
-  dyas1aa.add(idhave);
-}
-
-
-}
-int day2=0;
-
-  if(dyas1aa.length!=0){
-    for(var a in idess){
-
-      for(int day  in dyas1aa){
-
-        try{
-
-        final record = DashboardPageState.record.firstWhere((record) {
-          return record.job_no == int.parse(locations) &&
-              int.parse(record.date.toString()) == (day ) &&
-              a == record.id.toString();
-        });
-      //oooooooooooo
-}catch(e){
-if(a!=0){
-  print(a.toString()+"$day FFFFFF");
-}
-
-
-
-
-}
-      }
-            }
-            }
-
+var si=index+1;
           var name= DashboardPageState.Guard_Data[idess[index]].NAME_EN .toString();
             return pw.Row(children: [
               pw.Container(
@@ -348,15 +361,61 @@ if(a!=0){
                 child: pw.Container(
                   margin: pw.EdgeInsets.only(left: 0.5),
                   child: pw.SizedBox(
-                      width: 44,
-                      height: 20,
+                      width: 25,
+                      height: 12,
                       child: pw.Center(
                         child: pw.Text(
-                            id,style: pw.TextStyle(font: ttf)
+                            si.toString(),style: pw.TextStyle(font: ttf,fontSize:9)
                         ),
                       )),
                 ),
               ),
+
+              index==0?    pw.Container(
+                decoration: pw.BoxDecoration(
+                  border: pw.Border(
+                    top: pw.BorderSide(width: 1.0, color: PdfColors.black),
+                    left: pw.BorderSide(width: 1.0, color: PdfColors.black),
+                    right: pw.BorderSide(width: 1.0, color: PdfColors.black),
+                    // Add borders for other sides as needed
+                  ),
+                  /*
+                  border: pw.Border.all(
+
+                    color: PdfColors.black,
+                    width: 1, // عرض الحدود
+                  ),
+                  */
+                ),
+                child: pw.Container(
+                  margin: pw.EdgeInsets.only(left: 0.5),
+                  child: pw.SizedBox(
+                      width: 150 ,
+                      height: 12,
+                      child: pw.Text(DashboardPageState.locationsall[indix1].name.toString(),style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
+                ),
+              ):  pw.Container(
+            decoration: pw.BoxDecoration(
+            border: pw.Border(
+              bottom: pw.BorderSide(width: 1.0, color: PdfColors.black),
+            left: pw.BorderSide(width: 1.0, color: PdfColors.black),
+            right: pw.BorderSide(width: 1.0, color: PdfColors.black),
+            // Add borders for other sides as needed
+            ),
+            /*
+                  border: pw.Border.all(
+
+                    color: PdfColors.black,
+                    width: 1, // عرض الحدود
+                  ),
+                  */
+            ),
+            child:pw.Container(
+              margin: pw.EdgeInsets.only(left: 0.5),
+                width: 150 ,
+                height: 12,
+              ),  ),
+
 
               pw.Container(
                 decoration: pw.BoxDecoration(
@@ -368,9 +427,25 @@ if(a!=0){
                 child: pw.Container(
                   margin: pw.EdgeInsets.only(left: 0.5),
                   child: pw.SizedBox(
-                      width: 130,
-                      height: 20,
-                      child: pw.Text(name,style: pw.TextStyle(font: ttf,), maxLines: 1)),
+                      width: 25,
+                      height: 12,
+                      child: pw.Center(
+            child: pw.Text(id,style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1))),
+                ),
+              ),
+              pw.Container(
+                decoration: pw.BoxDecoration(
+                  border: pw.Border.all(
+                    color: PdfColors.black,
+                    width: 1, // عرض الحدود
+                  ),
+                ),
+                child: pw.Container(
+                  margin: pw.EdgeInsets.only(left: 0.5),
+                  child: pw.SizedBox(
+                      width: 150,
+                      height: 12,
+                      child: pw.Text(name,style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
                 ),
               ),
 
@@ -387,7 +462,7 @@ if(a!=0){
                             id == record.id.toString();
                       });
 
-                      duty = 12;
+                      duty = 1;
                     } catch (e) {
                       // إذا لم يتم العثور على تطابق، duty سيبقى 0
                     }
@@ -399,7 +474,7 @@ if(a!=0){
                             id == record3.id.toString();
                       });
 
-                      duty = duty+12;
+                      duty = duty+1;
                     } catch (e) {
                       // إذا لم يتم العثور على تطابق، duty سيبقى 0
                     }
@@ -413,17 +488,18 @@ if(a!=0){
                       child: pw.Container(
                         // تعيين Padding إلى صفر
                         margin: pw.EdgeInsets.only(left: 0.5),
+
                         color: DashboardPageState.isChecked
-                            ? duty == 12
-                            ? PdfColors.green
-                            : duty==24?PdfColors.deepOrange:PdfColors.white
-                            : PdfColors.white,
+                            ? duty == 0
+                        ?PdfColor.fromHex("#f7fff6")
+                            : PdfColors.white:PdfColors.white,
+
                         child: pw.SizedBox(
-                          width: 20,
-                          height: 20,
+                          width: 14,
+                          height: 12,
                           // تحديد عرض العنصر حسب احتياجاتك
                           child: pw.Center(
-                              child: pw.Text(duty.toString(),style: pw.TextStyle(font: ttf))),
+                              child: pw.Text(duty==0?"":duty.toString(),style: pw.TextStyle(font: ttf,fontSize:9))),
                         ),
                       ),
                     );
@@ -437,7 +513,7 @@ if(a!=0){
 
 
     pw.SizedBox(
-      height: 20,
+      height: 12,
 
       child:
       pw.ListView.builder(
@@ -445,27 +521,9 @@ if(a!=0){
           itemCount: idess.length,
           itemBuilder: (context, index) {
 
-            var name="Total";
+            var name="Grand Total";
             return pw.Row(children: [
-              pw.Container(
-                decoration: pw.BoxDecoration(
-                  border: pw.Border.all(
-                    color: PdfColors.black,
-                    width: 1, // عرض الحدود
-                  ),
-                ),
-                child: pw.Container(
-                  margin: pw.EdgeInsets.only(left: 0.5),
-                  child: pw.SizedBox(
-                      width: 44,
-                      height: 20,
-                      child: pw.Center(
-                        child: pw.Text(
-                            "",style: pw.TextStyle(font: ttf)
-                        ),
-                      )),
-                ),
-              ),
+
 
               pw.Container(
                 decoration: pw.BoxDecoration(
@@ -475,11 +533,14 @@ if(a!=0){
                   ),
                 ),
                 child: pw.Container(
+                  color: PdfColors.yellow,
                   margin: pw.EdgeInsets.only(left: 0.5),
                   child: pw.SizedBox(
-                      width: 130,
-                      height: 20,
-                      child: pw.Text(name,style: pw.TextStyle(font: ttf,), maxLines: 1)),
+
+                      width: 351.5,
+                      height: 12,
+                      child: pw.Center(
+            child: pw.Text(name,style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1))),
                 ),
               ),
 
@@ -505,18 +566,26 @@ if(a!=0){
                         ),
                       ),
                       child: pw.Container(
+                    decoration: pw.BoxDecoration(
+                    color: PdfColors.orangeAccent,
+                    border: pw.Border.all(
+                    color: PdfColors.black,
+                    width: 1, // عرض الحدود
+                    ),
+                    ),
+                    child:  pw.Container(
                         // تعيين Padding إلى صفر
                         margin: pw.EdgeInsets.only(left: 0.5),
                         color:  getGuardCountColor(guardCount, int.parse(num)),
 
                         child: pw.SizedBox(
-                          width: 20,
-                          height: 20,
+                          width: 14,
+                          height: 12,
                           // تحديد عرض العنصر حسب احتياجاتك
                           child: pw.Center(
-                              child: pw.Text(guardCount.toString(),style: pw.TextStyle(font: ttf))),
+                              child: pw.Text(guardCount.toString(),style: pw.TextStyle(font: ttf,fontSize:9))),
                         ),
-                      ),
+                      ), ),
                     );
                   }),
             ]);

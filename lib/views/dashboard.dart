@@ -51,7 +51,7 @@ class DashboardPageState extends State<DashboardPage>
 
 // Get the month name
   List<int> Yearslist = [2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030];
-  List<String> months = [
+  static  List<String> months = [
     "January",
     "February",
     "March",
@@ -1795,8 +1795,59 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
 
   Future<void> printDoc(  idess, locations, indix1 ) async {
 
-
+    final List<int> dyas1aa=[];
     List<dynamic> idess1=idess.toList();
+    for(var id in idess1){
+    for(int day =1;day<DashboardPageState.days;day++){
+      int idhave=0;
+
+      try{
+        final record3 = DashboardPageState.record3.firstWhere((record3) {
+          return record3.job_no == int.parse(locations) &&
+              int.parse(record3.date.toString()) == (day ) &&
+              id == record3.id.toString();
+        });
+
+        idhave=day;
+        print("${idhave}ttttttt");
+
+      }catch(e){
+
+  print("${idhave}ttttttt");
+      }
+      if(idhave!=0){
+        dyas1aa.add(idhave);
+      }
+
+
+    }
+    int day2=0;
+
+    if(dyas1aa.length!=0){
+      for(var a in idess){
+        for(int day  in dyas1aa){
+          try{
+            final record = DashboardPageState.record.firstWhere((record) {
+              return record.job_no == int.parse(locations) &&
+                  int.parse(record.date.toString()) == (day ) &&
+                  a == record.id.toString();
+            });
+            //oooooooooooo
+          }catch(e){
+            if(a!=0&&a!=id){
+              print(a.toString()+"$day FFFFFF");
+            }
+
+
+
+
+          }
+        }
+      }
+    }
+
+    }
+
     String locations1=locations;
     int indix11=indix1;
 //Detales

@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:webkit/controller/dashboard_controller.dart';
+import 'package:webkit/dubleduty.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import '../GuardDetails.dart';
 import '../helpers/theme/theme_customizer.dart';
@@ -1792,62 +1793,68 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
       */
     );
   }
-
+  int getIndexById(int id,int day) {
+    return DashboardPageState.record.indexWhere((record) => record.id == id && int.parse(record.date) == day);
+  }
   Future<void> printDoc(  idess, locations, indix1 ) async {
 
-    final List<int> dyas1aa=[];
+    final List<dubleduty> dubaleduty1=[];
     List<dynamic> idess1=idess.toList();
     for(var id in idess1){
     for(int day =1;day<DashboardPageState.days;day++){
-      int idhave=0;
 
       try{
         final record3 = DashboardPageState.record3.firstWhere((record3) {
-          return record3.job_no == int.parse(locations) &&
+          return record3.job_no == int.parse(locations)  &&record3.job_no==DashboardPageState.record[getIndexById(id,day)].job_no&&
               int.parse(record3.date.toString()) == (day ) &&
-              id == record3.id.toString();
+              id.toString() == record3.id.toString();
         });
-
-        idhave=day;
-        print("${idhave}ttttttt");
+        final a= dubleduty(
+          id,day
+        );
+        dubaleduty1.add(a);
+        record3.job_no=9555;
 
       }catch(e){
 
-  print("${idhave}ttttttt");
-      }
-      if(idhave!=0){
-        dyas1aa.add(idhave);
-      }
+    }
+
 
 
     }
-    int day2=0;
 
-    if(dyas1aa.length!=0){
-      for(var a in idess){
-        for(int day  in dyas1aa){
-          try{
+    }
+    for(var id in idess1) {
+      for (int day = 1; day < DashboardPageState.days; day++) {
+        for (int i = 0; i < dubaleduty1.length; i++) {
+
+          try {
             final record = DashboardPageState.record.firstWhere((record) {
               return record.job_no == int.parse(locations) &&
-                  int.parse(record.date.toString()) == (day ) &&
-                  a == record.id.toString();
+                  int.parse(record.date.toString()) == (dubaleduty1[i].day) &&
+                  id == record.id;
             });
             //oooooooooooo
-          }catch(e){
-            if(a!=0&&a!=id){
-              print(a.toString()+"$day FFFFFF");
-            }
+          } catch (e) {
 
 
+              final day =
+              (dubaleduty1[i].day).toString().padLeft(2, '0');
+              Record myRecord = Record(
+                id: id,
+                job_no: int.parse(locations),
+                date: day,
+                datetime: '08:00',
+                shift: 'Day',
+              );
 
+              DashboardPageState.record.add(myRecord);
+              dubaleduty1[i].day=50;
 
           }
         }
       }
     }
-
-    }
-
     String locations1=locations;
     int indix11=indix1;
 //Detales
@@ -1868,6 +1875,8 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
         }));
     await Printing.layoutPdf(
         onLayout: (PdfPageFormat format) async => doc.save());
+
+    a();
   }
   Widget getData(String name, String total, bool v) {
     return Visibility(

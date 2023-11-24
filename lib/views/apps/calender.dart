@@ -59,21 +59,25 @@ class _CalenderState extends State<Calender>
               MySpacing.height(flexSpacing),
               Padding(
                 padding: MySpacing.x(flexSpacing),
-                child: MyCard(
-                  shadow: MyShadow(elevation: 0.5),
-                  height: 700,
-                  child: SfCalendar(
-                    view: CalendarView.month,
-                    allowedViews: const [
-                      CalendarView.day,
-                      CalendarView.week,
-                      CalendarView.month,
-                    ],
-                    dataSource: controller.events,
-                    allowDragAndDrop: true,
-                    onDragEnd: controller.dragEnd,
-                    monthViewSettings: const MonthViewSettings(
-                      showAgenda: true,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: MyCard(
+                    shadow: MyShadow(elevation: 0.5),
+                    height: 400,
+                    width: 400,
+                    child: SfCalendar(
+                      view: CalendarView.month,
+                      allowedViews: const [
+                        CalendarView.day,
+                        CalendarView.week,
+                        CalendarView.month,
+                      ],
+                      dataSource: controller.events,
+                      allowDragAndDrop: true,
+                      onDragEnd: controller.dragEnd,
+                      monthViewSettings: const MonthViewSettings(
+                        showAgenda: true,
+                      ),
                     ),
                   ),
                 ),

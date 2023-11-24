@@ -12,6 +12,7 @@ class CalenderController extends MyController {
   }
 
   void dragEnd(AppointmentDragEndDetails appointmentDragEndDetails) {
+    print("4444444444444");
     Appointment detail = appointmentDragEndDetails.appointment as Appointment;
     Duration duration = detail.endTime.difference(detail.startTime);
 
@@ -19,7 +20,7 @@ class CalenderController extends MyController {
         appointmentDragEndDetails.droppingTime!.year,
         appointmentDragEndDetails.droppingTime!.month,
         appointmentDragEndDetails.droppingTime!.day,
-        appointmentDragEndDetails.droppingTime!.hour,
+
         0,
         0);
 
@@ -30,6 +31,7 @@ class CalenderController extends MyController {
         <dynamic>[appointmentDragEndDetails.appointment]);
 
     Appointment app = Appointment(
+
       subject: detail.subject,
       color: detail.color,
       startTime: start,
@@ -48,6 +50,16 @@ class CalenderController extends MyController {
 
     final DateTime today = DateTime(DateTime.now().year, DateTime.now().month,
         DateTime.now().day, DateTime.now().hour);
+    appointmentCollection.add(Appointment(
+        startTime: today,
+        endTime: today.add(const Duration(hours: 0)),
+        subject: 'فعالية رائس الخيمة',
+        color: Colors.blue));
+    appointmentCollection.add(Appointment(
+        startTime: today,
+        endTime: today.add(const Duration(hours: 0)),
+        subject: 'فعالية رائس الخيمة',
+        color: Colors.blue));
     appointmentCollection.add(Appointment(
         startTime: today,
         endTime: today.add(const Duration(hours: 1)),
@@ -79,6 +91,7 @@ class CalenderController extends MyController {
 
 class DataSource extends CalendarDataSource {
   DataSource(List<Appointment> source) {
+
     appointments = source;
   }
 }

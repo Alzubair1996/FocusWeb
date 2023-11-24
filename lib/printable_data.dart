@@ -340,174 +340,174 @@ pw.Row(children: [
 
 
 //27
-    pw.SizedBox(
-      height: (idess.length.toInt())*12,
+   pw.Row(
+     children: [
 
-      child:
-      pw.ListView.builder(
-          direction: pw.Axis.vertical,
-          itemCount: idess.length,
-          itemBuilder: (context, index) {
-      var id= idess[index].toString();
-      bool isLastItem = index == idess.length - 1;
-var si=index+1;
-          var name= DashboardPageState.Guard_Data[idess[index]].NAME_EN .toString();
-            return pw.Row(children: [
-              pw.Container(
-                decoration: pw.BoxDecoration(
-                  border: pw.Border.all(
-                    color: PdfColors.black,
-                    width: 1, // عرض الحدود
-                  ),
-                ),
-                child: pw.Container(
-                  margin: pw.EdgeInsets.only(left: 0.5),
-                  child: pw.SizedBox(
-                      width: 25,
-                      height: 12,
-                      child: pw.Center(
-                        child: pw.Text(
-                            si.toString(),style: pw.TextStyle(font: ttf,fontSize:9)
-                        ),
-                      )),
-                ),
-              ),
+       pw.SizedBox(
+         height: (idess.length.toInt())*12,
 
-              index==0?    pw.Container(
-                decoration: pw.BoxDecoration(
-                  border: pw.Border(
-                    top: pw.BorderSide(width: 1.0, color: PdfColors.black),
-                    left: pw.BorderSide(width: 1.0, color: PdfColors.black),
-                    right: pw.BorderSide(width: 1.0, color: PdfColors.black),
-                    // Add borders for other sides as needed
-                  ),
+         child:
+         pw.ListView.builder(
+             direction: pw.Axis.vertical,
+             itemCount: idess.length,
+             itemBuilder: (context, index) {
 
-                ),
-                child: pw.Container(
-                  margin: pw.EdgeInsets.only(left: 0.5),
-                  child: pw.SizedBox(
-                      width: 150 ,
-                      height: 12,
-                      child: pw.Center(child:pw.Text(DashboardPageState.locationsall[indix1].name.toString(),style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
-              )  ),
-              ):  pw.Container(
-            decoration: pw.BoxDecoration(
-            border: isLastItem?pw.Border(
-            bottom: pw.BorderSide(width: 1.0, color: PdfColors.black),
-            left: pw.BorderSide(width: 1.0, color: PdfColors.black),
-            right: pw.BorderSide(width: 1.0, color: PdfColors.black),
-            // Add borders for other sides as needed
-            ):pw.Border(
-              left: pw.BorderSide(width: 1.0, color: PdfColors.black),
-              right: pw.BorderSide(width: 1.0, color: PdfColors.black),
-              // Add borders for other sides as needed
-            ),
-            /*
-                  border: pw.Border.all(
+               var si=index+1;
 
-                    color: PdfColors.black,
-                    width: 1, // عرض الحدود
-                  ),
-                  */
-            ),
-            child:pw.Container(
-              margin: pw.EdgeInsets.only(left: 0.5),
-                width: 150 ,
-                height: 12,
-              ),  ),
+               return pw.Row(children: [
+                 pw.Container(
+                   decoration: pw.BoxDecoration(
+                     border: pw.Border.all(
+                       color: PdfColors.black,
+                       width: 1, // عرض الحدود
+                     ),
+                   ),
+                   child: pw.Container(
+                     margin: pw.EdgeInsets.only(left: 0.5),
+                     child: pw.SizedBox(
+                         width: 25,
+                         height: 12,
+                         child: pw.Center(
+                           child: pw.Text(
+                               si.toString(),style: pw.TextStyle(font: ttf,fontSize:9)
+                           ),
+                         )),
+                   ),
+                 ),
 
 
-              pw.Container(
-                decoration: pw.BoxDecoration(
-                  border: pw.Border.all(
-                    color: PdfColors.black,
-                    width: 1, // عرض الحدود
-                  ),
-                ),
-                child: pw.Container(
-                  margin: pw.EdgeInsets.only(left: 0.5),
-                  child: pw.SizedBox(
-                      width: 25,
-                      height: 12,
-                      child: pw.Center(
-            child: pw.Text(id,style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1))),
-                ),
-              ),
-              pw.Container(
-                decoration: pw.BoxDecoration(
-                  border: pw.Border.all(
-                    color: PdfColors.black,
-                    width: 1, // عرض الحدود
-                  ),
-                ),
-                child: pw.Container(
-                  margin: pw.EdgeInsets.only(left: 0.5),
-                  child: pw.SizedBox(
-                      width: 150,
-                      height: 12,
-                      child: pw.Text(" $name",style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
-                ),
-              ),
 
-              pw.ListView.builder(
-                  direction: pw.Axis.horizontal,
-                  itemCount: DashboardPageState.days,
-                  itemBuilder: (context, dayIndex) {
-                    var duty = 0;
+               ]);
+             }),
+       ),
+       pw.Container(
+         decoration: pw.BoxDecoration(
+           border: pw.Border(
+             top: pw.BorderSide(width: 1.0, color: PdfColors.black),
+             left: pw.BorderSide(width: 1.0, color: PdfColors.black),
+             right: pw.BorderSide(width: 1.0, color: PdfColors.black),
+             // Add borders for other sides as needed
+           ),
 
-                    try {
-                      final record = DashboardPageState.record.firstWhere((record) {
-                        return record.job_no == int.parse(locations) &&
-                            int.parse(record.date.toString()) == (dayIndex + 1) &&
-                            id == record.id.toString();
-                      });
+         ),
+         child: pw.Container(
+             margin: pw.EdgeInsets.only(left: 0.5),
+             child: pw.SizedBox(
+               width: 150 ,
+               height:idess.length*12,
+               child: pw.Center(child:pw.Text(DashboardPageState.locationsall[indix1].name.toString(),style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
+             )  ),
+       ),
 
-                      duty = 1;
-                    } catch (e) {
-                      // إذا لم يتم العثور على تطابق، duty سيبقى 0
-                    }
+       pw.SizedBox(
+         height: (idess.length.toInt())*12,
 
-                    try {
-                      final record3 = DashboardPageState.record3.firstWhere((record3) {
-                        return record3.job_no == int.parse(locations) &&
-                            int.parse(record3.date.toString()) == (dayIndex + 1) &&
-                            id == record3.id.toString();
-                      });
+         child:
+         pw.ListView.builder(
+             direction: pw.Axis.vertical,
+             itemCount: idess.length,
+             itemBuilder: (context, index) {
+               var id= idess[index].toString();
 
-                      duty = duty+1;
-                    } catch (e) {
-                      // إذا لم يتم العثور على تطابق، duty سيبقى 0
-                    }
-                    return pw.Container(
-                      decoration: pw.BoxDecoration(
-                        border: pw.Border.all(
-                          color: PdfColors.black,
-                          width: 1, // عرض الحدود
-                        ),
-                      ),
-                      child: pw.Container(
-                        // تعيين Padding إلى صفر
-                        margin: pw.EdgeInsets.only(left: 0.5),
+               var name= DashboardPageState.Guard_Data[idess[index]].NAME_EN .toString();
+               return pw.Row(children: [
 
-                        color: DashboardPageState.isChecked
-                            ? duty == 0
-                        ?PdfColor.fromHex("#f7fff6")
-                            : PdfColors.white:PdfColors.white,
 
-                        child: pw.SizedBox(
-                          width: 14,
-                          height: 12,
-                          // تحديد عرض العنصر حسب احتياجاتك
-                          child: pw.Center(
-                              child: pw.Text(duty==0?"":duty.toString(),style: pw.TextStyle(font: ttf,fontSize:9))),
-                        ),
-                      ),
-                    );
-                  }),
 
-            ]);
-          }),
-          ),
+                 pw.Container(
+                   decoration: pw.BoxDecoration(
+                     border: pw.Border.all(
+                       color: PdfColors.black,
+                       width: 1, // عرض الحدود
+                     ),
+                   ),
+                   child: pw.Container(
+                     margin: pw.EdgeInsets.only(left: 0.5),
+                     child: pw.SizedBox(
+                         width: 25,
+                         height: 12,
+                         child: pw.Center(
+                             child: pw.Text(id,style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1))),
+                   ),
+                 ),
+                 pw.Container(
+                   decoration: pw.BoxDecoration(
+                     border: pw.Border.all(
+                       color: PdfColors.black,
+                       width: 1, // عرض الحدود
+                     ),
+                   ),
+                   child: pw.Container(
+                     margin: pw.EdgeInsets.only(left: 0.5),
+                     child: pw.SizedBox(
+                         width: 150,
+                         height: 12,
+                         child: pw.Text(" $name",style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
+                   ),
+                 ),
+
+                 pw.ListView.builder(
+                     direction: pw.Axis.horizontal,
+                     itemCount: DashboardPageState.days,
+                     itemBuilder: (context, dayIndex) {
+                       var duty = 0;
+
+                       try {
+                         final record = DashboardPageState.record.firstWhere((record) {
+                           return record.job_no == int.parse(locations) &&
+                               int.parse(record.date.toString()) == (dayIndex + 1) &&
+                               id == record.id.toString();
+                         });
+
+                         duty = 1;
+                       } catch (e) {
+                         // إذا لم يتم العثور على تطابق، duty سيبقى 0
+                       }
+
+                       try {
+                         final record3 = DashboardPageState.record3.firstWhere((record3) {
+                           return record3.job_no == int.parse(locations) &&
+                               int.parse(record3.date.toString()) == (dayIndex + 1) &&
+                               id == record3.id.toString();
+                         });
+
+                         duty = duty+1;
+                       } catch (e) {
+                         // إذا لم يتم العثور على تطابق، duty سيبقى 0
+                       }
+                       return pw.Container(
+                         decoration: pw.BoxDecoration(
+                           border: pw.Border.all(
+                             color: PdfColors.black,
+                             width: 1, // عرض الحدود
+                           ),
+                         ),
+                         child: pw.Container(
+                           // تعيين Padding إلى صفر
+                           margin: pw.EdgeInsets.only(left: 0.5),
+
+                           color: DashboardPageState.isChecked
+                               ? duty == 0
+                               ?PdfColor.fromHex("#f7fff6")
+                               : PdfColors.white:PdfColors.white,
+
+                           child: pw.SizedBox(
+                             width: 14,
+                             height: 12,
+                             // تحديد عرض العنصر حسب احتياجاتك
+                             child: pw.Center(
+                                 child: pw.Text(duty==0?"":duty.toString(),style: pw.TextStyle(font: ttf,fontSize:9))),
+                           ),
+                         ),
+                       );
+                     }),
+
+               ]);
+             }),
+       ),
+
+     ]
+   ),
 
 
 

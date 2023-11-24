@@ -2295,17 +2295,17 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
             } catch (e) {}
             }
 
-/*
 
 
-*/
+
+
             } catch (e) {}
             Navigator.of(context)
                 .pop(); // This is correct because we are not trying to use the result of the pop method.
             },
             child: Text('Yes'),
             ),
-            /*
+
                                   TextButton(
                                     onPressed: () {
                                       Navigator.of(context)
@@ -2314,7 +2314,7 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
                                         context: context,
                                         builder: (context) {
                                           return AlertDialog(
-                                            title: Text('Confirm Change Location of duty'),
+                                            title: Text(duty==12?'Confirm Change Location of duty':'Select Location'),
                                             content:Container(
                                               height:200 ,
                                               width: 100,
@@ -2373,9 +2373,9 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
                                       );
                                       // This is correct because we are not trying to use the result of the pop method.
                                     },
-                                    child: Text('Change Location'),
+                                    child: Text(duty==12?'Change Location':'Add duty in other location'),
                                   ),
-                                  */
+
             ],
             );
             },

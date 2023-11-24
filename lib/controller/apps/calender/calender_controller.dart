@@ -12,7 +12,7 @@ class CalenderController extends MyController {
   }
 
   void dragEnd(AppointmentDragEndDetails appointmentDragEndDetails) {
-    print("4444444444444");
+
     Appointment detail = appointmentDragEndDetails.appointment as Appointment;
     Duration duration = detail.endTime.difference(detail.startTime);
 
@@ -49,7 +49,7 @@ class CalenderController extends MyController {
     List<Appointment> appointmentCollection = <Appointment>[];
 
     final DateTime today = DateTime(DateTime.now().year, DateTime.now().month,
-        DateTime.now().day, DateTime.now().hour);
+        DateTime.now().day);
     appointmentCollection.add(Appointment(
         startTime: today,
         endTime: today.add(const Duration(hours: 0)),

@@ -123,7 +123,15 @@ class _LeftBarState extends State<LeftBar>
                     isCondensed: isCondensed,
                   ),
 
+                  labelWidget("apps".tr()),
 
+                  //-----------------CALENDAR-----------------//
+                  NavigationItem(
+                    iconData: LucideIcons.calendarDays,
+                    title: "calender".tr(),
+                    route: '/calender',
+                    isCondensed: isCondensed,
+                  ),
 /*
                   labelWidget("apps".tr()),
 

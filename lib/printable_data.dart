@@ -217,7 +217,7 @@ pw.Row(children: [
       child: pw.Container(
         margin: pw.EdgeInsets.only(left: 0.5),
         child: pw.SizedBox(
-            width: 351.5+DashboardPageState.days*14.5-0.5,
+            width: 351.5+DashboardPageState.days*14.5,
             height: 17,
             child: pw.Center(child: pw.Text(DashboardPageState.locationsall[indix1].name+" Attendance ${DashboardPageState.months[DashboardPageState.selectedMonthIndex]} -${DashboardPageState.Years} ",
                 style: pw.TextStyle(font: ttf,fontWeight: pw.FontWeight.bold)))),
@@ -347,7 +347,7 @@ pw.Row(children: [
           itemCount: idess.length,
           itemBuilder: (context, index) {
       var id= idess[index].toString();
-
+      bool isLastItem = index == idess.length - 1;
 var si=index+1;
           var name= DashboardPageState.Guard_Data[idess[index]].NAME_EN .toString();
             return pw.Row(children: [
@@ -379,28 +379,26 @@ var si=index+1;
                     right: pw.BorderSide(width: 1.0, color: PdfColors.black),
                     // Add borders for other sides as needed
                   ),
-                  /*
-                  border: pw.Border.all(
 
-                    color: PdfColors.black,
-                    width: 1, // عرض الحدود
-                  ),
-                  */
                 ),
                 child: pw.Container(
                   margin: pw.EdgeInsets.only(left: 0.5),
                   child: pw.SizedBox(
                       width: 150 ,
                       height: 12,
-                      child: pw.Text(DashboardPageState.locationsall[indix1].name.toString(),style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
-                ),
+                      child: pw.Center(child:pw.Text(DashboardPageState.locationsall[indix1].name.toString(),style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
+              )  ),
               ):  pw.Container(
             decoration: pw.BoxDecoration(
-            border: pw.Border(
-              bottom: pw.BorderSide(width: 1.0, color: PdfColors.black),
+            border: isLastItem?pw.Border(
+            bottom: pw.BorderSide(width: 1.0, color: PdfColors.black),
             left: pw.BorderSide(width: 1.0, color: PdfColors.black),
             right: pw.BorderSide(width: 1.0, color: PdfColors.black),
             // Add borders for other sides as needed
+            ):pw.Border(
+              left: pw.BorderSide(width: 1.0, color: PdfColors.black),
+              right: pw.BorderSide(width: 1.0, color: PdfColors.black),
+              // Add borders for other sides as needed
             ),
             /*
                   border: pw.Border.all(
@@ -526,6 +524,7 @@ var si=index+1;
 
 
               pw.Container(
+
                 decoration: pw.BoxDecoration(
                   border: pw.Border.all(
                     color: PdfColors.black,
@@ -533,13 +532,15 @@ var si=index+1;
                   ),
                 ),
                 child: pw.Container(
+
                   color: PdfColors.yellow,
-                  margin: pw.EdgeInsets.only(left: 0.5),
-                  child: pw.SizedBox(
+                  child: pw.Container(
 
                       width: 351.5,
                       height: 12,
+                      margin: pw.EdgeInsets.only(left: 0.5),
                       child: pw.Center(
+
             child: pw.Text(name,style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1))),
                 ),
               ),

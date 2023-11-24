@@ -1649,15 +1649,7 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
                         height: 40,
                         width: 250,
                         decoration: BoxDecoration(
-                            /*
-                          border: Border(
-                            bottom: BorderSide(
-                              color: Colors.black,
-                              // لون الحدود
-                              width: 2.0, // عرض الحدود
-                            ),
-                          ),
-                          */
+
                             ),
                         child: Card(
                             margin: EdgeInsets.only(left: 1),

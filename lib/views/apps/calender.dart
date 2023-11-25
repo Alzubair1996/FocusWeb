@@ -1,18 +1,13 @@
-import 'dart:html';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/instance_manager.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:webkit/controller/apps/calender/calender_controller.dart';
 import 'package:webkit/helpers/utils/my_shadow.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
 import 'package:webkit/helpers/widgets/my_card.dart';
 import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
@@ -39,7 +34,10 @@ class Calender extends StatefulWidget {
 
 class CalenderState extends State<Calender>
     with SingleTickerProviderStateMixin, UIMixin {
+  void onInit() {
 
+    fetchFootballMatches() ;
+  }
   @override
   void initState() {
     super.initState();
@@ -81,7 +79,7 @@ class CalenderState extends State<Calender>
                 ],
               ),
               titlePadding: MySpacing.xy(16, 12),
-              insetPadding: MySpacing.y(230),
+              insetPadding: MySpacing.y(namestad=="Another"?170:230),
               actionsPadding: MySpacing.xy(150, 16),
               contentPadding: MySpacing.x(16),
               content: Column(
@@ -288,11 +286,37 @@ class CalenderState extends State<Calender>
 
                   ),
 
-                  namestad=="Another"?MyText.labelMedium(
-                      ""
-                  ):MyText.labelMedium(
-                      "$namestad"
-                  ),
+                  namestad=="Another"?Container():MyText.labelMedium(
+                      namestad),
+                  namestad=="Another"?
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      children: [
+                        MySpacing.height(16),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: MyText.bodyMedium("Name of location : ")),
+                        MySpacing.height(16),
+                        TextFormField(
+                          //  validator: controller.basicValidator.getValidation('address'),
+                          // controller: controller.basicValidator.getController('address'),
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: "Name of location",
+                            labelStyle:
+                            MyTextStyle.bodySmall(xMuted: true),
+                            border: outlineInputBorder,
+                            contentPadding: MySpacing.all(16),
+                            isCollapsed: true,
+                            floatingLabelBehavior:
+                            FloatingLabelBehavior.never,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ):Container(),
+
                 ],
               ),
               actions: [
@@ -316,6 +340,7 @@ class CalenderState extends State<Calender>
 
                       namestad="";
                       controller.selectedStartDate=  selectedDate;
+                      controller.selectedStartDate2=  selectedDate;
 
 
 
@@ -374,27 +399,33 @@ class CalenderState extends State<Calender>
                       Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextButton(
-                          onPressed: (){
+                        Expanded(
+                          flex: 1,
+                          child: TextButton(
+                            onPressed: (){
 
-                            setState(() {
-                              _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month - 1, 1);
+                              setState(() {
+                                _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month - 1, 1);
 
-                            });
+                              });
 
-                          },
-                          child: Text('Previous Month'),
+                            },
+                            child: Text('Previous Month'),
+                          ),
                         ),
                         SizedBox(width: 20
                         ,height: 20,),
-                        TextButton(
-                          onPressed: (){
-                            setState(() {
-                              _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month + 1, 1);
+                        Expanded(
+                          flex: 1,
+                          child: TextButton(
+                            onPressed: (){
+                              setState(() {
+                                _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month + 1, 1);
 
-                            });
-                          },
-                          child: Text('Next Month'),
+                              });
+                            },
+                            child: Text('Next Month'),
+                          ),
                         ),
                       ],
                     ),
@@ -403,9 +434,9 @@ class CalenderState extends State<Calender>
                       SfCalendar(
 
                           view: CalendarView.month,
-                         initialSelectedDate: isFirstOpen?DateTime.now():selectedDate,
+                          initialSelectedDate: isFirstOpen?DateTime.now():selectedDate,
                           dataSource: controller.events,
-                        initialDisplayDate: _displayedMonth,
+                          initialDisplayDate: _displayedMonth,
                           allowDragAndDrop: false,
                           onSelectionChanged: (date) {
                             String a = date.date.toString();
@@ -697,14 +728,16 @@ class CalenderState extends State<Calender>
       print('Error: $error');
     }
 
+
     setState(() {
       football.clear();
       football.addAll(locations2);
-
+      controller.events=DataSource(appointmentCollection);
     });
 
 
-    controller.events=DataSource(appointmentCollection);
+
+
 
 
 

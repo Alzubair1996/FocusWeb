@@ -32,15 +32,22 @@ class CalenderState extends State<Calender>
     with SingleTickerProviderStateMixin, UIMixin {
   late CalenderController controller;
 
+   DateTime _displayedMonth = DateTime.now();
+
   @override
   void initState() {
     super.initState();
 
     fetchFootballMatches();
+
   }
 
   static List<FootballMatch> football = [];
   static List<FootballMatch> footballday = [];
+  bool isFirstOpen = true;
+  bool ste = false;
+  late DateTime selectedDate;
+  late DateTime selectedDateBefor;
   @override
   Widget build(BuildContext context) {
     return Layout(
@@ -65,55 +72,131 @@ class CalenderState extends State<Calender>
               Padding(
                 padding: MySpacing.x(flexSpacing),
                 child: Align(
-                     alignment: ThemeCustomizer
-              .instance.currentLanguage.locale.languageCode ==
-          "ar"
-          ? Alignment.centerRight
-              : Alignment.centerLeft,
+                  alignment: ThemeCustomizer
+                              .instance.currentLanguage.locale.languageCode ==
+                          "ar"
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   child: MyCard(
                     shadow: MyShadow(elevation: 0.5),
                     height: 400,
                     width: 400,
-                    child: SfCalendar(
-                      view: CalendarView.month,
-                      dataSource: controller.events,
-                      allowDragAndDrop: false,
-                      onSelectionChanged: (date) {
+                    child: Column(
+                      children: [
+                      Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextButton(
+                          onPressed: (){
 
-                        String a=date.date.toString();
-                        DateTime dateTime = DateTime.parse(a);
+                            setState(() {
+                              _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month - 1, 1);
 
-                        String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
-                     
+                            });
 
-                        List<FootballMatch> footballday1 = [];
-                        for (int i =0;i< football.length;i++){
-                          if(football[i].date==formattedDate){
+                          },
+                          child: Text('Previous Month'),
+                        ),
+                        SizedBox(width: 20
+                        ,height: 20,),
+                        TextButton(
+                          onPressed: (){
+                            setState(() {
+                              _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month + 1, 1);
 
-                            footballday1.add(
-                              FootballMatch(
+                            });
+                          },
+                          child: Text('Next Month'),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child:
+                      SfCalendar(
+
+                          view: CalendarView.month,
+                         initialSelectedDate: isFirstOpen?DateTime.now():selectedDate,
+                          dataSource: controller.events,
+                        initialDisplayDate: _displayedMonth,
+                          allowDragAndDrop: false,
+                          onSelectionChanged: (date) {
+                            String a = date.date.toString();
+                            DateTime dateTime = DateTime.parse(a);
+                            String formattedDate =
+                            DateFormat('dd/MM/yyyy').format(dateTime);
+                            print(formattedDate);
+                            selectedDate=date.date!;
+                            if(date.date!=DateTime.now()&&selectedDate==null){
+
+                            setState(() {
+                              selectedDate = date.date!;
+                              isFirstOpen = false;
+                            });
+
+
+                            }else{
+
+
+                                  if(football.isNotEmpty){
+                                  try{
+                                  List<FootballMatch> footballday1 = [];
+                                  bool firest = true;
+                                  for (int i = 0; i < football.length; i++) {
+                                  if (football[i].date == formattedDate) {
+                                  footballday1.add(FootballMatch(
                                   football[i].id,
                                   football[i].contG,
                                   football[i].date,
                                   football[i].emirates,
                                   football[i].name,
                                   football[i].status,
-                              )
-                            );
-                          }
-                        }
-                        setState(() {
-                          footballday.clear();
-                          footballday.addAll(footballday1);
-                        });
+                                  firest ? Colors.orangeAccent : Colors.white));
+                                  firest = false;
+                                  }
+                                  }
+                                  setState(() {
+                                  selectedDate=date.date!;
+                                  isFirstOpen=false;
+                                  if(footballday.isEmpty){
+                                    footballday.clear();
+                                    footballday.addAll(footballday1);
+                                  }else {
+                                    if (footballday[0].date != formattedDate) {
+                                      footballday.clear();
+                                      footballday.addAll(footballday1);
+                                    }
+                                  }
 
-                        print(formattedDate);
-                       // print();
-                      },
-                      onDragEnd: controller.dragEnd,
-                      monthViewSettings: const MonthViewSettings(
-                        showAgenda: false,
-                      ),
+                                  });
+                                  }catch(e){
+
+
+
+
+                                  //
+
+
+                                  }
+                                  }
+                            }
+
+
+
+
+
+
+
+                           // fetchFootballMatches();
+                        /*
+
+
+                        */
+                            // print();
+                          },
+                          onDragEnd: controller.dragEnd,
+
+                        ),)
+                      ],
                     ),
                   ),
                 ),
@@ -126,7 +209,63 @@ class CalenderState extends State<Calender>
                     shadow: MyShadow(elevation: 0.5),
                     height: 400,
                     width: 400,
-                    child: Container(),
+                    child:
+
+
+                    ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        // التوجيه الأفقي
+                        itemCount: footballday.length,
+                        itemBuilder: (context, dayIndex) {
+                          return Padding(
+                              padding: const EdgeInsets.all(1.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  try {
+                                    for (int i = 0;
+                                        i < footballday.length;
+                                        i++) {
+                                      setState(() {
+                                        ste=true;
+                                        footballday[i].color = Colors.white;
+                                      });
+                                    }
+                                  } catch (e) {
+                                    print("$e");
+                                  }
+                                  footballday[dayIndex].color =
+                                      Colors.orangeAccent;
+
+                                },
+                                child: MyCard(
+                                    color: footballday[dayIndex].color,
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                footballday[dayIndex].name,
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              Text(
+                                                "  ContG : " +
+                                                    footballday[dayIndex].contG,
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          )),
+                                    )),
+                              ));
+                        }),
+
                   ),
                 ),
               ),
@@ -149,13 +288,13 @@ class CalenderState extends State<Calender>
 
       values.forEach((key, value) {
         FootballMatch location = FootballMatch(
-          value['ID'],
-          value['Cont_G'],
-          value['Date'],
-          value['Emirates'],
-          value['Name'],
-          value['Status'],
-        );
+            value['ID'],
+            value['Cont_G'],
+            value['Date'],
+            value['Emirates'],
+            value['Name'],
+            value['Status'],
+            Colors.transparent);
         locations2.add(location);
       });
     } catch (error) {

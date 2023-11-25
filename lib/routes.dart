@@ -139,7 +139,7 @@ getPageRoute() {
         page: () => const NFTDashboardScreen(),
         middlewares: [AuthMiddleware()]),
     GetPage(
-        name: '/calender',
+        name: '/Event',
         page: () => const Calender(),
         middlewares: [AuthMiddleware()]),
     GetPage(

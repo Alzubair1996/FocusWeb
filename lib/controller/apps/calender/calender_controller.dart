@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:webkit/controller/my_controller.dart';
 
+import '../../../views/apps/calender.dart';
+
 class CalenderController extends MyController {
   late DataSource events;
 
   @override
+
   void onInit() {
     super.onInit();
     events = addAppointments();
@@ -45,46 +48,25 @@ class CalenderController extends MyController {
     events.notifyListeners(CalendarDataSourceAction.add, appointment);
   }
 
-  DataSource addAppointments() {
+  DataSource addAppointments()  {
     List<Appointment> appointmentCollection = <Appointment>[];
 
-    final DateTime today = DateTime(DateTime.now().year, DateTime.now().month,
-        DateTime.now().day);
-    appointmentCollection.add(Appointment(
-        startTime: today,
-        endTime: today.add(const Duration(hours: 0)),
-        subject: 'فعالية رائس الخيمة',
-        color: Colors.blue));
-    appointmentCollection.add(Appointment(
-        startTime: today,
-        endTime: today.add(const Duration(hours: 0)),
-        subject: 'فعالية رائس الخيمة',
-        color: Colors.blue));
-    appointmentCollection.add(Appointment(
-        startTime: today,
-        endTime: today.add(const Duration(hours: 1)),
-        subject: 'Planning',
-        color: Colors.green));
-    appointmentCollection.add(Appointment(
-        startTime: today.add(const Duration(days: 1, hours: 2)),
-        endTime: today.add(const Duration(days: 1, hours: 3)),
-        subject: 'Meeting',
-        color: Colors.red));
-    appointmentCollection.add(Appointment(
-        startTime: today.add(const Duration(days: 1, hours: 1)),
-        endTime: today.add(const Duration(days: 1, hours: 2)),
-        subject: 'Retrospective',
-        color: Colors.pink));
-    appointmentCollection.add(Appointment(
-        startTime: today.add(const Duration(days: 2, hours: 5)),
-        endTime: today.add(const Duration(days: 2, hours: 6)),
-        subject: 'Birthday',
-        color: Colors.pink));
-    appointmentCollection.add(Appointment(
-        startTime: today.add(const Duration(days: 3, hours: 3)),
-        endTime: today.add(const Duration(days: 3, hours: 4)),
-        subject: 'Consulting',
-        color: Colors.deepPurple));
+
+
+    for(int i =0; i<CalenderState.football.length;i++){
+
+      String dateString = CalenderState.football[i].date;
+      List<String> dateParts = dateString.split('/');
+      int day = int.parse(dateParts[0]);
+      int month = int.parse(dateParts[1]);
+      int year = int.parse(dateParts[2]);
+      DateTime dateTime = DateTime(year, month, day);
+      appointmentCollection.add(Appointment(
+          startTime: dateTime,
+          endTime: dateTime.add(const Duration(hours: 0)),
+          subject: CalenderState.football[i].name,
+          color: Colors.blue));
+    }
     return DataSource(appointmentCollection);
   }
 }

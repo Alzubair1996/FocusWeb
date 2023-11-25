@@ -128,8 +128,8 @@ class _LeftBarState extends State<LeftBar>
                   //-----------------CALENDAR-----------------//
                   NavigationItem(
                     iconData: LucideIcons.calendarDays,
-                    title: "calender".tr(),
-                    route: '/calender',
+                    title: "Event".tr(),
+                    route: '/Event',
                     isCondensed: isCondensed,
                   ),
 /*

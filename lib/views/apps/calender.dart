@@ -1,4 +1,7 @@
 
+import 'dart:html';
+import 'dart:ui_web';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +43,9 @@ class CalenderState extends State<Calender>
   }
   @override
   void initState() {
+
     super.initState();
+    loadGoogleMaps();
     controller = Get.put(CalenderController());
   fetchFootballMatches() ;
   }
@@ -57,8 +62,8 @@ class CalenderState extends State<Calender>
   late DateTime selectedDate;
   late String selectedDates;
   late DateTime selectedDateBefor;
-
-
+  TextEditingController locationanother = TextEditingController();
+  final GlobalKey buttonKey = GlobalKey();
 
   void _showMyDialog() {
     showDialog(
@@ -79,7 +84,7 @@ class CalenderState extends State<Calender>
                 ],
               ),
               titlePadding: MySpacing.xy(16, 12),
-              insetPadding: MySpacing.y(namestad=="Another"?170:230),
+              insetPadding: MySpacing.y(namestad=="Another"?150:230),
               actionsPadding: MySpacing.xy(150, 16),
               contentPadding: MySpacing.x(16),
               content: Column(
@@ -299,6 +304,7 @@ class CalenderState extends State<Calender>
                             child: MyText.bodyMedium("Name of location : ")),
                         MySpacing.height(16),
                         TextFormField(
+                          controller: locationanother,
                           //  validator: controller.basicValidator.getValidation('address'),
                           // controller: controller.basicValidator.getController('address'),
                           keyboardType: TextInputType.emailAddress,
@@ -313,6 +319,95 @@ class CalenderState extends State<Calender>
                             FloatingLabelBehavior.never,
                           ),
                         ),
+                      ],
+                    ),
+                  ):Container(),
+                  namestad=="Another"?
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      children: [
+                        MySpacing.height(16),
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: MyButton(child: Text("Select Location ",style: TextStyle(color:  Colors.white),),
+                            onPressed: (){
+
+
+                                showDialog(
+                                  context: context,
+                                  barrierDismissible: false,
+                                  builder: (BuildContext context) {
+                                    return StatefulBuilder(
+                                      builder: (BuildContext context, StateSetter setState) {
+                                        return AlertDialog(
+
+                                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                                          title: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              MyText.titleMedium(
+                                                "Select Location ",
+                                              ),
+                                            ],
+                                          ),
+                                          titlePadding: MySpacing.xy(16, 12),
+                                          insetPadding: MySpacing.y(230),
+                                          actionsPadding: MySpacing.xy(200, 16),
+                                          contentPadding: MySpacing.x(16),
+                                          content:    SizedBox(
+                                            width: 400,
+                                            height: 400,
+                                            child: HtmlElementView(
+                                              viewType: 'google_maps',
+                                            ),
+
+                                          ),
+                                          actions: [
+                                            FilledButton(
+
+                                              // onPressed: controller.onSubmit,
+                                              onPressed: () {
+                                                _showClickLocation(context);
+                                         //       Navigator.pop(context);
+                                              },
+                                              key: buttonKey,
+                                          //    elevation: 0,
+                                             // backgroundColor: contentTheme.primary,
+                                             // borderRadiusAll: AppStyle.buttonRadius.medium,
+                                              child: MyText.bodyMedium(
+                                                "Ok",
+                                                color: contentTheme.onPrimary,
+                                              ),
+                                            ),
+                                            MyButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+
+                                                namestad="";
+                                                controller.selectedStartDate=  selectedDate;
+                                                controller.selectedStartDate2=  selectedDate;
+
+
+
+                                              },
+                                              elevation: 0,
+                                              backgroundColor: contentTheme.primary,
+                                              borderRadiusAll: AppStyle.buttonRadius.medium,
+                                              child: MyText.bodyMedium(
+                                                "Cancel",
+                                                color: contentTheme.onPrimary,
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
+
+
+                            },)),
                       ],
                     ),
                   ):Container(),
@@ -659,7 +754,185 @@ class CalenderState extends State<Calender>
     );
   }
 
+  void loadGoogleMaps() {
+    const src = '''
 
+<html>
+
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 100%;
+        }
+        input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+    </style>
+</head>
+
+<body>
+    <input id="searchInput" type="text" placeholder="Search for a location">
+    <div id="map"></div>
+
+    <script>
+        var map;
+        var marker;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+            
+  
+
+                center: {
+                    lat: 25.35262399520326,
+                    lng: 55.527496232968936
+                },
+                zoom: 12,
+                mapTypeControl: false, // لإزالة خيارات Map و Satellite
+                fullscreenControl: false // لإزالة خيار وضع الشاشة الكاملة
+            });
+
+            var searchInput = document.getElementById('searchInput');
+            var searchBox = new google.maps.places.SearchBox(searchInput);
+
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchInput);
+
+            google.maps.event.addListener(map, 'click', function (event) {
+                if (marker) {
+                    marker.setMap(null);
+                }
+
+                var clickedLocation = event.latLng;
+
+                marker = new google.maps.Marker({
+                    position: clickedLocation,
+                    map: map,
+                    title: "Selected Location"
+                });
+
+                var infoWindow = new google.maps.InfoWindow({
+                    content: 'Location: ' + clickedLocation.lat() + ', ' + clickedLocation.lng()
+                });
+
+                infoWindow.open(map, marker);
+            });
+
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                if (marker) {
+                    marker.setMap(null);
+                }
+
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function (place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+
+                    marker = new google.maps.Marker({
+                        map: map,
+                        title: place.name,
+                        position: place.geometry.location
+                    });
+
+                    if (place.geometry.viewport) {
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDU-F4ZT5wfF6tEzV68JuwsICP6kDkHvwg&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+
+</html>
+
+
+''';
+
+    final IFrameElement iframe = IFrameElement()
+      ..width = '100%'
+      ..height = '100%'
+      ..srcdoc = src
+      ..style.border = 'none';
+
+    // Create a platform view and associate it with the iframe element
+    platformViewRegistry.registerViewFactory(
+      'google_maps',
+          (int viewId) => iframe,
+    );
+
+    // Listen for postMessage events from the iframe
+    window.onMessage.listen((message) {
+      if (message.data == 'googleMapsLoaded') {
+        // The Google Maps script has loaded
+        // Perform any additional tasks here
+      }
+    });
+  }
+
+  void _showClickLocation(BuildContext context) {
+    RenderBox renderBox = buttonKey.currentContext!.findRenderObject() as RenderBox;
+    Offset localPosition = renderBox.localToGlobal(Offset.zero);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Click Location'),
+          content: Text('X: ${localPosition.dx}, Y: ${localPosition.dy}'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
   Future<void> fetchFootballMatches() async {
     DatabaseReference eventRef = FirebaseDatabase.instance.ref("Focus/Event");
     DatabaseReference eventReflocaton = FirebaseDatabase.instance.ref("Focus/Location_ofEvents");

@@ -5,6 +5,7 @@ import 'dart:ui_web';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -358,9 +359,14 @@ class CalenderState extends State<Calender>
                                           content:    SizedBox(
                                             width: 400,
                                             height: 400,
-                                            child: HtmlElementView(
-                                              viewType: 'google_maps',
+                                            child:GoogleMap(
+                                              initialCameraPosition: CameraPosition(
+                                                target: LatLng(37.7749, -122.4194),
+                                                zoom: 13,
+
+                                              ),
                                             ),
+
 
                                           ),
                                           actions: [

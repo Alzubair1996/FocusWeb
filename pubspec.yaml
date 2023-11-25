@@ -41,7 +41,7 @@ dependencies:
 
   provider: ^6.0.5
   url_launcher: ^6.1.11
-  google_maps_flutter: ^2.2.8
+
   syncfusion_flutter_charts: ^21.2.8
   flutter_blurhash: ^0.8.2
   feather_icons: ^1.2.0
@@ -78,6 +78,7 @@ dependencies:
   path_provider: ^2.1.1
   webview_flutter: ^4.4.2
   google_maps_flutter_web: ^0.5.4+2
+  google_maps_flutter: ^2.5.0
 
 
 

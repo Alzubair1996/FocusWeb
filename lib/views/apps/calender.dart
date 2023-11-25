@@ -1,4 +1,3 @@
-
 import 'dart:html';
 import 'dart:ui_web';
 
@@ -17,6 +16,7 @@ import 'package:webkit/helpers/widgets/my_spacing.dart';
 import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
+import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 
 import '../../Event.dart';
 import '../../Location_ofEvent.dart';
@@ -39,18 +39,21 @@ class Calender extends StatefulWidget {
 class CalenderState extends State<Calender>
     with SingleTickerProviderStateMixin, UIMixin {
   void onInit() {
-
-    fetchFootballMatches() ;
+    fetchFootballMatches();
   }
+
   @override
   void initState() {
-
     super.initState();
     loadGoogleMaps();
     controller = Get.put(CalenderController());
-  fetchFootballMatches() ;
+    fetchFootballMatches();
   }
 
+  double L_Location1 = 25.33327724855097;
+  double H_Location = 55.4195880143928;
+  late GoogleMapController mapController;
+  TextEditingController controller1 = TextEditingController();
   late CalenderController controller;
   String selectedValue = "Value 1";
   DateTime _displayedMonth = DateTime.now();
@@ -74,7 +77,6 @@ class CalenderState extends State<Calender>
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-
               clipBehavior: Clip.antiAliasWithSaveLayer,
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +87,7 @@ class CalenderState extends State<Calender>
                 ],
               ),
               titlePadding: MySpacing.xy(16, 12),
-              insetPadding: MySpacing.y(namestad=="Another"?150:230),
+              insetPadding: MySpacing.y(namestad == "Another" ? 150 : 230),
               actionsPadding: MySpacing.xy(150, 16),
               contentPadding: MySpacing.x(16),
               content: Column(
@@ -99,136 +101,133 @@ class CalenderState extends State<Calender>
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       labelText: "Name",
-                      labelStyle:
-                      MyTextStyle.bodySmall(xMuted: true),
+                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
                       border: outlineInputBorder,
                       contentPadding: MySpacing.all(16),
                       isCollapsed: true,
-                      floatingLabelBehavior:
-                      FloatingLabelBehavior.never,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
                     ),
                   ),
                   MySpacing.height(16),
-               Row(
-                 children: [
-                   Expanded(
-                     flex: 1,
-                  child :Column(
-                     children: [
-                       Align(
-                         alignment: Alignment.centerLeft,
-                         child: MyText.bodyMedium(
-                           "Select Start Date ",
-                           fontWeight: 600,
-                           muted: true,
-                         ),
-                       ),
-                       MySpacing.height(8),
-                       MyContainer.bordered(
-                         color: Colors.transparent,
-                         paddingAll: 12,
-                         onTap: () async {
-
-                           final DateTime? picked = await showDatePicker(
-                               context: Get.context!,
-                               initialDate: controller.selectedStartDate ?? DateTime.now(),
-                               firstDate: DateTime(2015, 8),
-                               lastDate: DateTime(2101));
-                           if (picked != null && picked != controller.selectedStartDate) {
-                             setState(()  {
-                               controller.selectedStartDate = picked;
-                               controller.selectedStartDate2 = picked;
-                               controller.update();
-                             });
-
-                           }
-
-                         },
-                         borderColor: theme.colorScheme.secondary,
-                         child: Row(
-                           mainAxisAlignment:
-                           MainAxisAlignment.start,
-                           crossAxisAlignment:
-                           CrossAxisAlignment.start,
-                           children: <Widget>[
-                             Icon(
-                               LucideIcons.calendar, color: theme.colorScheme.secondary,
-                               size: 16,
-                             ),
-                             MySpacing.width(10),
-                             MyText.bodyMedium(
-                               controller.selectedStartDate != null ? dateFormatter.format(controller.selectedStartDate!) :  selectedDates,
-                               fontWeight: 600,
-                               color: theme
-                                   .colorScheme.secondary,
-                             ),
-                           ],
-                         ),
-                       ),
-                     ],
-                   ),
-
-                   ),
-                   MySpacing.width(8),
-                   Expanded(
-                     flex: 1,
-                  child: Column(
-                     children: [
-
-                  Align(
-                  alignment: Alignment.centerLeft,
-                         child: MyText.bodyMedium(
-                           "Select End Date ",
-                           fontWeight: 600,
-                           muted: true,
-                         ),
-                       ),
-                       MySpacing.height(8),
-                       MyContainer.bordered(
-                         color: Colors.transparent,
-                         paddingAll: 12,
-                         onTap: () async {
-
-                           final DateTime? picked = await showDatePicker(
-                               context: Get.context!,
-                               initialDate: controller.selectedStartDate2 ?? DateTime.now(),
-                               firstDate: DateTime(2015, 8),
-                               lastDate: DateTime(2101));
-                           if (picked != null && picked != controller.selectedStartDate2) {
-                             setState(()  {
-                               controller.selectedStartDate2 = picked;
-                               controller.update();
-                             });
-
-                           }
-
-                         },
-                         borderColor: theme.colorScheme.secondary,
-                         child: Row(
-                           mainAxisAlignment:
-                           MainAxisAlignment.start,
-                           crossAxisAlignment:
-                           CrossAxisAlignment.start,
-                           children: <Widget>[
-                             Icon(
-                               LucideIcons.calendar, color: theme.colorScheme.secondary,
-                               size: 16,
-                             ),
-                             MySpacing.width(10),
-                             MyText.bodyMedium(
-                               controller.selectedStartDate2 != null ? dateFormatter.format(controller.selectedStartDate2!) :  selectedDates,
-                               fontWeight: 600,
-                               color: theme
-                                   .colorScheme.secondary,
-                             ),
-                           ],
-                         ),
-                       ),
-                     ],
-                   ),
-                   ),
-                 ],
-               ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: MyText.bodyMedium(
+                                "Select Start Date ",
+                                fontWeight: 600,
+                                muted: true,
+                              ),
+                            ),
+                            MySpacing.height(8),
+                            MyContainer.bordered(
+                              color: Colors.transparent,
+                              paddingAll: 12,
+                              onTap: () async {
+                                final DateTime? picked = await showDatePicker(
+                                    context: Get.context!,
+                                    initialDate: controller.selectedStartDate ??
+                                        DateTime.now(),
+                                    firstDate: DateTime(2015, 8),
+                                    lastDate: DateTime(2101));
+                                if (picked != null &&
+                                    picked != controller.selectedStartDate) {
+                                  setState(() {
+                                    controller.selectedStartDate = picked;
+                                    controller.selectedStartDate2 = picked;
+                                    controller.update();
+                                  });
+                                }
+                              },
+                              borderColor: theme.colorScheme.secondary,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Icon(
+                                    LucideIcons.calendar,
+                                    color: theme.colorScheme.secondary,
+                                    size: 16,
+                                  ),
+                                  MySpacing.width(10),
+                                  MyText.bodyMedium(
+                                    controller.selectedStartDate != null
+                                        ? dateFormatter.format(
+                                            controller.selectedStartDate!)
+                                        : selectedDates,
+                                    fontWeight: 600,
+                                    color: theme.colorScheme.secondary,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      MySpacing.width(8),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: MyText.bodyMedium(
+                                "Select End Date ",
+                                fontWeight: 600,
+                                muted: true,
+                              ),
+                            ),
+                            MySpacing.height(8),
+                            MyContainer.bordered(
+                              color: Colors.transparent,
+                              paddingAll: 12,
+                              onTap: () async {
+                                final DateTime? picked = await showDatePicker(
+                                    context: Get.context!,
+                                    initialDate:
+                                        controller.selectedStartDate2 ??
+                                            DateTime.now(),
+                                    firstDate: DateTime(2015, 8),
+                                    lastDate: DateTime(2101));
+                                if (picked != null &&
+                                    picked != controller.selectedStartDate2) {
+                                  setState(() {
+                                    controller.selectedStartDate2 = picked;
+                                    controller.update();
+                                  });
+                                }
+                              },
+                              borderColor: theme.colorScheme.secondary,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Icon(
+                                    LucideIcons.calendar,
+                                    color: theme.colorScheme.secondary,
+                                    size: 16,
+                                  ),
+                                  MySpacing.width(10),
+                                  MyText.bodyMedium(
+                                    controller.selectedStartDate2 != null
+                                        ? dateFormatter.format(
+                                            controller.selectedStartDate2!)
+                                        : selectedDates,
+                                    fontWeight: 600,
+                                    color: theme.colorScheme.secondary,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   MySpacing.height(16),
                   MyText.bodyMedium("Cont of Guard :"),
                   MySpacing.height(16),
@@ -238,186 +237,279 @@ class CalenderState extends State<Calender>
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       labelText: "Cont of Guard",
-                      labelStyle:
-                      MyTextStyle.bodySmall(xMuted: true),
+                      labelStyle: MyTextStyle.bodySmall(xMuted: true),
                       border: outlineInputBorder,
                       contentPadding: MySpacing.all(16),
                       isCollapsed: true,
-                      floatingLabelBehavior:
-                      FloatingLabelBehavior.never,
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
                     ),
                   ),
                   MySpacing.height(16),
-                  MyText.labelMedium(
-                      "Stad of event"
-                  ),
+                  MyText.labelMedium("Stad of event"),
                   MySpacing.height(8),
                   DropdownButtonFormField<Location_ofEvents>(
-                    dropdownColor: theme
-                        .colorScheme.background,
+                    dropdownColor: theme.colorScheme.background,
                     menuMaxHeight: 200,
-                    items: Location_ofEventall.map((gender) =>
-                        DropdownMenuItem<Location_ofEvents>(
-                            value:gender,
-                            child:
-                            MyText
-                                .labelMedium(
+                    items: Location_ofEventall.map(
+                        (gender) => DropdownMenuItem<Location_ofEvents>(
+                            value: gender,
+                            child: MyText.labelMedium(
                               gender.location,
-                            )))
-                        .toList(),
+                            ))).toList(),
                     icon: const Icon(
                       LucideIcons.chevronDown,
                       size: 20,
                     ),
                     decoration: InputDecoration(
                       hintText: "Select Location",
-                      hintStyle:
-                      MyTextStyle.bodySmall(
-                          xMuted: true),
+                      hintStyle: MyTextStyle.bodySmall(xMuted: true),
                       border: outlineInputBorder,
-                      enabledBorder:
-                      outlineInputBorder,
-                      focusedBorder:
-                      focusedInputBorder,
-                      contentPadding:
-                      MySpacing.all(16),
+                      enabledBorder: outlineInputBorder,
+                      focusedBorder: focusedInputBorder,
+                      contentPadding: MySpacing.all(16),
                       isCollapsed: true,
                     ),
                     onChanged: (Location_ofEvents? value) {
                       setState(() {
-                        namestad=value!.name.toString();
+                        namestad = value!.name.toString();
                       });
-
                     },
-
                   ),
-
-                  namestad=="Another"?Container():MyText.labelMedium(
-                      namestad),
-                  namestad=="Another"?
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        MySpacing.height(16),
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: MyText.bodyMedium("Name of location : ")),
-                        MySpacing.height(16),
-                        TextFormField(
-                          controller: locationanother,
-                          //  validator: controller.basicValidator.getValidation('address'),
-                          // controller: controller.basicValidator.getController('address'),
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            labelText: "Name of location",
-                            labelStyle:
-                            MyTextStyle.bodySmall(xMuted: true),
-                            border: outlineInputBorder,
-                            contentPadding: MySpacing.all(16),
-                            isCollapsed: true,
-                            floatingLabelBehavior:
-                            FloatingLabelBehavior.never,
+                  namestad == "Another"
+                      ? Container()
+                      : MyText.labelMedium(namestad),
+                  namestad == "Another"
+                      ? Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              MySpacing.height(16),
+                              Align(
+                                  alignment: Alignment.centerLeft,
+                                  child:
+                                      MyText.bodyMedium("Name of location : ")),
+                              MySpacing.height(16),
+                              TextFormField(
+                                controller: locationanother,
+                                //  validator: controller.basicValidator.getValidation('address'),
+                                // controller: controller.basicValidator.getController('address'),
+                                keyboardType: TextInputType.emailAddress,
+                                decoration: InputDecoration(
+                                  labelText: "Name of location",
+                                  labelStyle:
+                                      MyTextStyle.bodySmall(xMuted: true),
+                                  border: outlineInputBorder,
+                                  contentPadding: MySpacing.all(16),
+                                  isCollapsed: true,
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
-                  ):Container(),
-                  namestad=="Another"?
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        MySpacing.height(16),
-                        Align(
-                            alignment: Alignment.centerLeft,
-                            child: MyButton(child: Text("Select Location ",style: TextStyle(color:  Colors.white),),
-                            onPressed: (){
+                        )
+                      : Container(),
+                  namestad == "Another"
+                      ? Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              MySpacing.height(16),
+                              Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: MyButton(
+                                    child: Text(
+                                      "Select Location ",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        barrierDismissible: false,
+                                        builder: (BuildContext context) {
+                                          return StatefulBuilder(
+                                            builder: (BuildContext context,
+                                                StateSetter setState) {
+                                              return AlertDialog(
+                                                clipBehavior:
+                                                    Clip.antiAliasWithSaveLayer,
+                                                title: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    MyText.titleMedium(
+                                                      "Select Location ",
+                                                    ),
+                                                  ],
+                                                ),
+                                                titlePadding:
+                                                    MySpacing.xy(16, 12),
+                                                insetPadding: MySpacing.y(230),
+                                                actionsPadding:
+                                                    MySpacing.xy(200, 16),
+                                                contentPadding: MySpacing.x(16),
+                                                content: Column(
+                                                  children: [
+                                                    Expanded(
+                                                      child: SizedBox(
+                                                        width: 400,
+                                                        height: 400,
+                                                        child: GoogleMap(
+                                                          onMapCreated: (controller) => mapController = controller,
+                                                          initialCameraPosition:
+                                                              CameraPosition(
+                                                            target: LatLng(
+                                                                25.33327724855097,
+                                                                55.4195880143928),
+                                                            zoom: 11.0,
+                                                          ),
+                                                          markers: {
+                                                            Marker(
+                                                              markerId: MarkerId(''),
+                                                              position: LatLng(
+                                                                  L_Location1,
+                                                                  H_Location),
+                                                            ),
+                                                          },
+                                                          onTap: (g) {
+                                                            setState(() {
+                                                              L_Location1 =
+                                                                  g.latitude;
+                                                              H_Location =
+                                                                  g.longitude; /**/
+                                                            });
+
+                                                            print(g.toString());
+                                                          },
 
 
-                                showDialog(
-                                  context: context,
-                                  barrierDismissible: false,
-                                  builder: (BuildContext context) {
-                                    return StatefulBuilder(
-                                      builder: (BuildContext context, StateSetter setState) {
-                                        return AlertDialog(
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                        child: Column(
+                                                          children: [
+                                                            TextField(
+                                                              controller: controller1,
+                                                              onChanged: (text) async {
+                                                                // Perform the search operation using the text
+                                                                // Create a PlacesAutocomplete instance
+                                                                final placesAutocomplete = PlacesAutocomplete(
+                                                                  apiKey: "AIzaSyAZhJZTHXDPIUkSGcmrSAbpbVL9J8eC8rw",
+                                                                );
 
-                                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                                          title: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              MyText.titleMedium(
-                                                "Select Location ",
-                                              ),
-                                            ],
-                                          ),
-                                          titlePadding: MySpacing.xy(16, 12),
-                                          insetPadding: MySpacing.y(230),
-                                          actionsPadding: MySpacing.xy(200, 16),
-                                          contentPadding: MySpacing.x(16),
-                                          content:    SizedBox(
-                                            width: 400,
-                                            height: 400,
-                                            child:GoogleMap(
-                                              initialCameraPosition: CameraPosition(
-                                                target: LatLng(37.7749, -122.4194),
-                                                zoom: 13,
+                                                                // Get the search results
+                                                                final response = await placesAutocomplete.query(text);
+                                                                final predictions = response.predictions;
 
-                                              ),
-                                            ),
+                                                                // Clear the existing search results
+                                                                searchResults.clear();
 
+                                                                // Add the predictions to the search results list
+                                                                for (final prediction in predictions) {
+                                                                  searchResults.add(Placemark(
+                                                                    name: prediction.description,
+                                                                    address: prediction.structuredFormatting.addressComponents[0].longName,
+                                                                  ));
+                                                                }
 
-                                          ),
-                                          actions: [
-                                            FilledButton(
+                                                                // Update the state to re-render the list widget
+                                                                setState(() {});
+                                                              },
+                                                              decoration: InputDecoration(
+                                                                hintText: 'Search location',
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              child: ListView.builder(
+                                                                itemCount: searchResults.length,
+                                                                itemBuilder: (context, index) {
+                                                                  final placemark = searchResults[index];
+                                                                  return ListTile(
+                                                                    title: Text(placemark.name),
+                                                                    subtitle: Text(placemark.address),
+                                                                    onTap: () {
+                                                                      // Add a marker for the selected placemark
+                                                                      final marker = Marker(
+                                                                        markerId: MarkerId(placemark.name),
+                                                                        position: placemark.position,
+                                                                      );
 
-                                              // onPressed: controller.onSubmit,
-                                              onPressed: () {
-                                                _showClickLocation(context);
-                                         //       Navigator.pop(context);
-                                              },
-                                              key: buttonKey,
-                                          //    elevation: 0,
-                                             // backgroundColor: contentTheme.primary,
-                                             // borderRadiusAll: AppStyle.buttonRadius.medium,
-                                              child: MyText.bodyMedium(
-                                                "Ok",
-                                                color: contentTheme.onPrimary,
-                                              ),
-                                            ),
-                                            MyButton(
-                                              onPressed: () {
-                                                Navigator.pop(context);
+                                                                      // Add the marker to the map
+                                                                      mapController.addMarker(marker);
 
-                                                namestad="";
-                                                controller.selectedStartDate=  selectedDate;
-                                                controller.selectedStartDate2=  selectedDate;
+                                                                      // Move the camera to the center of the results
+                                                                      mapController.animateCamera(
+                                                                        CameraUpdate.newCameraPosition(
+                                                                          CameraPosition(
+                                                                            target: placemark.position,
+                                                                            zoom: 15,
+                                                                          ),
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  );
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                actions: [
+                                                  FilledButton(
+                                                    // onPressed: controller.onSubmit,
+                                                    onPressed: () {
+                                                      _showClickLocation(
+                                                          context);
+                                                      //       Navigator.pop(context);
+                                                    },
+                                                    key: buttonKey,
+                                                    //    elevation: 0,
+                                                    // backgroundColor: contentTheme.primary,
+                                                    // borderRadiusAll: AppStyle.buttonRadius.medium,
+                                                    child: MyText.bodyMedium(
+                                                      "Ok",
+                                                      color: contentTheme
+                                                          .onPrimary,
+                                                    ),
+                                                  ),
+                                                  MyButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
 
-
-
-                                              },
-                                              elevation: 0,
-                                              backgroundColor: contentTheme.primary,
-                                              borderRadiusAll: AppStyle.buttonRadius.medium,
-                                              child: MyText.bodyMedium(
-                                                "Cancel",
-                                                color: contentTheme.onPrimary,
-                                              ),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                );
-
-
-                            },)),
-                      ],
-                    ),
-                  ):Container(),
-
+                                                      namestad = "";
+                                                      controller
+                                                              .selectedStartDate =
+                                                          selectedDate;
+                                                      controller
+                                                              .selectedStartDate2 =
+                                                          selectedDate;
+                                                    },
+                                                    elevation: 0,
+                                                    backgroundColor:
+                                                        contentTheme.primary,
+                                                    borderRadiusAll: AppStyle
+                                                        .buttonRadius.medium,
+                                                    child: MyText.bodyMedium(
+                                                      "Cancel",
+                                                      color: contentTheme
+                                                          .onPrimary,
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          );
+                                        },
+                                      );
+                                    },
+                                  )),
+                            ],
+                          ),
+                        )
+                      : Container(),
                 ],
               ),
               actions: [
@@ -439,12 +531,9 @@ class CalenderState extends State<Calender>
                   onPressed: () {
                     Navigator.pop(context);
 
-                      namestad="";
-                      controller.selectedStartDate=  selectedDate;
-                      controller.selectedStartDate2=  selectedDate;
-
-
-
+                    namestad = "";
+                    controller.selectedStartDate = selectedDate;
+                    controller.selectedStartDate2 = selectedDate;
                   },
                   elevation: 0,
                   backgroundColor: contentTheme.primary,
@@ -497,126 +586,116 @@ class CalenderState extends State<Calender>
                     width: 400,
                     child: Column(
                       children: [
-                      Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: TextButton(
-                            onPressed: (){
-
-                              setState(() {
-                                _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month - 1, 1);
-
-                              });
-
-                            },
-                            child: Text('Previous Month'),
-                          ),
-                        ),
-                        SizedBox(width: 20
-                        ,height: 20,),
-                        Expanded(
-                          flex: 1,
-                          child: TextButton(
-                            onPressed: (){
-                              setState(() {
-                                _displayedMonth = DateTime(_displayedMonth.year, _displayedMonth.month + 1, 1);
-
-                              });
-                            },
-                            child: Text('Next Month'),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Expanded(
-                      child:
-                      SfCalendar(
-
-                          view: CalendarView.month,
-                          initialSelectedDate: isFirstOpen?DateTime.now():selectedDate,
-                          dataSource: controller.events,
-                          initialDisplayDate: _displayedMonth,
-                          allowDragAndDrop: false,
-                          onSelectionChanged: (date) {
-                            String a = date.date.toString();
-                            DateTime dateTime = DateTime.parse(a);
-                            String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
-
-                            selectedDate=date.date!;
-                            if(date.date!=DateTime.now()&&selectedDate==null){
-
-                            setState(() {
-                              selectedDates=formattedDate;
-                              selectedDate = date.date!;
-                              isFirstOpen = false;
-                            });
-
-
-                            }else{
-
-
-                                  if(football.isNotEmpty){
-                                  try{
-                                  List<FootballMatch> footballday1 = [];
-                                  bool firest = true;
-                                  for (int i = 0; i < football.length; i++) {
-                                  if (football[i].date == formattedDate) {
-                                  footballday1.add(FootballMatch(
-                                  football[i].id,
-                                  football[i].contG,
-                                  football[i].date,
-                                  football[i].emirates,
-                                  football[i].name,
-                                  football[i].status,
-                                  firest ? Colors.orangeAccent : Colors.white));
-                                  firest = false;
-                                  }
-                                  }
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: TextButton(
+                                onPressed: () {
                                   setState(() {
-                                    selectedDates=formattedDate;
-                                  selectedDate=date.date!;
-                                  isFirstOpen=false;
-                                  if(footballday.isEmpty){
-                                    footballday.clear();
-                                    footballday.addAll(footballday1);
-                                  }else {
-                                    if (footballday[0].date != formattedDate) {
-                                      footballday.clear();
-                                      footballday.addAll(footballday1);
-                                    }
-                                  }
-
+                                    _displayedMonth = DateTime(
+                                        _displayedMonth.year,
+                                        _displayedMonth.month - 1,
+                                        1);
                                   });
-                                  }catch(e){
+                                },
+                                child: Text('Previous Month'),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                              height: 20,
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: TextButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _displayedMonth = DateTime(
+                                        _displayedMonth.year,
+                                        _displayedMonth.month + 1,
+                                        1);
+                                  });
+                                },
+                                child: Text('Next Month'),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: SfCalendar(
+                            view: CalendarView.month,
+                            initialSelectedDate:
+                                isFirstOpen ? DateTime.now() : selectedDate,
+                            dataSource: controller.events,
+                            initialDisplayDate: _displayedMonth,
+                            allowDragAndDrop: false,
+                            onSelectionChanged: (date) {
+                              String a = date.date.toString();
+                              DateTime dateTime = DateTime.parse(a);
+                              String formattedDate =
+                                  DateFormat('dd/MM/yyyy').format(dateTime);
 
-
-
-
-                                  //
-
-
+                              selectedDate = date.date!;
+                              if (date.date != DateTime.now() &&
+                                  selectedDate == null) {
+                                setState(() {
+                                  selectedDates = formattedDate;
+                                  selectedDate = date.date!;
+                                  isFirstOpen = false;
+                                });
+                              } else {
+                                if (football.isNotEmpty) {
+                                  try {
+                                    List<FootballMatch> footballday1 = [];
+                                    bool firest = true;
+                                    for (int i = 0; i < football.length; i++) {
+                                      if (football[i].date == formattedDate) {
+                                        footballday1.add(FootballMatch(
+                                            football[i].id,
+                                            football[i].contG,
+                                            football[i].date,
+                                            football[i].emirates,
+                                            football[i].name,
+                                            football[i].status,
+                                            firest
+                                                ? Colors.orangeAccent
+                                                : Colors.white));
+                                        firest = false;
+                                      }
+                                    }
+                                    setState(() {
+                                      selectedDates = formattedDate;
+                                      selectedDate = date.date!;
+                                      isFirstOpen = false;
+                                      if (footballday.isEmpty) {
+                                        footballday.clear();
+                                        footballday.addAll(footballday1);
+                                      } else {
+                                        if (footballday[0].date !=
+                                            formattedDate) {
+                                          footballday.clear();
+                                          footballday.addAll(footballday1);
+                                        }
+                                      }
+                                    });
+                                  } catch (e) {
+                                    //
                                   }
-                                  }
-                            }
+                                }
+                              }
 
-
-
-
-
-
-
-                           // fetchFootballMatches();
-                        /*
+                              // fetchFootballMatches();
+                              /*
 
 
                         */
-                            // print();
-                          },
-                          onDragEnd: controller.dragEnd,
-
-                        ),)
+                              // print();
+                            },
+                            onDragEnd: controller.dragEnd,
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -626,36 +705,31 @@ class CalenderState extends State<Calender>
                 padding: MySpacing.x(flexSpacing),
                 child: Align(
                   alignment: ThemeCustomizer
-                      .instance.currentLanguage.locale.languageCode ==
-                      "ar"
+                              .instance.currentLanguage.locale.languageCode ==
+                          "ar"
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   child: MyCard(
                     shadow: MyShadow(elevation: 0.5),
                     height: 420,
                     width: 400,
-                    child:
-
-
-                    Column(
+                    child: Column(
                       children: [
                         Expanded(
                           flex: 0,
                           child: MyCard(
-                            onTap: (){
-
-                              _showMyDialog();
-
-
-
-                            },
-                            height:60 ,
-
-                              color:Colors.deepOrange,
+                              onTap: () {
+                                _showMyDialog();
+                              },
+                              height: 60,
+                              color: Colors.deepOrange,
                               child: Align(
                                 alignment: ThemeCustomizer
-                                    .instance.currentLanguage.locale.languageCode ==
-                                    "ar"
+                                            .instance
+                                            .currentLanguage
+                                            .locale
+                                            .languageCode ==
+                                        "ar"
                                     ? Alignment.centerRight
                                     : Alignment.centerLeft,
                                 child: Padding(
@@ -668,27 +742,25 @@ class CalenderState extends State<Calender>
                                             "Add New Event",
                                             style: TextStyle(
                                                 fontSize: 18,
-                                                fontWeight:
-                                                FontWeight.bold,color: Colors.white),
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
                                           ),
                                         ),
                                         SizedBox(
                                           width: 10,
                                           height: 10,
                                         ),
-                                       Expanded(
-                                         flex: 0,
-                                         child: Icon(
+                                        Expanded(
+                                          flex: 0,
+                                          child: Icon(
                                             Icons.add,
                                             color: Colors.white,
                                           ),
-                                       ),
-
+                                        ),
                                       ],
                                     )),
                               )),
                         ),
-
                         Expanded(
                           flex: 1,
                           child: ListView.builder(
@@ -698,58 +770,62 @@ class CalenderState extends State<Calender>
                               itemBuilder: (context, dayIndex) {
                                 return Padding(
                                     padding: const EdgeInsets.all(1.0),
-                                    child:  MyCard(
-                                      onTap: (){
-                                        try {
-                                          for (int i = 0;
-                                          i < footballday.length;
-                                          i++) {
-                                            setState(() {
-                                              ste=true;
-                                              footballday[i].color = Colors.white;
-                                            });
+                                    child: MyCard(
+                                        onTap: () {
+                                          try {
+                                            for (int i = 0;
+                                                i < footballday.length;
+                                                i++) {
+                                              setState(() {
+                                                ste = true;
+                                                footballday[i].color =
+                                                    Colors.white;
+                                              });
+                                            }
+                                          } catch (e) {
+                                            print("$e");
                                           }
-                                        } catch (e) {
-                                          print("$e");
-                                        }
-                                        footballday[dayIndex].color =
-                                            Colors.orangeAccent;
-                                      },
-                                          color: footballday[dayIndex].color,
-                                          child: Align(
-                                            alignment: ThemeCustomizer
-                                                .instance.currentLanguage.locale.languageCode ==
-                                                "ar"
-                                                ? Alignment.centerRight
-                                                : Alignment.centerLeft,
-                                            child: Padding(
-                                                padding: const EdgeInsets.all(8.0),
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      footballday[dayIndex].name,
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    Text(
-                                                      "  ContG : " +
-                                                          footballday[dayIndex].contG,
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ],
-                                                )),
-                                          )
-                                    ));
+                                          footballday[dayIndex].color =
+                                              Colors.orangeAccent;
+                                        },
+                                        color: footballday[dayIndex].color,
+                                        child: Align(
+                                          alignment: ThemeCustomizer
+                                                      .instance
+                                                      .currentLanguage
+                                                      .locale
+                                                      .languageCode ==
+                                                  "ar"
+                                              ? Alignment.centerRight
+                                              : Alignment.centerLeft,
+                                          child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    footballday[dayIndex].name,
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    "  ContG : " +
+                                                        footballday[dayIndex]
+                                                            .contG,
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ],
+                                              )),
+                                        )));
                               }),
                         ),
                       ],
                     ),
-
                   ),
                 ),
               ),
@@ -905,7 +981,7 @@ input[type=submit]:hover {
     // Create a platform view and associate it with the iframe element
     platformViewRegistry.registerViewFactory(
       'google_maps',
-          (int viewId) => iframe,
+      (int viewId) => iframe,
     );
 
     // Listen for postMessage events from the iframe
@@ -918,7 +994,8 @@ input[type=submit]:hover {
   }
 
   void _showClickLocation(BuildContext context) {
-    RenderBox renderBox = buttonKey.currentContext!.findRenderObject() as RenderBox;
+    RenderBox renderBox =
+        buttonKey.currentContext!.findRenderObject() as RenderBox;
     Offset localPosition = renderBox.localToGlobal(Offset.zero);
 
     showDialog(
@@ -939,24 +1016,26 @@ input[type=submit]:hover {
       },
     );
   }
+
   Future<void> fetchFootballMatches() async {
     DatabaseReference eventRef = FirebaseDatabase.instance.ref("Focus/Event");
-    DatabaseReference eventReflocaton = FirebaseDatabase.instance.ref("Focus/Location_ofEvents");
+    DatabaseReference eventReflocaton =
+        FirebaseDatabase.instance.ref("Focus/Location_ofEvents");
 
     final Location_ofEvent = <Location_ofEvents>[];
     try {
       DatabaseEvent snapshot = await eventReflocaton.once();
 
       Map<dynamic, dynamic>? values1 =
-      snapshot.snapshot.value as Map<dynamic, dynamic>;
+          snapshot.snapshot.value as Map<dynamic, dynamic>;
 
       values1.forEach((key, value) {
         Location_ofEvents location = Location_ofEvents(
-            value['name'],
-            value['location'],
-            value['Latitude'],
-            value['longitude'],
-            value['id'],
+          value['name'],
+          value['location'],
+          value['Latitude'],
+          value['longitude'],
+          value['id'],
         );
         Location_ofEvent.add(location);
       });
@@ -967,7 +1046,6 @@ input[type=submit]:hover {
     setState(() {
       Location_ofEventall.clear();
       Location_ofEventall.addAll(Location_ofEvent);
-
     });
 
     final locations2 = <FootballMatch>[];
@@ -979,8 +1057,6 @@ input[type=submit]:hover {
           snapshot.snapshot.value as Map<dynamic, dynamic>;
 
       values.forEach((key, value) {
-
-
         String dateString = value['Date'];
         List<String> dateParts = dateString.split('/');
         int day = int.parse(dateParts[0]);
@@ -990,7 +1066,7 @@ input[type=submit]:hover {
         appointmentCollection.add(Appointment(
             startTime: dateTime,
             endTime: dateTime.add(const Duration(hours: 0)),
-            subject:value['Emirates'],
+            subject: value['Emirates'],
             color: Colors.blue));
 
         FootballMatch location = FootballMatch(
@@ -1007,19 +1083,10 @@ input[type=submit]:hover {
       print('Error: $error');
     }
 
-
     setState(() {
       football.clear();
       football.addAll(locations2);
-      controller.events=DataSource(appointmentCollection);
+      controller.events = DataSource(appointmentCollection);
     });
-
-
-
-
-
-
-
-
   }
 }

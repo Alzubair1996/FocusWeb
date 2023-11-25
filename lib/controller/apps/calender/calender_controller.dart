@@ -11,6 +11,7 @@ class CalenderController extends MyController {
   late DataSource events;
   ProjectPrivacy selectProjectPrivacy = ProjectPrivacy.Private;
   DateTime? selectedStartDate;
+  DateTime? selectedStartDate2;
   DateTime? selectedEndDate;
   String selectProperties = "Medium";
   String selectMembers = "";
@@ -60,21 +61,6 @@ class CalenderController extends MyController {
     List<Appointment> appointmentCollection = <Appointment>[];
 
 
-
-    for(int i =0; i<CalenderState.football.length;i++){
-
-      String dateString = CalenderState.football[i].date;
-      List<String> dateParts = dateString.split('/');
-      int day = int.parse(dateParts[0]);
-      int month = int.parse(dateParts[1]);
-      int year = int.parse(dateParts[2]);
-      DateTime dateTime = DateTime(year, month, day);
-      appointmentCollection.add(Appointment(
-          startTime: dateTime,
-          endTime: dateTime.add(const Duration(hours: 0)),
-          subject: CalenderState.football[i].name,
-          color: Colors.blue));
-    }
     return DataSource(appointmentCollection);
   }
 

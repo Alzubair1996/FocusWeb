@@ -43,8 +43,8 @@ class CalenderState extends State<Calender>
   @override
   void initState() {
     super.initState();
-
-    fetchFootballMatches();
+    controller = Get.put(CalenderController());
+  fetchFootballMatches() ;
   }
 
   late CalenderController controller;
@@ -105,52 +105,126 @@ class CalenderState extends State<Calender>
                     ),
                   ),
                   MySpacing.height(16),
-                  MyText.bodyMedium(
-                    "Select Date of Event",
-                    fontWeight: 600,
-                    muted: true,
-                  ),
-                  MySpacing.height(8),
-                  MyContainer.bordered(
-                    color: Colors.transparent,
-                    paddingAll: 12,
-                    onTap: () async {
+               Row(
+                 children: [
+                   Expanded(
+                     flex: 1,
+                  child :Column(
+                     children: [
+                       Align(
+                         alignment: Alignment.centerLeft,
+                         child: MyText.bodyMedium(
+                           "Select Start Date ",
+                           fontWeight: 600,
+                           muted: true,
+                         ),
+                       ),
+                       MySpacing.height(8),
+                       MyContainer.bordered(
+                         color: Colors.transparent,
+                         paddingAll: 12,
+                         onTap: () async {
 
-              final DateTime? picked = await showDatePicker(
-                  context: Get.context!,
-                  initialDate: controller.selectedStartDate ?? DateTime.now(),
-                  firstDate: DateTime(2015, 8),
-                  lastDate: DateTime(2101));
-              if (picked != null && picked != controller.selectedStartDate) {
-                setState(()  {
-                  controller.selectedStartDate = picked;
-                  controller.update();
-                });
+                           final DateTime? picked = await showDatePicker(
+                               context: Get.context!,
+                               initialDate: controller.selectedStartDate ?? DateTime.now(),
+                               firstDate: DateTime(2015, 8),
+                               lastDate: DateTime(2101));
+                           if (picked != null && picked != controller.selectedStartDate) {
+                             setState(()  {
+                               controller.selectedStartDate = picked;
+                               controller.selectedStartDate2 = picked;
+                               controller.update();
+                             });
 
-              }
+                           }
 
-                    },
-                    borderColor: theme.colorScheme.secondary,
-                    child: Row(
-                      mainAxisAlignment:
-                      MainAxisAlignment.start,
-                      crossAxisAlignment:
-                      CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(
-                          LucideIcons.calendar, color: theme.colorScheme.secondary,
-                          size: 16,
-                        ),
-                        MySpacing.width(10),
-                        MyText.bodyMedium(
-                          controller.selectedStartDate != null ? dateFormatter.format(controller.selectedStartDate!) :  selectedDates,
-                          fontWeight: 600,
-                          color: theme
-                              .colorScheme.secondary,
-                        ),
-                      ],
-                    ),
-                  ),
+                         },
+                         borderColor: theme.colorScheme.secondary,
+                         child: Row(
+                           mainAxisAlignment:
+                           MainAxisAlignment.start,
+                           crossAxisAlignment:
+                           CrossAxisAlignment.start,
+                           children: <Widget>[
+                             Icon(
+                               LucideIcons.calendar, color: theme.colorScheme.secondary,
+                               size: 16,
+                             ),
+                             MySpacing.width(10),
+                             MyText.bodyMedium(
+                               controller.selectedStartDate != null ? dateFormatter.format(controller.selectedStartDate!) :  selectedDates,
+                               fontWeight: 600,
+                               color: theme
+                                   .colorScheme.secondary,
+                             ),
+                           ],
+                         ),
+                       ),
+                     ],
+                   ),
+
+                   ),
+                   MySpacing.width(8),
+                   Expanded(
+                     flex: 1,
+                  child: Column(
+                     children: [
+
+                  Align(
+                  alignment: Alignment.centerLeft,
+                         child: MyText.bodyMedium(
+                           "Select End Date ",
+                           fontWeight: 600,
+                           muted: true,
+                         ),
+                       ),
+                       MySpacing.height(8),
+                       MyContainer.bordered(
+                         color: Colors.transparent,
+                         paddingAll: 12,
+                         onTap: () async {
+
+                           final DateTime? picked = await showDatePicker(
+                               context: Get.context!,
+                               initialDate: controller.selectedStartDate2 ?? DateTime.now(),
+                               firstDate: DateTime(2015, 8),
+                               lastDate: DateTime(2101));
+                           if (picked != null && picked != controller.selectedStartDate2) {
+                             setState(()  {
+                               controller.selectedStartDate2 = picked;
+                               controller.update();
+                             });
+
+                           }
+
+                         },
+                         borderColor: theme.colorScheme.secondary,
+                         child: Row(
+                           mainAxisAlignment:
+                           MainAxisAlignment.start,
+                           crossAxisAlignment:
+                           CrossAxisAlignment.start,
+                           children: <Widget>[
+                             Icon(
+                               LucideIcons.calendar, color: theme.colorScheme.secondary,
+                               size: 16,
+                             ),
+                             MySpacing.width(10),
+                             MyText.bodyMedium(
+                               controller.selectedStartDate2 != null ? dateFormatter.format(controller.selectedStartDate2!) :  selectedDates,
+                               fontWeight: 600,
+                               color: theme
+                                   .colorScheme.secondary,
+                             ),
+                           ],
+                         ),
+                       ),
+                     ],
+                   ),
+                   ),
+                 ],
+               ),
                   MySpacing.height(16),
                   MyText.bodyMedium("Cont of Guard :"),
                   MySpacing.height(16),
@@ -442,143 +516,6 @@ class CalenderState extends State<Calender>
 
 
 
-                              /*
-                              showDialog(
-                                context: context,
-                                builder: (context) => AlertDialog(
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  title: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      MyText.titleMedium(
-                                        "Add New Event",
-                                      ),
-                                    ],
-                                  ),
-                                  titlePadding: MySpacing.xy(16, 12),
-                                  insetPadding: MySpacing.y(200),
-                                  actionsPadding: MySpacing.xy(150, 16),
-                                  contentPadding: MySpacing.x(16),
-                                  content: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      MyText.bodyMedium("Name :"),
-                                      MySpacing.height(8),
-                                      TextFormField(
-                                     //   validator: controller.basicValidator.getValidation('name'),
-                                    //    controller: controller.basicValidator.getController('name'),
-                                        keyboardType: TextInputType.emailAddress,
-                                        decoration: InputDecoration(
-                                          labelText: "Name",
-                                          labelStyle:
-                                          MyTextStyle.bodySmall(xMuted: true),
-                                          border: outlineInputBorder,
-                                          contentPadding: MySpacing.all(16),
-                                          isCollapsed: true,
-                                          floatingLabelBehavior:
-                                          FloatingLabelBehavior.never,
-                                        ),
-                                      ),
-                                      MySpacing.height(16),
-                                      MyText.bodyMedium("Address :"),
-                                      MySpacing.height(16),
-                                      TextFormField(
-                                      //  validator: controller.basicValidator.getValidation('address'),
-                                       // controller: controller.basicValidator.getController('address'),
-                                        keyboardType: TextInputType.emailAddress,
-                                        decoration: InputDecoration(
-                                          labelText: "Address",
-                                          labelStyle:
-                                          MyTextStyle.bodySmall(xMuted: true),
-                                          border: outlineInputBorder,
-                                          contentPadding: MySpacing.all(16),
-                                          isCollapsed: true,
-                                          floatingLabelBehavior:
-                                          FloatingLabelBehavior.never,
-                                        ),
-                                      ),
-                                      MyText.labelMedium(
-                                      "Stad of event"
-                                      ),
-                                      MySpacing.height(8),
-                                      DropdownButtonFormField<Location_ofEvents>(
-                                          dropdownColor: theme
-                                              .colorScheme.background,
-                                          menuMaxHeight: 200,
-                                          items: Location_ofEventall.map((gender) =>
-                                              DropdownMenuItem<Location_ofEvents>(
-                                                  value:gender,
-                                                  child:
-                                                  MyText
-                                                      .labelMedium(
-                                                    gender.location,
-                                                  )))
-                                              .toList(),
-                                          icon: const Icon(
-                                            LucideIcons.chevronDown,
-                                            size: 20,
-                                          ),
-                                          decoration: InputDecoration(
-                                              hintText: "Select gender",
-                                              hintStyle:
-                                              MyTextStyle.bodySmall(
-                                                  xMuted: true),
-                                              border: outlineInputBorder,
-                                              enabledBorder:
-                                              outlineInputBorder,
-                                              focusedBorder:
-                                              focusedInputBorder,
-                                              contentPadding:
-                                              MySpacing.all(16),
-                                              isCollapsed: true,
-                                          ),
-                                        onChanged: (Location_ofEvents? value) {
-                                            setState(() {
-                                              namestad=value!.name.toString();
-                                            });
-
-                                        },
-
-                                        //  onChanged: controller.basicValidator.onChanged<Object?>('gender'),
-                                         // validator: controller.basicValidator.getValidation<Gender?>('gender')),
-                                      ),
-
-                                      MyText.labelMedium(
-                                          "$namestad jjjjjjjjjj"
-                                      ),
-                                    ],
-                                  ),
-                                  actions: [
-                                    MyButton(
-                                      // onPressed: controller.onSubmit,
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-
-                                      elevation: 0,
-                                      backgroundColor: contentTheme.primary,
-                                      borderRadiusAll: AppStyle.buttonRadius.medium,
-                                      child: MyText.bodyMedium(
-                                        "Ok",
-                                        color: contentTheme.onPrimary,
-                                      ),
-                                    ),
-                                    MyButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      elevation: 0,
-                                      backgroundColor: contentTheme.primary,
-                                      borderRadiusAll: AppStyle.buttonRadius.medium,
-                                      child: MyText.bodyMedium(
-                                        "Cancel",
-                                        color: contentTheme.onPrimary,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                              */
                             },
                             height:60 ,
 
@@ -629,12 +566,12 @@ class CalenderState extends State<Calender>
                               itemBuilder: (context, dayIndex) {
                                 return Padding(
                                     padding: const EdgeInsets.all(1.0),
-                                    child: GestureDetector(
-                                      onTap: () {
+                                    child:  MyCard(
+                                      onTap: (){
                                         try {
                                           for (int i = 0;
-                                              i < footballday.length;
-                                              i++) {
+                                          i < footballday.length;
+                                          i++) {
                                             setState(() {
                                               ste=true;
                                               footballday[i].color = Colors.white;
@@ -645,9 +582,7 @@ class CalenderState extends State<Calender>
                                         }
                                         footballday[dayIndex].color =
                                             Colors.orangeAccent;
-                          
                                       },
-                                      child: MyCard(
                                           color: footballday[dayIndex].color,
                                           child: Align(
                                             alignment: ThemeCustomizer
@@ -676,7 +611,7 @@ class CalenderState extends State<Calender>
                                                     ),
                                                   ],
                                                 )),
-                                          )),
+                                          )
                                     ));
                               }),
                         ),
@@ -726,6 +661,7 @@ class CalenderState extends State<Calender>
     });
 
     final locations2 = <FootballMatch>[];
+    List<Appointment> appointmentCollection = <Appointment>[];
     try {
       DatabaseEvent snapshot = await eventRef.once();
 
@@ -733,6 +669,20 @@ class CalenderState extends State<Calender>
           snapshot.snapshot.value as Map<dynamic, dynamic>;
 
       values.forEach((key, value) {
+
+
+        String dateString = value['Date'];
+        List<String> dateParts = dateString.split('/');
+        int day = int.parse(dateParts[0]);
+        int month = int.parse(dateParts[1]);
+        int year = int.parse(dateParts[2]);
+        DateTime dateTime = DateTime(year, month, day);
+        appointmentCollection.add(Appointment(
+            startTime: dateTime,
+            endTime: dateTime.add(const Duration(hours: 0)),
+            subject:value['Emirates'],
+            color: Colors.blue));
+
         FootballMatch location = FootballMatch(
             value['ID'],
             value['Cont_G'],
@@ -750,7 +700,14 @@ class CalenderState extends State<Calender>
     setState(() {
       football.clear();
       football.addAll(locations2);
-      controller = Get.put(CalenderController());
+
     });
+
+
+    controller.events=DataSource(appointmentCollection);
+
+
+
+
   }
 }

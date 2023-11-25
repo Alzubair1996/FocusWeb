@@ -132,7 +132,7 @@ class _LeftBarState extends State<LeftBar>
                     route: '/Event',
                     isCondensed: isCondensed,
                   ),
-
+/*
        //---------------Chat-----------------//
                   NavigationItem(
                     iconData: LucideIcons.messageSquare,
@@ -531,7 +531,7 @@ class _LeftBarState extends State<LeftBar>
                             color: theme.colorScheme.onPrimary,
                           )),
                     ),
-
+        */
                   MySpacing.height(32),
                 ],
               ),

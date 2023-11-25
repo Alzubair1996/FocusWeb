@@ -132,17 +132,8 @@ class _LeftBarState extends State<LeftBar>
                     route: '/Event',
                     isCondensed: isCondensed,
                   ),
-/*
-                  labelWidget("apps".tr()),
 
-                  //-----------------CALENDAR-----------------//
-                  NavigationItem(
-                    iconData: LucideIcons.calendarDays,
-                    title: "calender".tr(),
-                    route: '/calender',
-                    isCondensed: isCondensed,
-                  ),
-                  //-----------------Chat-----------------//
+       //---------------Chat-----------------//
                   NavigationItem(
                     iconData: LucideIcons.messageSquare,
                     title: "chat".tr(),
@@ -540,7 +531,7 @@ class _LeftBarState extends State<LeftBar>
                             color: theme.colorScheme.onPrimary,
                           )),
                     ),
-        */
+
                   MySpacing.height(32),
                 ],
               ),

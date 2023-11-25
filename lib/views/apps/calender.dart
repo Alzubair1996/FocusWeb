@@ -19,11 +19,9 @@ import 'package:webkit/helpers/widgets/my_text.dart';
 import 'package:webkit/helpers/widgets/responsive.dart';
 import 'package:webkit/views/layouts/layout.dart';
 
-import '../../DialogAdd.dart';
 import '../../Event.dart';
 import '../../Location_ofEvent.dart';
-import '../../controller/dashboard_controller.dart';
-import '../../controller/forms/basic_controller.dart';
+
 import '../../helpers/theme/app_style.dart';
 import '../../helpers/theme/app_theme.dart';
 import '../../helpers/theme/theme_customizer.dart';
@@ -650,6 +648,7 @@ class CalenderState extends State<Calender>
             value['location'],
             value['Latitude'],
             value['longitude'],
+            value['id'],
         );
         Location_ofEvent.add(location);
       });

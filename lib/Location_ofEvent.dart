@@ -8,6 +8,7 @@ class Location_ofEvents {
   final String location;
   final String Latitude;
   final String longitude;
+  final String id;
 // Define the color property with late initialization
 
   Location_ofEvents(
@@ -15,6 +16,7 @@ class Location_ofEvents {
       this.location,
       this.Latitude,
       this.longitude,
+      this.id,
       );
  // Assign the provided color to the field
 

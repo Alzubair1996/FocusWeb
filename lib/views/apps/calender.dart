@@ -22,10 +22,12 @@ import 'package:webkit/views/layouts/layout.dart';
 import '../../Event.dart';
 import '../../Location_ofEvent.dart';
 
+import '../../app_constant.dart';
 import '../../helpers/theme/app_style.dart';
 import '../../helpers/theme/app_theme.dart';
 import '../../helpers/theme/theme_customizer.dart';
 import '../../helpers/widgets/my_button.dart';
+import '../../helpers/widgets/my_container.dart';
 import '../../helpers/widgets/my_text_style.dart';
 
 class Calender extends StatefulWidget {
@@ -55,6 +57,7 @@ class CalenderState extends State<Calender>
   bool isFirstOpen = true;
   bool ste = false;
   late DateTime selectedDate;
+  late String selectedDates;
   late DateTime selectedDateBefor;
 
 
@@ -62,10 +65,12 @@ class CalenderState extends State<Calender>
   void _showMyDialog() {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
+
               clipBehavior: Clip.antiAliasWithSaveLayer,
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +81,7 @@ class CalenderState extends State<Calender>
                 ],
               ),
               titlePadding: MySpacing.xy(16, 12),
-              insetPadding: MySpacing.y(200),
+              insetPadding: MySpacing.y(230),
               actionsPadding: MySpacing.xy(150, 16),
               contentPadding: MySpacing.x(16),
               content: Column(
@@ -87,7 +92,7 @@ class CalenderState extends State<Calender>
                   TextFormField(
                     //   validator: controller.basicValidator.getValidation('name'),
                     //    controller: controller.basicValidator.getController('name'),
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       labelText: "Name",
                       labelStyle:
@@ -100,14 +105,61 @@ class CalenderState extends State<Calender>
                     ),
                   ),
                   MySpacing.height(16),
-                  MyText.bodyMedium("Address :"),
+                  MyText.bodyMedium(
+                    "Select Date of Event",
+                    fontWeight: 600,
+                    muted: true,
+                  ),
+                  MySpacing.height(8),
+                  MyContainer.bordered(
+                    color: Colors.transparent,
+                    paddingAll: 12,
+                    onTap: () async {
+
+              final DateTime? picked = await showDatePicker(
+                  context: Get.context!,
+                  initialDate: controller.selectedStartDate ?? DateTime.now(),
+                  firstDate: DateTime(2015, 8),
+                  lastDate: DateTime(2101));
+              if (picked != null && picked != controller.selectedStartDate) {
+                setState(()  {
+                  controller.selectedStartDate = picked;
+                  controller.update();
+                });
+
+              }
+
+                    },
+                    borderColor: theme.colorScheme.secondary,
+                    child: Row(
+                      mainAxisAlignment:
+                      MainAxisAlignment.start,
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Icon(
+                          LucideIcons.calendar, color: theme.colorScheme.secondary,
+                          size: 16,
+                        ),
+                        MySpacing.width(10),
+                        MyText.bodyMedium(
+                          controller.selectedStartDate != null ? dateFormatter.format(controller.selectedStartDate!) :  selectedDates,
+                          fontWeight: 600,
+                          color: theme
+                              .colorScheme.secondary,
+                        ),
+                      ],
+                    ),
+                  ),
+                  MySpacing.height(16),
+                  MyText.bodyMedium("Cont of Guard :"),
                   MySpacing.height(16),
                   TextFormField(
                     //  validator: controller.basicValidator.getValidation('address'),
                     // controller: controller.basicValidator.getController('address'),
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      labelText: "Address",
+                      labelText: "Cont of Guard",
                       labelStyle:
                       MyTextStyle.bodySmall(xMuted: true),
                       border: outlineInputBorder,
@@ -140,7 +192,7 @@ class CalenderState extends State<Calender>
                       size: 20,
                     ),
                     decoration: InputDecoration(
-                      hintText: "Select gender",
+                      hintText: "Select Location",
                       hintStyle:
                       MyTextStyle.bodySmall(
                           xMuted: true),
@@ -162,7 +214,9 @@ class CalenderState extends State<Calender>
 
                   ),
 
-                  MyText.labelMedium(
+                  namestad=="Another"?MyText.labelMedium(
+                      ""
+                  ):MyText.labelMedium(
                       "$namestad"
                   ),
                 ],
@@ -185,6 +239,12 @@ class CalenderState extends State<Calender>
                 MyButton(
                   onPressed: () {
                     Navigator.pop(context);
+
+                      namestad="";
+                      controller.selectedStartDate=  selectedDate;
+
+
+
                   },
                   elevation: 0,
                   backgroundColor: contentTheme.primary,
@@ -276,13 +336,13 @@ class CalenderState extends State<Calender>
                           onSelectionChanged: (date) {
                             String a = date.date.toString();
                             DateTime dateTime = DateTime.parse(a);
-                            String formattedDate =
-                            DateFormat('dd/MM/yyyy').format(dateTime);
-                            print(formattedDate);
+                            String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
+
                             selectedDate=date.date!;
                             if(date.date!=DateTime.now()&&selectedDate==null){
 
                             setState(() {
+                              selectedDates=formattedDate;
                               selectedDate = date.date!;
                               isFirstOpen = false;
                             });
@@ -309,6 +369,7 @@ class CalenderState extends State<Calender>
                                   }
                                   }
                                   setState(() {
+                                    selectedDates=formattedDate;
                                   selectedDate=date.date!;
                                   isFirstOpen=false;
                                   if(footballday.isEmpty){
@@ -631,6 +692,7 @@ class CalenderState extends State<Calender>
       ),
     );
   }
+
 
   Future<void> fetchFootballMatches() async {
     DatabaseReference eventRef = FirebaseDatabase.instance.ref("Focus/Event");

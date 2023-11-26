@@ -1,25 +1,35 @@
-import 'package:flutter/material.dart'; // Required for using Colors
-
-
-
-
 class Location_ofEvents {
   final String name;
   final String location;
-  final String Latitude;
+  final String latitude;
   final String longitude;
   final String id;
-// Define the color property with late initialization
 
   Location_ofEvents(
       this.name,
       this.location,
-      this.Latitude,
+      this.latitude,
       this.longitude,
       this.id,
       );
- // Assign the provided color to the field
 
+  @override
+  bool operator ==(dynamic other) {
+    if (identical(this, other)) return true;
+    return other is Location_ofEvents &&
+        other.id == id &&
+        other.name == name &&
+        other.location == location &&
+        other.latitude == latitude &&
+        other.longitude == longitude;
+  }
 
-// Other methods or constructors if needed
+  @override
+  int get hashCode {
+    return id.hashCode ^
+    name.hashCode ^
+    location.hashCode ^
+    latitude.hashCode ^
+    longitude.hashCode;
+  }
 }

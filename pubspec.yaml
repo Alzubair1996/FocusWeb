@@ -77,8 +77,11 @@ dependencies:
 
   path_provider: ^2.1.1
   webview_flutter: ^4.4.2
-  google_maps_flutter_web: ^0.5.4+2
   google_maps_flutter: ^2.5.0
+  flutter_google_places: ^0.3.0
+  geocoding: ^2.1.1
+  flutter_google_places_web: ^1.0.2
+  google_maps_flutter_web: ^0.5.4+2
 
 
 

@@ -122,7 +122,12 @@ class _LeftBarState extends State<LeftBar>
                     route: '/Employees',
                     isCondensed: isCondensed,
                   ),
-
+                  NavigationItem(
+                    iconData: LucideIcons.list,
+                    title: "Location1".tr(),
+                    route: '/Location',
+                    isCondensed: isCondensed,
+                  ),
                   labelWidget("apps".tr()),
 
                   //-----------------CALENDAR-----------------//

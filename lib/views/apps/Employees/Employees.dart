@@ -38,8 +38,8 @@ class _Employees extends State<Employees>
     with SingleTickerProviderStateMixin, UIMixin {
   late ShoppingController controller;
   static List<GuardData> _Guard_Data = [];
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  FocusNode myFocusNode = FocusNode();
+
+
   final Reference storageReference = FirebaseStorage.instance.ref().child('Images/1406.jpg');
   String imageUrl="https://firebasestorage.googleapis.com/v0/b/focusdata/o/1414.jpg?alt=media&token=8f4a8c63-732b-46c8-b95d-8c6a0e5ec70b";
   @override
@@ -308,14 +308,12 @@ FilledButton(onPressed: (){
         }
       }
 
-      formKey.currentState?.reset(); // إعادة تعيين الحالة إذا كان ذلك مناسبًا
-      formKey.currentState?.validate(); // التحقق من البيانات إذا كان ذلك مناسبًا
+ // التحقق من البيانات إذا كان ذلك مناسبًا
       setState(() {
         _Guard_Data.clear();
         _Guard_Data.addAll(guarddata);
-        formKey.currentState?.reset(); // إعادة تعيين الحالة إذا كان ذلك مناسبًا
-        formKey.currentState?.validate();
-        myFocusNode.requestFocus();
+
+
 
       });
     });

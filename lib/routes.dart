@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webkit/views/apps/CRM/contacts_page.dart';
 import 'package:webkit/views/apps/CRM/opportunities.dart';
+import 'package:webkit/views/apps/Location/Location.dart';
 import 'package:webkit/views/apps/calender.dart';
 import 'package:webkit/views/apps/chat_page.dart';
 import 'package:webkit/views/apps/contacts/edit_profile.dart';
@@ -145,6 +146,10 @@ getPageRoute() {
     GetPage(
         name: '/Employees',
         page: () => const Employees(),
+        middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: '/Location',
+        page: () => const Location(),
         middlewares: [AuthMiddleware()]),
 
     ///---------------- KanBan ----------------///

@@ -643,6 +643,215 @@ pw.SizedBox(
 );
 
 
+PrintAtendencsheet(ttf) => pw.Padding(
+  padding: const pw.EdgeInsets.all(13.00),
+  child: pw.Column(children: [
+    pw.Row(children: [
+      //pw.Image(logo, width: 40, height: 40),
+      pw.Container(
+          width: 800,
+          child: pw.Center(
+            // style: pw.TextStyle(font: ttf, fontSize: 24)
+              child: pw.Text(
+                "Summary Attendance Sheet of ${DashboardPageState.selectedMonthIndex}  ${DashboardPageState.Years}",
+                style: pw.TextStyle(
+                    fontSize: 16,font: ttf
+                ),
+              )))
+    ]),
+
+
+pw.Center(
+  child: pw.Container(
+    padding: pw.EdgeInsets.fromLTRB(40,0,40,0),
+    child: pw.Column(
+        children: [
+          pw.Container(
+              child: pw.Row(children: [
+
+
+                pw.Expanded(
+                  flex: 0,
+                  child: pw.Container(
+                    decoration: pw.BoxDecoration(
+                      color: PdfColors.orangeAccent,
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 1, // عرض الحدود
+                      ),
+                    ),
+                    child: pw.Container(
+                      margin: pw.EdgeInsets.only(left: 0.5),
+                      child: pw.SizedBox(
+                          width: 70,
+                          height: 30,
+                          child: pw.Center(child: pw.Text("SI No",
+                              style: pw.TextStyle(font: ttf)))),
+                    ),
+                  ),
+                ),
+                pw.Expanded(
+                  flex: 0,
+                  child: pw.Container(
+                    decoration: pw.BoxDecoration(
+                      color: PdfColors.orangeAccent,
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 1, // عرض الحدود
+                      ),
+                    ),
+                    child: pw.Container(
+                      margin: pw.EdgeInsets.only(left: 0.5),
+                      child: pw.SizedBox(
+                          width: 70,
+                          height: 30,
+                          child: pw.Center(child: pw.Text("ID No",
+                              style: pw.TextStyle(font: ttf)))),
+                    ),
+                  ),
+                ),
+                pw.Expanded(
+                  flex: 0,
+                  child: pw.Container(
+                    decoration: pw.BoxDecoration(
+                      color: PdfColors.orangeAccent,
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 1, // عرض الحدود
+                      ),
+                    ),
+                    child: pw.Container(
+                      margin: pw.EdgeInsets.only(left: 0.5),
+                      child: pw.SizedBox(
+                          width: 200,
+                          height: 30,
+                          child: pw.Center(child: pw.Text("Name",style: pw.TextStyle(font: ttf)))),
+                    ),
+                  ),
+                ),
+                pw.Expanded(
+                  flex: 0,
+                  child: pw.Container(
+                    decoration: pw.BoxDecoration(
+                      color: PdfColors.orangeAccent,
+                      border: pw.Border.all(
+                        color: PdfColors.black,
+                        width: 1, // عرض الحدود
+                      ),
+                    ),
+                    child: pw.Container(
+                      margin: pw.EdgeInsets.only(left: 0.5),
+                      child: pw.SizedBox(
+                          width: 120,
+                          height: 30,
+                          child: pw.Center(child: pw.Text("signature",style: pw.TextStyle(font: ttf)))),
+                    ),
+                  ),
+                ),
+
+              ])
+          ),
+
+
+
+//27
+          pw.Container(
+            child: pw.SizedBox(
+              height: 10*30,
+              child: pw.ListView.builder(
+                  direction: pw.Axis.vertical,
+                  itemCount: 10,
+                  itemBuilder: (context, index) {
+                    var index1=index+1;
+                    return pw.Row(children: [
+                      pw.Container(
+                        decoration: pw.BoxDecoration(
+                          border: pw.Border.all(
+                            color: PdfColors.black,
+                            width: 1, // عرض الحدود
+                          ),
+                        ),
+                        child: pw.Container(
+                          margin: pw.EdgeInsets.only(left: 0.5),
+                          child: pw.SizedBox(
+                              width: 70,
+                              height: 30,
+                              child: pw.Center(
+                                child: pw.Text(
+                                    index1.toString(),style: pw.TextStyle(font: ttf)
+                                ),
+                              )),
+                        ),
+                      ),
+                      pw.Container(
+                        decoration: pw.BoxDecoration(
+                          border: pw.Border.all(
+                            color: PdfColors.black,
+                            width: 1, // عرض الحدود
+                          ),
+                        ),
+                        child: pw.Container(
+                          margin: pw.EdgeInsets.only(left: 0.5),
+                          child: pw.SizedBox(
+                              width: 70,
+                              height: 30,
+                              child: pw.Center(
+                                child: pw.Text(
+                                   "",style: pw.TextStyle(font: ttf)
+                                ),
+                              )),
+                        ),
+                      ),
+
+                      pw.Container(
+                        decoration: pw.BoxDecoration(
+                          border: pw.Border.all(
+                            color: PdfColors.black,
+                            width: 1, // عرض الحدود
+                          ),
+                        ),
+                        child: pw.Container(
+                          margin: pw.EdgeInsets.only(left: 0.5),
+                          child: pw.SizedBox(
+                              width: 200,
+                              height: 30,
+                              child:pw.Align(
+                                  alignment: pw.Alignment.centerLeft,
+                                  child: pw.Text("",style: pw.TextStyle(font: ttf), maxLines: 1))),
+                        ),
+                      ),
+                      pw.Container(
+                        decoration: pw.BoxDecoration(
+                          border: pw.Border.all(
+                            color: PdfColors.black,
+                            width: 1, // عرض الحدود
+                          ),
+                        ),
+                        child: pw.Container(
+                          margin: pw.EdgeInsets.only(left: 0.5),
+                          child: pw.SizedBox(
+                              width: 120,
+                              height: 30,
+                              child: pw.Center(
+                                child: pw.Text(
+                                   "",style: pw.TextStyle(font: ttf)
+                                ),
+                              )),
+                        ),
+                      ),
+
+                    ]);
+                  }),
+            ),
+          ),
+        ]
+    ),
+  )
+)
+  ]),
+);
+
+
 
 int getGuardCount(String day, int targetSiteNumber) {
   return DashboardPageState.attendanceData.values.where((attendance) {

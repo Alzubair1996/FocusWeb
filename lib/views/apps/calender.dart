@@ -1,15 +1,16 @@
 import 'dart:html';
 import 'dart:ui_web';
-
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_google_places_web/flutter_google_places_web.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:printing/printing.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:webkit/controller/apps/calender/calender_controller.dart';
 import 'package:webkit/helpers/utils/my_shadow.dart';
@@ -29,6 +30,7 @@ import '../../helpers/theme/theme_customizer.dart';
 import '../../helpers/widgets/my_button.dart';
 import '../../helpers/widgets/my_container.dart';
 import '../../helpers/widgets/my_text_style.dart';
+import '../../printable_data.dart';
 
 const kGoogleApiKey = "AIzaSyAZhJZTHXDPIUkSGcmrSAbpbVL9J8eC8rw";
 
@@ -351,173 +353,11 @@ class CalenderState extends State<Calender>
 
 
                                              test='';
-/*
-                                            showDialog(
-                                              context: context,
-                                              barrierDismissible: false,
-                                              builder: (BuildContext context) {
-                                                return StatefulBuilder(
-                                                  builder: (BuildContext context,
-                                                      StateSetter setState) {
-                                                    return AlertDialog(
-                                                      clipBehavior:
-                                                          Clip.antiAliasWithSaveLayer,
-                                                      title: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment.start,
-                                                        children: [
-                                                          MyText.titleMedium(
-                                                            "Select Location ",
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      titlePadding:
-                                                          MySpacing.xy(16, 12),
-                                                      insetPadding: MySpacing.y(230),
-                                                      actionsPadding:
-                                                          MySpacing.xy(170, 16),
-                                                      contentPadding: MySpacing.x(16),
-                                                      content: Column(
-                                                        children: const [
 
-                                                                  Expanded(
-                                                                    flex: 1,
-                                                                    child:HtmlElementView(
-                                                                      viewType: 'google_maps',
-                                                                    ),
-
-
-                                                          ),
-                                                          Expanded(
-                                                              flex:0,
-                                                              child: Text(""),),
-                                                        ],
-                                                      ),
-                                                      actions: [
-
-                                                    Column(
-                                                      children: [
-                                                        Container(
-                                                          width: 200,
-                                                          height: 60,
-                                                          child: MyButton(
-
-
-                                                            onPressed: () async {
-
-                                                              ClipboardData? clipboardData = await Clipboard.getData(Clipboard.kTextPlain);
-                                                              if (clipboardData != null) {
-                                                                String lastCopiedText = clipboardData.text ?? 'No text found';
-
-                                                                String locationData = lastCopiedText;
-                                                    setState(() {
-                                                                testcopy=lastCopiedText;
-                                                    });
-                                                                // Remove "Location: " prefix and split the string
-                                                                List<String> locationValues = locationData.replaceAll("Location: ", "").split(',');
-
-                                                                double latitude = 0.0;
-                                                                double longitude=0.0;
-                                                                // Check if the split produced two values (latitude and longitude)
-                                                                if (locationValues.length == 2) {
-                                                                   latitude = double.tryParse(locationValues[0]) ?? 0.0;
-                                                                   longitude = double.tryParse(locationValues[1]) ?? 0.0;
-
-
-                                                                  setState(() {
-
-                                                                    L_Location = latitude;
-                                                                     H_Location=longitude;
-                                                                    test="$latitude,\n$longitude";
-                                                                  });
-
-                                                                } else {
-
-
-
-                                                                    L_Location=0.00;
-                                                                    H_Location=0.00;
-                                                                  test='';
-
-
-                                                                }
-                                                                print(L_Location);
-
-
-
-                                                                // Here you have the last copied text, do something with it
-                                                              } else {
-
-                                                                test='';
-                                                                L_Location=0.00;
-                                                                H_Location=0.00;
-
-                                                                print('No text found in the clipboard');
-                                                              }
-                                                            },
-                                                            child: Text(test==""?"Copy the location":"you chos\n$test",style: TextStyle(
-                                                              color: Colors.white
-                                                            ),),),
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            MyButton(
-                                                              // onPressed: controller.onSubmit,
-                                                              onPressed: () {
-                                                                if(L_Location!=0.0){
-
-
-                                                                  Navigator.pop(context);
-                                                                }else{
-
-                                                                }
-
-
-                                                                //
-                                                              },
-
-                                                              elevation: 0,
-                                                              backgroundColor: contentTheme.primary,
-                                                              borderRadiusAll: AppStyle.buttonRadius.medium,
-                                                              child: MyText.bodyMedium(
-                                                                "Ok",
-                                                                color: contentTheme
-                                                                    .onPrimary,
-                                                              ),
-                                                            ),
-                                                            MySpacing.width(16),
-                                                            MyButton(
-                                                              onPressed: () {
-                                                                Navigator.pop(context);
-
-
-                                                              },
-                                                              elevation: 0,
-                                                              backgroundColor:
-                                                              contentTheme.primary,
-                                                              borderRadiusAll: AppStyle
-                                                                  .buttonRadius.medium,
-                                                              child: MyText.bodyMedium(
-                                                                "Cancel",
-                                                                color: contentTheme
-                                                                    .onPrimary,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    )
-                                                      ],
-                                                    );
-                                                  },
-                                                );
-                                              },
-                                            );
-                                            */
                                           },
                                         ),
                                         MySpacing.width(16),
-                                        Text(L_Location.toString()+","+H_Location.toString()),
+                                        Text("$L_Location,$H_Location"),
                                       ],
                                     )),
                               ],
@@ -528,7 +368,7 @@ class CalenderState extends State<Calender>
                 ),
               ),
               actions: [
-                locationtrue?Column(
+                if (locationtrue) Column(
                   children: [
                     Container(
                       width: 200,
@@ -643,111 +483,108 @@ class CalenderState extends State<Calender>
                       ],
                     ),
                   ],
-                )
-             :Container(
-                  child: Row(
-                    children: [
-                      MyButton(
-                        // onPressed: controller.onSubmit,
-                        onPressed: () {
+                ) else Row(
+               children: [
+                 MyButton(
+                   // onPressed: controller.onSubmit,
+                   onPressed: () {
 
 
 
-                          DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
-                          if(contofguard.text.isEmpty||selectedDates==""||name1.text.isEmpty||_selectedItem==null||H_Location==0.00) {
+                     DatabaseReference databaseReference = FirebaseDatabase.instance.reference();
+                     if(contofguard.text.isEmpty||selectedDates==""||name1.text.isEmpty||_selectedItem==null||H_Location==0.00) {
 
-                          } else{
-                            String a = controller.selectedStartDate.toString();
-                            DateTime dateTime = DateTime.parse(a);
-                            String formattedDate =
-                            DateFormat('dd/MM/yyyy').format(dateTime);
+                     } else{
+                       String a = controller.selectedStartDate.toString();
+                       DateTime dateTime = DateTime.parse(a);
+                       String formattedDate =
+                       DateFormat('dd/MM/yyyy').format(dateTime);
 
-                            DatabaseReference newPostRef = databaseReference.child("Focus/Event").push();
-                            newPostRef.set({
-                              'Cont_G': contofguard.text,
-                              'Date':formattedDate,
-                              'Emirates': 'Sharja',
-                              'ID': newPostRef.key.toString(),
-                              'Name': name1.text,
-                              'Status': _selectedItem!.location,
-                              'l_location': H_Location.toString(),
-                              'H_location':L_Location.toString(),
-                              // Other data fields you want to store
-                            }).then((_) {
-                              print('Data saved successfully with key: ${newPostRef.key}');
-                              fetchFootballMatches();
-                            }).catchError((onError) {
-                              print('Failed to save data: $onError');
-                            });
-                            Navigator.pop(context);
-            }
+                       DatabaseReference newPostRef = databaseReference.child("Focus/Event").push();
+                       newPostRef.set({
+                         'Cont_G': contofguard.text,
+                         'Date':formattedDate,
+                         'Emirates': 'Sharja',
+                         'ID': newPostRef.key.toString(),
+                         'Name': name1.text,
+                         'Status': _selectedItem!.location,
+                         'l_location': H_Location.toString(),
+                         'H_location':L_Location.toString(),
+                         // Other data fields you want to store
+                       }).then((_) {
+                         print('Data saved successfully with key: ${newPostRef.key}');
+                         fetchFootballMatches();
+                       }).catchError((onError) {
+                         print('Failed to save data: $onError');
+                       });
+                       Navigator.pop(context);
+                         }
 
-/*
-                          for(var i in football){
+             /*
+                     for(var i in football){
 
-                            newPostRef.set({
-                              'Cont_G': i.contG,
-                              'Date': i.date,
-                              'Emirates': i.emirates,
-                              'ID1': newPostRef,
-                              'Name': i.name,
-                              'Status': i.status,
-                              // Other data fields you want to store
-                            }).then((_) {
-                              print('Data saved successfully with key: ${newPostRef.key}');
-                            }).catchError((onError) {
-                              print('Failed to save data:${i.name} $onError');
-                            });
+                       newPostRef.set({
+                         'Cont_G': i.contG,
+                         'Date': i.date,
+                         'Emirates': i.emirates,
+                         'ID1': newPostRef,
+                         'Name': i.name,
+                         'Status': i.status,
+                         // Other data fields you want to store
+                       }).then((_) {
+                         print('Data saved successfully with key: ${newPostRef.key}');
+                       }).catchError((onError) {
+                         print('Failed to save data:${i.name} $onError');
+                       });
 
-                          }
-       newPostRef.set({
-                              'Cont_G': 15,
-                              'Date': searchResults,
-                              'Emirates': 'Sharja',
-                              'ID': newPostRef,
-                              'Name': 'Your Content',
-                              'Status': 'Done',
-                              // Other data fields you want to store
-                            }).then((_) {
-                              print('Data saved successfully with key: ${newPostRef.key}');
-                            }).catchError((onError) {
-                              print('Failed to save data: $onError');
-                            });
- */
-                          // Generate a random key using push() and set data at that location
+                     }
+                    newPostRef.set({
+                         'Cont_G': 15,
+                         'Date': searchResults,
+                         'Emirates': 'Sharja',
+                         'ID': newPostRef,
+                         'Name': 'Your Content',
+                         'Status': 'Done',
+                         // Other data fields you want to store
+                       }).then((_) {
+                         print('Data saved successfully with key: ${newPostRef.key}');
+                       }).catchError((onError) {
+                         print('Failed to save data: $onError');
+                       });
+              */
+                     // Generate a random key using push() and set data at that location
 
 
 
-                        },
+                   },
 
-                        elevation: 0,
-                        backgroundColor: contentTheme.primary,
-                        borderRadiusAll: AppStyle.buttonRadius.medium,
-                        child: MyText.bodyMedium(
-                          "Ok",
-                          color: contentTheme.onPrimary,
-                        ),
-                      ),
-                      MySpacing.width(16),
-                      MyButton(
-                        onPressed: () {
-                          Navigator.pop(context);
+                   elevation: 0,
+                   backgroundColor: contentTheme.primary,
+                   borderRadiusAll: AppStyle.buttonRadius.medium,
+                   child: MyText.bodyMedium(
+                     "Ok",
+                     color: contentTheme.onPrimary,
+                   ),
+                 ),
+                 MySpacing.width(16),
+                 MyButton(
+                   onPressed: () {
+                     Navigator.pop(context);
 
-                          namestad = "";
-                          controller.selectedStartDate = selectedDate;
-                          controller.selectedStartDate2 = selectedDate;
-                        },
-                        elevation: 0,
-                        backgroundColor: contentTheme.primary,
-                        borderRadiusAll: AppStyle.buttonRadius.medium,
-                        child: MyText.bodyMedium(
-                          "Cancel",
-                          color: contentTheme.onPrimary,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                     namestad = "";
+                     controller.selectedStartDate = selectedDate;
+                     controller.selectedStartDate2 = selectedDate;
+                   },
+                   elevation: 0,
+                   backgroundColor: contentTheme.primary,
+                   borderRadiusAll: AppStyle.buttonRadius.medium,
+                   child: MyText.bodyMedium(
+                     "Cancel",
+                     color: contentTheme.onPrimary,
+                   ),
+                 ),
+               ],
+             ),
 
               ],
             );
@@ -846,7 +683,7 @@ class CalenderState extends State<Calender>
 
                               selectedDate = date.date!;
                               if (date.date != DateTime.now() &&
-                                  selectedDate == null) {
+                                  selectedDate.isNull) {
                                 setState(() {
                                   selectedDates = formattedDate;
                                   selectedDate = date.date!;
@@ -978,7 +815,25 @@ class CalenderState extends State<Calender>
                                 return Padding(
                                     padding: const EdgeInsets.all(1.0),
                                     child: MyCard(
-                                        onTap: () {
+                                        onTap: () async {
+                                          final fontData = await rootBundle.load("assets/font/font.ttf");
+                                          final ttf = pw.Font.ttf(fontData.buffer.asByteData());
+                                          final doc = pw.Document();
+                                          doc.addPage(pw.Page(
+                                              pageFormat: PdfPageFormat.a4.copyWith(
+                                                width: PdfPageFormat.a4.width,
+                                                height: PdfPageFormat.a4.height,
+                                                marginLeft: 0,
+                                                marginRight: 0,
+                                                marginTop: 0,
+                                                marginBottom: 0,
+                                              ),
+                                              build: (pw.Context context) {
+                                                return PrintAtendencsheet(ttf);
+                                              }));
+                                          await Printing.layoutPdf(
+                                              onLayout: (PdfPageFormat format) async => doc.save());
+
                                           try {
                                             for (int i = 0;
                                                 i < footballday.length;
@@ -1061,10 +916,7 @@ class CalenderState extends State<Calender>
 
   }
   void loadGoogleMaps() {
-    const src = '''
-
-<html>
-
+    const src = '''<html lang="en">
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
@@ -1104,6 +956,7 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
     </style>
+    <title></title>
 </head>
 
 <body>

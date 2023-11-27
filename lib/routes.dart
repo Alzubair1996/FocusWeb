@@ -342,7 +342,12 @@ getPageRoute() {
         name: '/maps/google-maps',
         page: () => const GoogleMapPage(),
         middlewares: [AuthMiddleware()]),
+    GetPage(
+        name: '/LoginPage',
+
+        middlewares: [AuthMiddleware()], page: () =>  LoginPage()),
   ];
+
 }
 
 // class AuthMiddleware1 extends MyMiddleware {

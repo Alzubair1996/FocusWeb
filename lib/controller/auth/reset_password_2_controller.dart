@@ -38,7 +38,7 @@ class ResetPassword2Controller extends MyController {
     if (basicValidator.validateForm()) {
       loading = true;
       update();
-      var errors = await AuthService.loginUser(basicValidator.getData());
+      var errors = await AuthService.loginUser(basicValidator.getController('password').toString());
       if (errors != null) {
         basicValidator.addErrors(errors);
         basicValidator.validateForm();

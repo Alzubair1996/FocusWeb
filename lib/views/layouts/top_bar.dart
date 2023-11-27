@@ -22,6 +22,8 @@ import 'package:webkit/views/auth/login.dart';
 import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/widgets/custom_pop_menu.dart';
 
+import '../../helpers/storage/local_storage.dart';
+
 class TopBar extends StatefulWidget {
   const TopBar({
     super.key, // this.onMenuIconTap,
@@ -353,7 +355,8 @@ class _TopBarState extends State<TopBar>
             padding: MySpacing.xy(8, 8),
             child: MyButton(
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              onPressed: () {
+              onPressed: () async {
+                await LocalStorage.setLoggedInUser(false);
                 Get.off(LoginPage());
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,

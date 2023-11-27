@@ -47,8 +47,9 @@ int select_index=-1;
 
     super.initState();
  //   getGuardDeitales("");
+
     controller = Get.put(ShoppingController());
-controller.location1lla.isEmpty? controller.getGuardDeitales(""):null;
+    controller.location1lla.isEmpty? controller.getGuardDeitales(""):null;
   }
 
   @override

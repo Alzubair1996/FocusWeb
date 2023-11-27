@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
+import 'package:webkit/AdminUsers.dart';
 import 'package:webkit/controller/auth/login_controller.dart';
 import 'package:webkit/helpers/extensions/string.dart';
 import 'package:webkit/helpers/theme/app_theme.dart';
@@ -21,13 +22,14 @@ class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginPage> createState() => LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage>
+class LoginPageState extends State<LoginPage>
     with SingleTickerProviderStateMixin, UIMixin {
   late LoginController controller;
 
+  static String pass ="";
   @override
   void initState() {
     super.initState();
@@ -53,19 +55,19 @@ class _LoginPageState extends State<LoginPage>
                           ? Image.asset(
                               Images.login[3],
                               fit: BoxFit.contain,
-                              height: 350,
+                              height: 90,
                             )
                           : type == MyScreenMediaType.xl
                               ? Image.asset(
                                   Images.login[3],
                                   fit: BoxFit.contain,
-                                  height: 350,
+                                  height: 90,
                                 )
                               : type == MyScreenMediaType.lg
                                   ? Image.asset(
                                       Images.login[3],
                                       fit: BoxFit.contain,
-                                      height: 350,
+                                      height: 90,
                                     )
                                   : const SizedBox();
                     },
@@ -96,17 +98,45 @@ class _LoginPageState extends State<LoginPage>
                           ),
                           MySpacing.height(40),
                           MyText.bodyMedium(
-                            "Your ID",
+                            "Name",
                           ),
                           MySpacing.height(8),
+                          DropdownButtonFormField<AdminUsers>(
+                            dropdownColor: theme.colorScheme.background,
+                            menuMaxHeight: 200,
+
+                            value: controller.adminusres.first,
+                            // Make sure _selectedItem is initialized properly
+                            items: controller.adminusres.map((AdminUsers user) {
+                              return DropdownMenuItem<AdminUsers>(
+                                value: user,
+                                child: MyText.labelMedium(user.name),
+                              );
+                            }).toList(),
+                            icon: const Icon(
+                              LucideIcons.chevronDown,
+                              size: 20,
+                            ),
+                            decoration: InputDecoration(
+                              hintText: "Name",
+                              hintStyle: MyTextStyle.bodySmall(xMuted: true),
+                              border: outlineInputBorder,
+                              enabledBorder: outlineInputBorder,
+                              focusedBorder: focusedInputBorder,
+                              contentPadding: MySpacing.all(16),
+                              isCollapsed: true,
+                            ),
+                            onChanged: (AdminUsers? value) {},
+                          ),
+/*
                           TextFormField(
                             validator: controller.basicValidator
-                                .getValidation('ID'),
+                                .getValidation('Name'),
                             controller: controller.basicValidator
-                                .getController('ID'),
+                                .getController('Name'),
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
-                                labelText: "ID",
+                                labelText: "Name",
                                 labelStyle: MyTextStyle.bodySmall(xMuted: true),
                                 border: outlineInputBorder,
                                 prefixIcon: const Icon(
@@ -118,14 +148,17 @@ class _LoginPageState extends State<LoginPage>
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never),
                           ),
+                          */
                           MySpacing.height(16),
                           MyText.labelMedium(
                             "password".tr(),
                           ),
                           MySpacing.height(8),
                           TextFormField(
-                            validator: controller.basicValidator
-                                .getValidation('password'),
+                            onChanged: (data) {
+                              pass=data;
+                             // print(a);
+                            },
                             controller: controller.basicValidator
                                 .getController('password'),
                             keyboardType: TextInputType.visiblePassword,
@@ -158,7 +191,8 @@ class _LoginPageState extends State<LoginPage>
                               InkWell(
                                 onTap: () => controller
                                     .onChangeCheckBox(!controller.isChecked),
-                                child: Visibility(visible: false,
+                                child: Visibility(
+                                  visible: false,
                                   child: Row(
                                     children: [
                                       Checkbox(
@@ -177,9 +211,12 @@ class _LoginPageState extends State<LoginPage>
                                   ),
                                 ),
                               ),
-                              Visibility(visible: false,
+                              Visibility(
+                                visible: false,
                                 child: MyButton.text(
-                                  onPressed: controller.goToForgotPassword,
+                                  onPressed: () {}
+                                  //controller.goToForgotPassword//
+                                  ,
                                   elevation: 0,
                                   padding: MySpacing.xy(8, 0),
                                   splashColor:
@@ -221,7 +258,8 @@ class _LoginPageState extends State<LoginPage>
                               ),
                             ),
                           ),
-                          Visibility(visible: false,
+                          Visibility(
+                            visible: false,
                             child: Center(
                               child: MyButton.text(
                                 onPressed: controller.gotoRegister,

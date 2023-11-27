@@ -4,7 +4,7 @@ import 'package:webkit/helpers/services/auth_services.dart';
 import 'package:webkit/helpers/theme/theme_customizer.dart';
 
 class LocalStorage {
-  static const String _loggedInUserKey = "user";
+  static const String _loggedInUserKey = "user111";
   static const String _themeCustomizerKey = "theme_customizer";
   static const String _languageKey = "lang_code";
 

@@ -3,7 +3,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Trans;
-import 'package:webkit/controller/apps/shopping_customer/shopping_customer_controller.dart';
 import 'package:webkit/helpers/utils/my_shadow.dart';
 import 'package:webkit/helpers/utils/ui_mixins.dart';
 import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
@@ -24,6 +23,8 @@ import 'package:webkit/views/layouts/layout.dart';
 
 import '../../../GuardDetails.dart';
 import '../../../LocationData.dart';
+import '../../../controller/StringNames.dart';
+import '../../../controller/apps/shopping_customer/shopping_customer_controller.dart';
 import '../../../helpers/localizations/language.dart';
 import '../../../helpers/theme/theme_customizer.dart';
 import '../../../pdf_service.dart';
@@ -37,17 +38,22 @@ class Location extends StatefulWidget {
 
 class _Location extends State<Location> {
   late ShoppingController controller;
-  final location1lla = <LocationData>[];
 
+int select_index=-1;
   @override
   void initState() {
-    controller = Get.put(ShoppingController());
+
+
+
     super.initState();
-    getGuardDeitales("");
+ //   getGuardDeitales("");
+    controller = Get.put(ShoppingController());
+controller.location1lla.isEmpty? controller.getGuardDeitales(""):null;
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Layout(
       child: GetBuilder<ShoppingController>(
         init: controller,
@@ -75,7 +81,7 @@ class _Location extends State<Location> {
                               onFieldSubmitted: (v) {
                                 String a = "";
                                 a = v;
-                                getGuardDeitales(v);
+                             //   getGuardDeitales(v);
                                 v = a;
                               },
                               maxLines: 1,
@@ -105,19 +111,25 @@ class _Location extends State<Location> {
                                 child: ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   // التوجيه الأفقي
-                                  itemCount: location1lla.length,
+                                  itemCount: controller.location1lla.length,
 
                                   // عدد الأيام من 1 إلى 31
                                   itemBuilder: (context, Index) {
+
                                     // تنسيق اليوم
 
                                     return Padding(
                                       padding: const EdgeInsets.all(4.0),
                                       child: MyCard(
+                                        onTap: (){
+                                          controller.onChangeProduct(Index);
+                                          StringNemes.locations_items=Index;
+
+                                         // if(select_index)
+                                        },
                                         // تعيين Padding إلى صفر
                                         margin: EdgeInsets.only(left: 1),
-                                        color
-                                            : Color(0xffffffff),
+                                        color: controller.location1lla[Index].color,
 
                                         child: SizedBox(
                                           width: 500,
@@ -131,7 +143,7 @@ class _Location extends State<Location> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                      location1lla[Index].name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w900)),
+                                                      controller.location1lla[Index].name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.w900)),
                                                 ),
                                               ),
                                               Align(
@@ -140,7 +152,7 @@ class _Location extends State<Location> {
                                                   padding:
                                                       const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                      "Total Of guard ${location1lla[Index].tolal}",
+                                                      "Total Of guard ${controller.location1lla[Index].tolal}",
                                                   style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold)),
                                                 ),
                                               ),
@@ -165,46 +177,5 @@ class _Location extends State<Location> {
     );
   }
 
-  getGuardDeitales(String query) async {
-    DatabaseReference eventReflocaton =
-        FirebaseDatabase.instance.ref("Focus/Locatins");
 
-    final location1 = <LocationData>[];
-    try {
-      DatabaseEvent snapshot = await eventReflocaton.once();
-
-      Map<dynamic, dynamic>? values1 =
-          snapshot.snapshot.value as Map<dynamic, dynamic>;
-
-      List<MapEntry> entries = values1.entries.toList();
-
-// Sort the list based on the 'name' value
-      entries.sort((a, b) => (a.value['id']).compareTo(b.value['id']));
-
-// Create a new map with sorted entries
-      Map<String, dynamic> sortedMap =
-          Map.fromEntries(entries as Iterable<MapEntry<String, dynamic>>);
-
-      sortedMap.forEach((key, value) {
-        LocationData location = LocationData(
-            value['id'],
-            value['tolal'],
-            value['name'],
-            value['day_time'],
-            value['night_time'],
-            value['hors'],
-            double.parse(value['Latitude'].toString()),
-            double.parse(value['longitude'].toString()));
-
-        location1.add(location);
-      });
-    } catch (error) {
-      print('Error: $error');
-    }
-
-    setState(() {
-      location1lla.clear();
-      location1lla.addAll(location1);
-    });
-  }
 }

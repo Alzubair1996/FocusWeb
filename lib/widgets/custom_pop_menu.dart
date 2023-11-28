@@ -16,10 +16,11 @@ class CustomPopupMenu extends StatefulWidget {
   final bool backdrop;
   final bool show;
   final HideFn? hideFn;
-
+  final Function(String) onItemSelected;
   const CustomPopupMenu(
       {super.key,
       required this.menu,
+        required this.onItemSelected,
       required this.onChange,
       required this.menuBuilder,
       this.selectedIndex = 0,

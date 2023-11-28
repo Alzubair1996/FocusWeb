@@ -62,6 +62,9 @@ class Layout extends StatelessWidget {
           ),
           MySpacing.width(8),
           CustomPopupMenu(
+            onItemSelected: (a){
+
+            },
             backdrop: true,
             onChange: (_) {},
             offsetX: -180,
@@ -78,6 +81,9 @@ class Layout extends StatelessWidget {
           ),
           MySpacing.width(8),
           CustomPopupMenu(
+            onItemSelected: (a){
+
+            },
             backdrop: true,
             onChange: (_) {},
             offsetX: -90,

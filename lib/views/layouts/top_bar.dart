@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:webkit/controller/StringNames.dart';
 import 'package:webkit/helpers/localizations/language.dart';
 import 'package:webkit/helpers/theme/app_notifier.dart';
 import 'package:webkit/helpers/theme/app_style.dart';
@@ -110,6 +111,10 @@ class _TopBarState extends State<TopBar>
                 ),
                 MySpacing.width(12),
                 CustomPopupMenu(
+                  onItemSelected: (a){
+
+                    print("ggg");
+                  },
                   backdrop: true,
                   hideFn: (_) => languageHideFn = _,
                   onChange: (_) {},
@@ -131,6 +136,9 @@ class _TopBarState extends State<TopBar>
                 ),
                 MySpacing.width(6),
                 CustomPopupMenu(
+                  onItemSelected: (a){
+
+                  },
                   backdrop: true,
                   onChange: (_) {},
                   offsetX: -120,
@@ -147,8 +155,15 @@ class _TopBarState extends State<TopBar>
                 ),
                 MySpacing.width(4),
                 CustomPopupMenu(
+                  onItemSelected: (a){
+                    
+                  },
+
                   backdrop: true,
-                  onChange: (_) {},
+                  onChange: (_) {
+                 
+
+                  },
                   offsetX: -60,
                   offsetY: 8,
                   menu: Padding(
@@ -170,7 +185,9 @@ class _TopBarState extends State<TopBar>
                       ],
                     ),
                   ),
-                  menuBuilder: (_) => buildAccountMenu(),
+                  menuBuilder:(_)  =>  buildAccountMenu()
+    ,
+
                 ),
               ],
             ),
@@ -280,8 +297,8 @@ class _TopBarState extends State<TopBar>
     );
   }
 
-  Widget buildAccountMenu() {
-    return MyContainer.bordered(
+  Widget  buildAccountMenu() {
+    return  MyContainer.bordered(
       paddingAll: 0,
       width: 150,
       child: Column(
@@ -356,8 +373,15 @@ class _TopBarState extends State<TopBar>
             child: MyButton(
               tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () async {
+
                 await LocalStorage.setLoggedInUser(false);
+             //   Navigator.of(context).pop();
+
                 Get.off(LoginPage());
+                setState(() {
+
+                });
+
               },
               borderRadiusAll: AppStyle.buttonRadius.medium,
               padding: MySpacing.xy(8, 4),

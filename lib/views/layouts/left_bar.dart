@@ -639,6 +639,9 @@ class _MenuWidgetState extends State<MenuWidget>
 
     if (widget.isCondensed) {
       return CustomPopupMenu(
+        onItemSelected: (a){
+
+        },
         backdrop: true,
         show: popupShowing,
         hideFn: (_) => hideFn = _,

@@ -1824,8 +1824,11 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
     }
 
     }
+    List<int> myIntList = [];
+
     for(var id in idess1) {
       for (int day = 1; day < DashboardPageState.days; day++) {
+
         for (int i = 0; i < dubaleduty1.length; i++) {
 
           try {
@@ -1837,19 +1840,26 @@ class _CustomListViewDialogState extends State<CustomListViewDialog> {
             //oooooooooooo
           } catch (e) {
 
+if(day==(dubaleduty1[i].day) && !myIntList.contains(day)){
+  print(day);
 
-              final day =
-              (dubaleduty1[i].day).toString().padLeft(2, '0');
-              Record myRecord = Record(
-                id: id,
-                job_no: int.parse(locations),
-                date: day,
-                datetime: '08:00',
-                shift: 'Day',
-              );
+  myIntList.add(day);
 
-              DashboardPageState.record.add(myRecord);
-              dubaleduty1[i].day=50;
+  final day12 = (dubaleduty1[i].day).toString().padLeft(2, '0').toString();
+  print(day12);
+  Record myRecord = Record(
+    id: id,
+    job_no: int.parse(locations),
+    date: day12,
+    datetime: '08:00',
+    shift: 'Day',
+  );
+
+  DashboardPageState.record.add(myRecord);
+//  dubaleduty1[i].day=day*5;
+
+
+}
 
           }
         }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/widgets/my_display_type.dart';
-import 'package:webkit/helpers/widgets/my_screen_media.dart';
-import 'package:webkit/helpers/widgets/my_screen_media_type.dart';
+import 'package:focusweb/helpers/widgets/my_display_type.dart';
+import 'package:focusweb/helpers/widgets/my_screen_media.dart';
+import 'package:focusweb/helpers/widgets/my_screen_media_type.dart';
 
 class MyFlexItem extends StatelessWidget {
   final Widget child;

@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:webkit/controller/apps/kanban_controller.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
-import 'package:webkit/helpers/widgets/my_container.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/views/layouts/layout.dart';
+import 'package:focusweb/controller/apps/kanban_controller.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/utils/ui_mixins.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb_item.dart';
+import 'package:focusweb/helpers/widgets/my_container.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
+import 'package:focusweb/helpers/widgets/responsive.dart';
+import 'package:focusweb/views/layouts/layout.dart';
 
 class KanBanPage extends StatefulWidget {
   const KanBanPage({Key? key}) : super(key: key);

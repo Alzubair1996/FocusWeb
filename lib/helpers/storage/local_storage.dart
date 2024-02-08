@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:webkit/helpers/localizations/language.dart';
-import 'package:webkit/helpers/services/auth_services.dart';
-import 'package:webkit/helpers/theme/theme_customizer.dart';
+import 'package:focusweb/helpers/localizations/language.dart';
+import 'package:focusweb/helpers/services/auth_services.dart';
+import 'package:focusweb/helpers/theme/theme_customizer.dart';
 
 class LocalStorage {
   static const String _loggedInUserKey = "user111";

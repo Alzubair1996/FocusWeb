@@ -3,22 +3,22 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:webkit/controller/apps/ecommerce/invoice_controller.dart';
-import 'package:webkit/helpers/theme/app_style.dart';
-import 'package:webkit/helpers/utils/my_shadow.dart';
-import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
-import 'package:webkit/helpers/widgets/my_button.dart';
-import 'package:webkit/helpers/widgets/my_card.dart';
-import 'package:webkit/helpers/widgets/my_container.dart';
-import 'package:webkit/helpers/widgets/my_flex.dart';
-import 'package:webkit/helpers/widgets/my_flex_item.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/images.dart';
-import 'package:webkit/views/layouts/layout.dart';
+import 'package:focusweb/controller/apps/ecommerce/invoice_controller.dart';
+import 'package:focusweb/helpers/theme/app_style.dart';
+import 'package:focusweb/helpers/utils/my_shadow.dart';
+import 'package:focusweb/helpers/utils/ui_mixins.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb_item.dart';
+import 'package:focusweb/helpers/widgets/my_button.dart';
+import 'package:focusweb/helpers/widgets/my_card.dart';
+import 'package:focusweb/helpers/widgets/my_container.dart';
+import 'package:focusweb/helpers/widgets/my_flex.dart';
+import 'package:focusweb/helpers/widgets/my_flex_item.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
+import 'package:focusweb/helpers/widgets/responsive.dart';
+import 'package:focusweb/images.dart';
+import 'package:focusweb/views/layouts/layout.dart';
 
 class InvoicePage extends StatefulWidget {
   const InvoicePage({Key? key}) : super(key: key);
@@ -92,7 +92,7 @@ class _InvoicePageState extends State<InvoicePage>
                                         height: 16,
                                       ),
                                       MySpacing.width(8),
-                                      MyText.titleMedium("WebKit"),
+                                      MyText.titleMedium("focusweb"),
                                     ],
                                   ),
                                   MyText.titleMedium("Invoice"),

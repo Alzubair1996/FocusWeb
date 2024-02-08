@@ -1,11 +1,11 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/widgets/my_bottom_navigation_bar_item.dart';
-import 'package:webkit/helpers/widgets/my_container.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text_style.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/widgets/my_bottom_navigation_bar_item.dart';
+import 'package:focusweb/helpers/widgets/my_container.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text_style.dart';
 
 enum MyBottomNavigationBarType {
   normal,

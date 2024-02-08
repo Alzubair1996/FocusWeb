@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class GuardData {
   final String BIRTHDAY;
   final String Contact;
@@ -18,6 +20,7 @@ class GuardData {
   final String Shift;
   final String VIS_EXPIRY_DATE;
   final String password;
+  late Color co=Colors.white;
 
   // Constructor
   GuardData(

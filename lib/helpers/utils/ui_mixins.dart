@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/theme/admin_theme.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/widgets/my_dashed_divider.dart';
-import 'package:webkit/helpers/widgets/my_navigation_mixin.dart';
+import 'package:focusweb/helpers/theme/admin_theme.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/widgets/my_dashed_divider.dart';
+import 'package:focusweb/helpers/widgets/my_navigation_mixin.dart';
 
 mixin UIMixin {
   // ThemeData get theme => AppStyle.theme;

@@ -1,4 +1,4 @@
-import 'package:webkit/helpers/widgets/my_base_exception.dart';
+import 'package:focusweb/helpers/widgets/my_base_exception.dart';
 
 class RouteException extends BaseException {
   final String message;

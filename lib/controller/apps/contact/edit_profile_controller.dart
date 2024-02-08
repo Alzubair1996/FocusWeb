@@ -1,5 +1,5 @@
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/helpers/widgets/my_form_validator.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/helpers/widgets/my_form_validator.dart';
 
 class EditProfileController extends MyController {
   MyFormValidator validation = MyFormValidator();

@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/helpers/extensions/string.dart';
-import 'package:webkit/helpers/widgets/my_text_utils.dart';
-import 'package:webkit/views/other/basic_table.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/helpers/extensions/string.dart';
+import 'package:focusweb/helpers/widgets/my_text_utils.dart';
+import 'package:focusweb/views/other/basic_table.dart';
 
 class Data {
   final int id, qty;

@@ -1,11 +1,11 @@
-class Record {
+class Recorda {
   int id;
   int job_no;
   String date;
   String datetime;
   String shift;
 
-  Record({required this.id, required this.job_no,required this.date,required this.datetime,required this.shift});
+  Recorda({required this.id, required this.job_no,required this.date,required this.datetime,required this.shift});
 
   Map<String, dynamic> toJson() {
     return {

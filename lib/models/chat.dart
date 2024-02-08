@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:webkit/helpers/services/json_decoder.dart';
-import 'package:webkit/models/identifier_model.dart';
+import 'package:focusweb/helpers/services/json_decoder.dart';
+import 'package:focusweb/models/identifier_model.dart';
 
 class Chat extends IdentifierModel {
   final String firstName, message, sendMessage, receiveMessage;

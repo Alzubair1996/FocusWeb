@@ -1,5 +1,5 @@
 import 'package:quill_html_editor/quill_html_editor.dart';
-import 'package:webkit/controller/my_controller.dart';
+import 'package:focusweb/controller/my_controller.dart';
 
 class QuillHtmlEditorController extends MyController {
   final QuillEditorController quillHtmlEditor = QuillEditorController();

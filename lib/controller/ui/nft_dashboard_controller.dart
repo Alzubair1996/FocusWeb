@@ -1,6 +1,6 @@
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/helpers/widgets/my_text_utils.dart';
-import 'package:webkit/models/nft_dashboard_model.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/helpers/widgets/my_text_utils.dart';
+import 'package:focusweb/models/nft_dashboard_model.dart';
 
 class NFTDashboardController extends MyController {
   List<String> dummyTexts =

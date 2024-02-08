@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:webkit/controller/error_pages/coming_soon_controller.dart';
-import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
+import 'package:focusweb/controller/error_pages/coming_soon_controller.dart';
+import 'package:focusweb/helpers/utils/ui_mixins.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
 
 class ComingSoonPage extends StatefulWidget {
   const ComingSoonPage({Key? key}) : super(key: key);

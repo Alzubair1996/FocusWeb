@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:webkit/helpers/localizations/translator.dart';
+import 'package:focusweb/helpers/localizations/translator.dart';
 
 extension StringUtil on String {
   Color get toColor {

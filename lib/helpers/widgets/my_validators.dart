@@ -1,5 +1,5 @@
-import 'package:webkit/helpers/utils/my_string_utils.dart';
-import 'package:webkit/helpers/widgets/my_field_validator.dart';
+import 'package:focusweb/helpers/utils/my_string_utils.dart';
+import 'package:focusweb/helpers/widgets/my_field_validator.dart';
 
 class MyEmailValidator extends MyFieldValidatorRule<String> {
   @override

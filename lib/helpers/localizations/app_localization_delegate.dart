@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:webkit/helpers/localizations/language.dart';
-import 'package:webkit/helpers/theme/app_notifier.dart';
+import 'package:focusweb/helpers/localizations/language.dart';
+import 'package:focusweb/helpers/theme/app_notifier.dart';
 
 class AppLocalizationsDelegate extends LocalizationsDelegate {
   final BuildContext context;

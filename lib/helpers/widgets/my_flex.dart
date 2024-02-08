@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/widgets/my_flex_item.dart';
-import 'package:webkit/helpers/widgets/my_list_extension.dart';
-import 'package:webkit/helpers/widgets/my_responsiv.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:focusweb/helpers/widgets/my_flex_item.dart';
+import 'package:focusweb/helpers/widgets/my_list_extension.dart';
+import 'package:focusweb/helpers/widgets/my_responsiv.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/responsive.dart';
 
 class MyFlex extends StatelessWidget {
   final List<MyFlexItem> children;

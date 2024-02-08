@@ -1,4 +1,4 @@
-import 'package:webkit/models/user.dart';
+import 'package:focusweb/models/user.dart';
 
 import '../../views/auth/login.dart';
 import '../storage/local_storage.dart';

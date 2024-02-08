@@ -1,5 +1,5 @@
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/models/drag_drop.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/models/drag_drop.dart';
 
 class DragDropController extends MyController {
   List<DragDrop> dragDrop = [];

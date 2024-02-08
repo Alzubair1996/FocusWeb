@@ -1,7 +1,7 @@
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:webkit/helpers/extensions/string.dart';
-import 'package:webkit/views/dashboard.dart';
+
+import 'controller/dashboard_controller.dart';
 
 buildPrintableData(ttf) => pw.Padding(
       padding: const pw.EdgeInsets.all(13.00),
@@ -13,7 +13,7 @@ buildPrintableData(ttf) => pw.Padding(
               child: pw.Center(
                 // style: pw.TextStyle(font: ttf, fontSize: 24)
                   child: pw.Text(
-                    "Summary Attendance Sheet of ${DashboardPageState.selectedMonthIndex}  ${DashboardPageState.Years}",
+                    "Summary Attendance Sheet of ${DashboardController.selectedMonthIndex}  ${DashboardController.Years}",
                     style: pw.TextStyle(
                       fontSize: 16,font: ttf
                     ),
@@ -62,7 +62,7 @@ buildPrintableData(ttf) => pw.Padding(
           ),
           pw.ListView.builder(
               direction: pw.Axis.horizontal,
-              itemCount: DashboardPageState.days,
+              itemCount: DashboardController.days,
               itemBuilder: (context, dayIndex) {
                 final day = (dayIndex + 1).toString();
 
@@ -92,18 +92,18 @@ buildPrintableData(ttf) => pw.Padding(
 
 //27
         pw.SizedBox(
-            height: DashboardPageState.locationsall.length*20,
+            height: DashboardController.locationsall.length*20,
 
             child:
             pw.ListView.builder(
                 direction: pw.Axis.vertical,
-                itemCount: DashboardPageState.locationsall.length,
+                itemCount: DashboardController.locationsall.length,
                 itemBuilder: (context, index) {
                   final name =
-                  DashboardPageState.locationsall[index].name.toString();
-                 final num= DashboardPageState.locationsall[index].tolal.toString();
+                  DashboardController.locationsall[index].name.toString();
+                 final num= DashboardController.locationsall[index].tolal.toString();
                   final numer =
-                  DashboardPageState.locationsall[index].id.toString();
+                  DashboardController.locationsall[index].id.toString();
                   final numer1 = "J${numer.padLeft(4, '0')}";
                   return pw.Row(children: [
                    pw.Container(
@@ -145,7 +145,7 @@ buildPrintableData(ttf) => pw.Padding(
                       ),
                     pw.ListView.builder(
                         direction: pw.Axis.horizontal,
-                        itemCount: DashboardPageState.days,
+                        itemCount: DashboardController.days,
                         itemBuilder: (context, dayIndex) {
                           final day1 =
                           (dayIndex + 1).toString().padLeft(2, '0');
@@ -194,7 +194,7 @@ buildPrintableDataDetales(ttf ,idess, locations, indix1)
       pw.SizedBox(width: 50, height: 50),
       //pw.Image(logo, width: 40, height: 40),
       pw.Container(
-          width:  351.5+DashboardPageState.days*12.5-0.5,
+          width:  351.5+DashboardController.days*12.5-0.5,
           child: pw.Center(
             // style: pw.TextStyle(font: ttf, fontSize: 24)
               child: pw.Text(
@@ -219,9 +219,9 @@ pw.Row(children: [
       child: pw.Container(
         margin: pw.EdgeInsets.only(left: 0.5),
         child: pw.SizedBox(
-            width: 351.5+DashboardPageState.days*14.5,
+            width: 351.5+DashboardController.days*14.5,
             height: 17,
-            child: pw.Center(child: pw.Text(DashboardPageState.locationsall[indix1].name+" Attendance ${DashboardPageState.months[DashboardPageState.selectedMonthIndex]} - ${DashboardPageState.Years} ",
+            child: pw.Center(child: pw.Text("${DashboardController.locationsall[indix1].name} Attendance ${DashboardController.months[DashboardController.selectedMonthIndex]} - ${DashboardController.Years} ",
                 style: pw.TextStyle(font: ttf,fontWeight: pw.FontWeight.bold)))),
       ),
     ),
@@ -311,7 +311,7 @@ pw.Row(children: [
 
       pw.ListView.builder(
           direction: pw.Axis.horizontal,
-          itemCount: DashboardPageState.days,
+          itemCount: DashboardController.days,
           itemBuilder: (context, dayIndex) {
             final day = (dayIndex + 1).toString();
 
@@ -395,7 +395,7 @@ pw.Row(children: [
              child: pw.SizedBox(
                width: 150 ,
                height:idess.length*12,
-               child: pw.Center(child:pw.Text(DashboardPageState.locationsall[indix1].name.toString(),style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
+               child: pw.Center(child:pw.Text(DashboardController.locationsall[indix1].name.toString(),style: pw.TextStyle(font: ttf,fontSize:9), maxLines: 1)),
              )  ),
        ),
 
@@ -409,7 +409,7 @@ pw.Row(children: [
              itemBuilder: (context, index) {
                var id= idess[index].toString();
 
-               var name= DashboardPageState.Guard_Data[idess[index]].NAME_EN .toString();
+               var name= DashboardController.Guard_Data[idess[index]].NAME_EN .toString();
                return pw.Row(children: [
 
 
@@ -448,12 +448,12 @@ pw.Row(children: [
 
                  pw.ListView.builder(
                      direction: pw.Axis.horizontal,
-                     itemCount: DashboardPageState.days,
+                     itemCount: DashboardController.days,
                      itemBuilder: (context, dayIndex) {
                        var duty = 0;
 
                        try {
-                         final record = DashboardPageState.record.firstWhere((record) {
+                         final record = DashboardController.record.firstWhere((record) {
                            return record.job_no == int.parse(locations) &&
                                int.parse(record.date.toString()) == (dayIndex + 1) &&
                                id == record.id.toString();
@@ -465,7 +465,7 @@ pw.Row(children: [
                        }
 
                        try {
-                         final record3 = DashboardPageState.record3.firstWhere((record3) {
+                         final record3 = DashboardController.record3.firstWhere((record3) {
                            return record3.job_no == int.parse(locations) &&
                                int.parse(record3.date.toString()) == (dayIndex + 1) &&
                                id == record3.id.toString();
@@ -486,7 +486,7 @@ pw.Row(children: [
                            // تعيين Padding إلى صفر
                            margin: pw.EdgeInsets.only(left: 0.5),
 
-                           color: DashboardPageState.isChecked
+                           color: DashboardController.isChecked
                                ? duty == 0
                                ?PdfColor.fromHex("#f7fff6")
                                : PdfColors.white:PdfColors.white,
@@ -549,14 +549,14 @@ pw.Row(children: [
 
               pw.ListView.builder(
                   direction: pw.Axis.horizontal,
-                  itemCount: DashboardPageState.days,
+                  itemCount: DashboardController.days,
                   itemBuilder: (context, dayIndex) {
                     final day1 =
                     (dayIndex + 1).toString().padLeft(2, '0');
                     final day = (dayIndex + 1).toString();
 //smoothisis
                     final targetSiteNumber = int.parse(locations);
-                    final num = DashboardPageState.locationsall[indix1].tolal.toString();
+                    final num = DashboardController.locationsall[indix1].tolal.toString();
                     //  final num = int.parse(total);
                     final guardCount =
                     getGuardCount(day1, targetSiteNumber);
@@ -653,7 +653,7 @@ PrintAtendencsheet(ttf) => pw.Padding(
           child: pw.Center(
             // style: pw.TextStyle(font: ttf, fontSize: 24)
               child: pw.Text(
-                "Summary Attendance Sheet of ${DashboardPageState.selectedMonthIndex}  ${DashboardPageState.Years}",
+                "Summary Attendance Sheet of ${DashboardController.selectedMonthIndex}  ${DashboardController.Years}",
                 style: pw.TextStyle(
                     fontSize: 16,font: ttf
                 ),
@@ -854,14 +854,14 @@ pw.Center(
 
 
 int getGuardCount(String day, int targetSiteNumber) {
-  return DashboardPageState.attendanceData.values.where((attendance) {
+  return DashboardController.attendanceData.values.where((attendance) {
 
     return  attendance.length > 1 ?attendance[1]['date'] == day &&
         attendance[1]['job_no'] == targetSiteNumber:false;
 
 
 
-  }).length+ DashboardPageState.attendanceData.values.where((attendance) {
+  }).length+ DashboardController.attendanceData.values.where((attendance) {
 
     return  attendance[0]['date'] == day &&
         attendance[0]['job_no'] == targetSiteNumber;
@@ -873,7 +873,7 @@ int getGuardCount(String day, int targetSiteNumber) {
 }
 
 PdfColor getGuardCountColor(int guardCount, int num) {
-  if (DashboardPageState.isChecked) {
+  if (DashboardController.isChecked) {
     if (guardCount == 0) {
       return PdfColors.white;
     } else if (guardCount < num) {
@@ -888,5 +888,5 @@ PdfColor getGuardCountColor(int guardCount, int num) {
   }
 }
 int getIndexById(int id) {
-  return DashboardPageState.locationsall.indexWhere((location) => location.id == id);
+  return DashboardController.locationsall.indexWhere((location) => location.id == id);
 }

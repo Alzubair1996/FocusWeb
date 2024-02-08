@@ -3,23 +3,23 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Trans;
-import 'package:webkit/helpers/utils/my_shadow.dart';
-import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
+import 'package:focusweb/helpers/utils/my_shadow.dart';
+import 'package:focusweb/helpers/utils/ui_mixins.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb_item.dart';
 
-import 'package:webkit/helpers/widgets/my_card.dart';
-import 'package:webkit/helpers/widgets/my_container.dart';
+import 'package:focusweb/helpers/widgets/my_card.dart';
+import 'package:focusweb/helpers/widgets/my_container.dart';
 
-import 'package:webkit/helpers/widgets/my_flex.dart';
-import 'package:webkit/helpers/widgets/my_flex_item.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/helpers/extensions/string.dart';
+import 'package:focusweb/helpers/widgets/my_flex.dart';
+import 'package:focusweb/helpers/widgets/my_flex_item.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
+import 'package:focusweb/helpers/widgets/my_text_style.dart';
+import 'package:focusweb/helpers/widgets/responsive.dart';
+import 'package:focusweb/helpers/extensions/string.dart';
 
-import 'package:webkit/views/layouts/layout.dart';
+import 'package:focusweb/views/layouts/layout.dart';
 
 import '../../../GuardDetails.dart';
 import '../../../LocationData.dart';
@@ -49,7 +49,7 @@ int select_index=-1;
  //   getGuardDeitales("");
 
     controller = Get.put(ShoppingController());
-    controller.location1lla.isEmpty? controller.getGuardDeitales(""):null;
+     controller.getGuardDeitales("");
   }
 
   @override

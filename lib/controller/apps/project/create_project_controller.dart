@@ -3,7 +3,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:webkit/controller/my_controller.dart';
+import 'package:focusweb/controller/my_controller.dart';
 
 enum ProjectPrivacy {
   Private,

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:quill_html_editor/quill_html_editor.dart';
-import 'package:webkit/controller/forms/quill_editor_controller.dart';
-import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
-import 'package:webkit/helpers/widgets/my_flex.dart';
-import 'package:webkit/helpers/widgets/my_flex_item.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/views/layouts/layout.dart';
+import 'package:focusweb/controller/forms/quill_editor_controller.dart';
+import 'package:focusweb/helpers/utils/ui_mixins.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb_item.dart';
+import 'package:focusweb/helpers/widgets/my_flex.dart';
+import 'package:focusweb/helpers/widgets/my_flex_item.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
+import 'package:focusweb/helpers/widgets/my_text_style.dart';
+import 'package:focusweb/helpers/widgets/responsive.dart';
+import 'package:focusweb/views/layouts/layout.dart';
 
 class QuillEditor extends StatefulWidget {
   const QuillEditor({Key? key}) : super(key: key);

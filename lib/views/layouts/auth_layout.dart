@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:webkit/controller/layouts/auth_layout_controller.dart';
-import 'package:webkit/helpers/theme/admin_theme.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/widgets/my_container.dart';
-import 'package:webkit/helpers/widgets/my_flex.dart';
-import 'package:webkit/helpers/widgets/my_flex_item.dart';
-import 'package:webkit/helpers/widgets/my_responsiv.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/controller/layouts/auth_layout_controller.dart';
+import 'package:focusweb/helpers/theme/admin_theme.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/widgets/my_container.dart';
+import 'package:focusweb/helpers/widgets/my_flex.dart';
+import 'package:focusweb/helpers/widgets/my_flex_item.dart';
+import 'package:focusweb/helpers/widgets/my_responsiv.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
 
 class AuthLayout extends StatelessWidget {
   final Widget? child;

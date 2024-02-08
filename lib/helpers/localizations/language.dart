@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/storage/local_storage.dart';
-import 'package:webkit/helpers/theme/theme_customizer.dart';
+import 'package:focusweb/helpers/storage/local_storage.dart';
+import 'package:focusweb/helpers/theme/theme_customizer.dart';
 
 class Language {
   final Locale locale;

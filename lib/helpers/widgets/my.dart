@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/widgets/my_constant.dart';
-import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/widgets/my_constant.dart';
+import 'package:focusweb/helpers/widgets/my_text_style.dart';
+import 'package:focusweb/helpers/widgets/responsive.dart';
 
 class My {
   // entry point of the package

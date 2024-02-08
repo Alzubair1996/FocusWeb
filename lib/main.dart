@@ -4,8 +4,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
-import 'package:webkit/helpers/localizations/app_localization_delegate.dart';
-import 'package:webkit/routes.dart';
+import 'package:focusweb/helpers/localizations/app_localization_delegate.dart';
+import 'package:focusweb/routes.dart';
 
 import 'helpers/localizations/language.dart';
 import 'helpers/services/navigation_service.dart';

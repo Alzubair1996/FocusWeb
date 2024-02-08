@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:webkit/controller/my_controller.dart';
+import 'package:focusweb/controller/my_controller.dart';
 
 class ChartSampleData {
   ChartSampleData(

@@ -7,13 +7,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:webkit/helpers/localizations/language.dart';
-import 'package:webkit/helpers/localizations/translator.dart';
-import 'package:webkit/helpers/services/json_decoder.dart';
-import 'package:webkit/helpers/services/navigation_service.dart';
-import 'package:webkit/helpers/theme/admin_theme.dart';
-import 'package:webkit/helpers/theme/app_notifier.dart';
-import 'package:webkit/helpers/theme/app_style.dart';
+import 'package:focusweb/helpers/localizations/language.dart';
+import 'package:focusweb/helpers/localizations/translator.dart';
+import 'package:focusweb/helpers/services/json_decoder.dart';
+import 'package:focusweb/helpers/services/navigation_service.dart';
+import 'package:focusweb/helpers/theme/admin_theme.dart';
+import 'package:focusweb/helpers/theme/app_notifier.dart';
+import 'package:focusweb/helpers/theme/app_style.dart';
 
 typedef ThemeChangeCallback = void Function(
     ThemeCustomizer oldVal, ThemeCustomizer newVal);

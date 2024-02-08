@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:html';
+
 import 'dart:ui';
 
 
@@ -52,14 +52,14 @@ class PdfService {
     grid.draw(
         page: document.pages.add(), bounds: const Rect.fromLTWH(0, 0, 0, 0));
     List<int> bytes = await document.save();
-
+/*
     //Download document
     AnchorElement(
         href:
             "data:application/octet-stream;charset=utf-16le;base64,${base64.encode(bytes)}")
       ..setAttribute("download", "report.pdf")
       ..click();
-
+*/
     //Dispose the document
     document.dispose();
   }

@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:webkit/controller/ui/landing_controller.dart';
-import 'package:webkit/helpers/theme/app_style.dart';
-import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_button.dart';
-import 'package:webkit/helpers/widgets/my_container.dart';
-import 'package:webkit/helpers/widgets/my_flex.dart';
-import 'package:webkit/helpers/widgets/my_flex_item.dart';
-import 'package:webkit/helpers/widgets/my_list_extension.dart';
-import 'package:webkit/helpers/widgets/my_responsiv.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/images.dart';
+import 'package:focusweb/controller/ui/landing_controller.dart';
+import 'package:focusweb/helpers/theme/app_style.dart';
+import 'package:focusweb/helpers/utils/ui_mixins.dart';
+import 'package:focusweb/helpers/widgets/my_button.dart';
+import 'package:focusweb/helpers/widgets/my_container.dart';
+import 'package:focusweb/helpers/widgets/my_flex.dart';
+import 'package:focusweb/helpers/widgets/my_flex_item.dart';
+import 'package:focusweb/helpers/widgets/my_list_extension.dart';
+import 'package:focusweb/helpers/widgets/my_responsiv.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
+import 'package:focusweb/helpers/widgets/my_text_style.dart';
+import 'package:focusweb/helpers/widgets/responsive.dart';
+import 'package:focusweb/images.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
@@ -63,7 +63,7 @@ class _LandingPageState extends State<LandingPage>
                               ),
                               MySpacing.width(8),
                               MyText.titleMedium(
-                                "WEBKIT",
+                                "focusweb",
                                 fontWeight: 600,
                                 fontSize: 24,
                                 letterSpacing: 2,
@@ -217,12 +217,12 @@ class _LandingPageState extends State<LandingPage>
                                       ),
                                       MySpacing.height(40),
                                       MyText.titleLarge(
-                                        "Webkit - Responsive Web UI Kit & Dashboard Template",
+                                        "focusweb - Responsive Web UI Kit & Dashboard Template",
                                         fontSize: 28,
                                       ),
                                       MySpacing.height(40),
                                       MyText.titleMedium(
-                                        "Webkit is a fully featured dashboard and admin template comes with tones of well designed UI elements, components, widgets and pages.",
+                                        "focusweb is a fully featured dashboard and admin template comes with tones of well designed UI elements, components, widgets and pages.",
                                       ),
                                       MySpacing.height(40),
                                       Row(
@@ -518,7 +518,7 @@ class _LandingPageState extends State<LandingPage>
                         ),
                         MySpacing.height(flexSpacing),
                         MyText.bodyMedium(
-                            "Webkit comes with next generation ui design and have multiple benefits"),
+                            "focusweb comes with next generation ui design and have multiple benefits"),
                         MySpacing.height(flexSpacing * 2),
                         MyFlex(
                           children: [
@@ -935,7 +935,7 @@ class _LandingPageState extends State<LandingPage>
                                           controller.dummyTexts[1]),
                                       MySpacing.height(28),
                                       buildFAQItem(
-                                          "Will you regularly give updates of Webkit?",
+                                          "Will you regularly give updates of focusweb?",
                                           controller.dummyTexts[1]),
                                     ],
                                   )),
@@ -1136,7 +1136,7 @@ class _LandingPageState extends State<LandingPage>
                                       ),
                                       MySpacing.width(8),
                                       MyText.bodyMedium(
-                                        "WebKit",
+                                        "focusweb",
                                         color: contentTheme.light,
                                         fontSize: 20,
                                         fontWeight: 600,
@@ -1228,7 +1228,7 @@ class _LandingPageState extends State<LandingPage>
                         ),
                         MySpacing.height(32),
                         MyText.bodyMedium(
-                          "© 2018 - 2023 Webkit. Design",
+                          "© 2018 - 2023 focusweb. Design",
                           fontSize: 12,
                           color: contentTheme.light,
                           muted: true,

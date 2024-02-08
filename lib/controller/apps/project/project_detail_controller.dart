@@ -1,6 +1,6 @@
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/helpers/widgets/my_text_utils.dart';
-import 'package:webkit/images.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/helpers/widgets/my_text_utils.dart';
+import 'package:focusweb/images.dart';
 
 class ChartData {
   ChartData({this.x, this.yValue1, this.yValue2});

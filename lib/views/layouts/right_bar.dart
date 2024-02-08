@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/theme/theme_customizer.dart';
-import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/widgets/custom_switch.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/theme/theme_customizer.dart';
+import 'package:focusweb/helpers/utils/ui_mixins.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
+import 'package:focusweb/widgets/custom_switch.dart';
 
 // typedef void OnLeftBarColorSchemeChange(LeftBarThemeType leftBarThemeType);
 // typedef void OnTopBarColorSchemeChange(TopBarThemeType topBarThemeType);

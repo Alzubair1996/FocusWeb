@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/models/opportunities.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/models/opportunities.dart';
 
 class ChartData1 {
   ChartData1(this.x, this.y, [this.color]);

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:webkit/controller/starter_controller.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb.dart';
-import 'package:webkit/helpers/widgets/my_breadcrumb_item.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/helpers/widgets/responsive.dart';
-import 'package:webkit/views/layouts/layout.dart';
+import 'package:focusweb/controller/starter_controller.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb.dart';
+import 'package:focusweb/helpers/widgets/my_breadcrumb_item.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
+import 'package:focusweb/helpers/widgets/responsive.dart';
+import 'package:focusweb/views/layouts/layout.dart';
 
 class Starter extends StatefulWidget {
   const Starter({Key? key}) : super(key: key);

@@ -3,19 +3,19 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/helpers/extensions/string.dart';
-import 'package:webkit/helpers/theme/admin_theme.dart';
-import 'package:webkit/helpers/widgets/my_button.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/helpers/extensions/string.dart';
+import 'package:focusweb/helpers/theme/admin_theme.dart';
+import 'package:focusweb/helpers/widgets/my_button.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
 
 class NotificationsController extends MyController {
   final TickerProvider ticker;
   Timer? _timer;
 
   TextEditingController toastTitleController =
-      TextEditingController(text: "Webkit Notifications");
+      TextEditingController(text: "focusweb Notifications");
   ContentThemeColor selectedColor = ContentThemeColor.primary;
   SnackBarBehavior selectedBehavior = SnackBarBehavior.floating;
   late AnimationController animationController =

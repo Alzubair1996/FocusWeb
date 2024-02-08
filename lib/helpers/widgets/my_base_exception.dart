@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:webkit/helpers/widgets/my_exception.dart';
+import 'package:focusweb/helpers/widgets/my_exception.dart';
 
 class BaseException extends MyException {
   StackTrace? stackTrace;

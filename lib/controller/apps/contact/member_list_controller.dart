@@ -1,7 +1,7 @@
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/helpers/widgets/my_form_validator.dart';
-import 'package:webkit/models/discover.dart';
-import 'package:webkit/models/opportunities.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/helpers/widgets/my_form_validator.dart';
+import 'package:focusweb/models/discover.dart';
+import 'package:focusweb/models/opportunities.dart';
 
 class MemberListController extends MyController {
   List<Discover> discover = [];

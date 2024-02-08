@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart';
-import 'package:webkit/helpers/extensions/extensions.dart';
-import 'package:webkit/helpers/services/json_decoder.dart';
-import 'package:webkit/models/identifier_model.dart';
-import 'package:webkit/models/shopping_product_data.dart';
+import 'package:focusweb/helpers/extensions/extensions.dart';
+import 'package:focusweb/helpers/services/json_decoder.dart';
+import 'package:focusweb/models/identifier_model.dart';
+import 'package:focusweb/models/shopping_product_data.dart';
 
 class ShoppingCart extends IdentifierModel {
   ShoppingProduct product;

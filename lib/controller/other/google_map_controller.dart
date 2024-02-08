@@ -1,5 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:webkit/controller/my_controller.dart';
+import 'package:focusweb/controller/my_controller.dart';
 
 class GoogleMapPageController extends MyController {
   GoogleMapController? mapController;

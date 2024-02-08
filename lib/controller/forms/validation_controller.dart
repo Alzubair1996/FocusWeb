@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/controller/forms/basic_controller.dart';
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/helpers/widgets/my_field_validator.dart';
-import 'package:webkit/helpers/widgets/my_form_validator.dart';
-import 'package:webkit/helpers/widgets/my_validators.dart';
+import 'package:focusweb/controller/forms/basic_controller.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/helpers/widgets/my_field_validator.dart';
+import 'package:focusweb/helpers/widgets/my_form_validator.dart';
+import 'package:focusweb/helpers/widgets/my_validators.dart';
 
 class GenderValidator extends MyFieldValidatorRule<Gender> {
   @override

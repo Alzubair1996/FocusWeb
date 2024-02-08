@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/services.dart';
-import 'package:webkit/helpers/extensions/extensions.dart';
-import 'package:webkit/helpers/services/json_decoder.dart';
-import 'package:webkit/models/identifier_model.dart';
+import 'package:focusweb/helpers/extensions/extensions.dart';
+import 'package:focusweb/helpers/services/json_decoder.dart';
+import 'package:focusweb/models/identifier_model.dart';
 
 class ShoppingProduct extends IdentifierModel {
   String Contact, DATE_OF_JOINING, EMIRATES_ID,EMPLOYMENT_STATUS,

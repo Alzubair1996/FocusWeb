@@ -1,4 +1,4 @@
-import 'package:webkit/helpers/extensions/date_time_extention.dart';
+import 'package:focusweb/helpers/extensions/date_time_extention.dart';
 
 class Utils {
   static getDateStringFromDateTime(DateTime dateTime,

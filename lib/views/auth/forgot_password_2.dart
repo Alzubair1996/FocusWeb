@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lucide_icons/lucide_icons.dart';
-import 'package:webkit/controller/auth/forgot_password_2_controller.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/utils/ui_mixins.dart';
-import 'package:webkit/helpers/widgets/my_button.dart';
-import 'package:webkit/helpers/widgets/my_container.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
-import 'package:webkit/helpers/widgets/my_text_style.dart';
-import 'package:webkit/images.dart';
-import 'package:webkit/views/layouts/auth_layout_2.dart';
+import 'package:focusweb/controller/auth/forgot_password_2_controller.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/utils/ui_mixins.dart';
+import 'package:focusweb/helpers/widgets/my_button.dart';
+import 'package:focusweb/helpers/widgets/my_container.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
+import 'package:focusweb/helpers/widgets/my_text_style.dart';
+import 'package:focusweb/images.dart';
+import 'package:focusweb/views/layouts/auth_layout_2.dart';
 
 class ForgotPassword2 extends StatefulWidget {
   const ForgotPassword2({super.key});
@@ -50,7 +50,7 @@ class _ForgotPassword2State extends State<ForgotPassword2>
                       ),
                       MySpacing.width(16),
                       MyText.bodyMedium(
-                        "WebKit",
+                        "focusweb",
                         fontSize: 24,
                         fontWeight: 600,
                       ),

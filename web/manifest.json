@@ -1,6 +1,6 @@
 {
-    "name": "webkit",
-    "short_name": "webkit",
+    "name": "focusweb",
+    "short_name": "focusweb",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

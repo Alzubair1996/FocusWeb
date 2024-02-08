@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/helpers/theme/theme_customizer.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/helpers/theme/theme_customizer.dart';
 
 class LayoutController extends MyController {
   ThemeCustomizer themeCustomizer = ThemeCustomizer();

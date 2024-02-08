@@ -1,4 +1,4 @@
-package com.example.webkit
+package com.example.focusweb
 
 import io.flutter.embedding.android.FlutterActivity
 

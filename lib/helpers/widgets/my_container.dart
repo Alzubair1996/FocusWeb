@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/utils/constant_data.dart';
-import 'package:webkit/helpers/widgets/my_spacing.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/utils/constant_data.dart';
+import 'package:focusweb/helpers/widgets/my_spacing.dart';
 
 class MyContainer extends StatelessWidget {
   final Widget? child;

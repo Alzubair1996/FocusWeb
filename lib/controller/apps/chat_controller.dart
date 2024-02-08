@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/controller/my_controller.dart';
-import 'package:webkit/models/chat.dart';
+import 'package:focusweb/controller/my_controller.dart';
+import 'package:focusweb/models/chat.dart';
 
 class ChatController extends MyController {
   List<Chat> chat = [];

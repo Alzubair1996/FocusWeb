@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/widgets/my_middleware.dart';
+import 'package:focusweb/helpers/widgets/my_middleware.dart';
 
 class MyRoute {
   String name;

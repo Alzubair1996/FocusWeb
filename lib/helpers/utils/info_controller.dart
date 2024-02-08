@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/widgets/my_text.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/widgets/my_text.dart';
 
 class Info {
   static message(String message,

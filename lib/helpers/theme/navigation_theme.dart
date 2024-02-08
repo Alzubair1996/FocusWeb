@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/helpers/theme/app_theme.dart';
-import 'package:webkit/helpers/theme/theme_type.dart';
+import 'package:focusweb/helpers/theme/app_theme.dart';
+import 'package:focusweb/helpers/theme/theme_type.dart';
 
 class NavigationTheme {
   Color? backgroundColor,

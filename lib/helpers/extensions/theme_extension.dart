@@ -1,4 +1,4 @@
-import 'package:webkit/helpers/theme/theme_type.dart';
+import 'package:focusweb/helpers/theme/theme_type.dart';
 
 extension ThemeExtension on ThemeType {
   String get toText {

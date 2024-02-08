@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:webkit/controller/my_controller.dart';
+import 'package:focusweb/controller/my_controller.dart';
 import 'package:appflowy_board/appflowy_board.dart';
-import 'package:webkit/images.dart';
+import 'package:focusweb/images.dart';
 
 class KanBanController extends MyController {
   final AppFlowyBoardController boardData = AppFlowyBoardController(
